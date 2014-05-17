@@ -1,13 +1,16 @@
 <?php
 	
-	require_once __DIR__.'/controllers/application.php';
+	require_once __DIR__.'/libraries/application.php';
 	
-	$application = new Application();
+	$application = new Application(__DIR__, '/config');
 	
-	$application->load('modele', 'modele_exemple.php');
+	$application->load('model', 'model_example.php');
 	
 	$album = $application->connection->query("SELECT `id`,`titre`,`date` FROM albums WHERE id < 4");
+	
+	
 	echo '<pre>';
+	print_r($application);
 	print_r($album);
 	echo '</pre>';
 	

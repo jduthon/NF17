@@ -17,7 +17,7 @@ class Connection
 		$this->connection = @mysql_connect($this->server, $this->username, $this->password);
 		
 		if (!$this->connection)
-			exit('Unable to connect to the database server : ' . mysql_error());
+			throw new DoteException('unable to connect to the database server : ' . mysql_error());
 
 		if (!empty($database))
 			$this->select_database($database);
@@ -34,7 +34,7 @@ class Connection
 		$select_db = mysql_select_db($this->database, $this->connection);
 			
 		if (!$select_db)
-			exit('Unable to connect to the database : ' . mysql_error());
+			throw new DoteException('unable to connect to the database : ' . mysql_error());
 	}
 	
 	public function query($query)
@@ -42,7 +42,7 @@ class Connection
 		$answer = mysql_query($query);
 		
 		if (!$answer)
-			exit('Query failed : ' . mysql_error());
+			throw new DoteException('query failed : ' . mysql_error());
 	
 		while($ligne = mysql_fetch_assoc($answer))
 			$result[] = $ligne;
