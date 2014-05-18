@@ -29,9 +29,8 @@ class Application
 			/* Establish a connection with the database */
 			$this->load('library', 'connection.php');
 			$this->connection = new Connection($this->connection['server'], $this->connection['username'], $this->connection['password'], $this->connection['database']);
-			$this->connection->select_database('whatsup');
 		}
-		catch(DoteException $e)
+		catch (DoteException $e)
 		{
 			exit($e->what());
 		}
@@ -65,7 +64,7 @@ class Application
 		if (!empty($connection))
 		{
 			$this->connection = $connection;
-		} 
+		}
 		else
 			throw new DoteException('connection informations not found in ' . $this->path('config', 'config.php'));
 	}

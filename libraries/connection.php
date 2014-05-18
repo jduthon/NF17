@@ -8,48 +8,44 @@ class Connection
 	private $database;
 	private $connection;
 	
-	public function __construct($server, $username, $password, $database = '')
+	public function __construct($server, $username, $password, $database = '', $techno = 'mysql')
 	{
 		$this->server = $server;
 		$this->username = $username;
 		$this->password = $password;
-		
-		$this->connection = @mysql_connect($this->server, $this->username, $this->password);
-		
-		if (!$this->connection)
-			throw new DoteException('unable to connect to the database server : ' . mysql_error());
-
-		if (!empty($database))
-			$this->select_database($database);
-
-		mysql_query("SET NAMES 'utf8'");
-		mysql_query("SET CHARACTER SET utf8");
-		mysql_query("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
-	}
-	
-	public function select_database($database)
-	{
 		$this->database = $database;
-	
-		$select_db = mysql_select_db($this->database, $this->connection);
-			
-		if (!$select_db)
-			throw new DoteException('unable to connect to the database : ' . mysql_error());
+		
+		try
+		{
+			$dsn = $techno . ':host=' . $this->server . ';dbname=' . $this->database;
+			$this->connection = new PDO($dsn , $this->username, $this->password);
+		}
+		catch (PDOException $e)
+		{
+			throw new DoteException('unable to connect to the database server : ' . $e->getMessage() . ', code error : ' . $e->getCode()); 
+		}
 	}
 	
-	public function query($query)
+	public function prepare($query)
 	{
-		$answer = mysql_query($query);
-		
-		if (!$answer)
-			throw new DoteException('query failed : ' . mysql_error());
+		return $this->connection->prepare($query);
+	}
 	
-		while($ligne = mysql_fetch_assoc($answer))
-			$result[] = $ligne;
-		
-		if (count($result) == 1)
-			return $result[0];
+	public function execute($query, $parameters = '')
+	{
+		if ($query->execute()) {
+			$answer = $query->fetchAll();
+			$query->closeCursor();
+			return $answer;
+		}
 		else
-			return $result;
+			throw new DoteException('query failed : ' . mysql_error());
+	}
+	
+	public function query($query, $parameters = '')
+	{
+		$sth = $this->connection->prepare($query);
+		
+		return $this->execute($sth, $parameters);
 	}
 }
