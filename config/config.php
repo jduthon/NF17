@@ -5,13 +5,18 @@ $path = array('controller' => '/controllers',
 			'model' => '/models',
 			'library' => '/libraries',
 			'view' => '/views',
-			'css' => '/ressources/css',
-			'javascript' => '/ressources/javascript',
-			'image' => '/ressources/images');
+			'css' => '/web/css',
+			'javascript' => '/web/javascript',
+			'image' => '/web/images');
 			
 			
 /* Connection informations */
 $connection = array('server' => 'localhost',
 					'username' => 'root',
-					'password' => 'qds',
-					'database' => '');
+					'password' => '',
+					'database' => 'whatsup');
+
+					
+/* Default values */
+$default = array('page' => 'Example',
+				'action' => 'action_example');

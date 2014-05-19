@@ -36,16 +36,13 @@ class Connection
 		if ($query->execute()) {
 			$answer = $query->fetchAll();
 			$query->closeCursor();
+			
+			if (count($answer) == 1) // In that case, we prefer fetch(PDO::FETCH_ASSOC) instead of fetchAll()
+				$answer = $answer[0];
+			
 			return $answer;
 		}
 		else
 			throw new DoteException('query failed : ' . mysql_error());
-	}
-	
-	public function query($query, $parameters = '')
-	{
-		$sth = $this->connection->prepare($query);
-		
-		return $this->execute($sth, $parameters);
 	}
 }
