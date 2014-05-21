@@ -10,7 +10,7 @@
 		</header>
 			
 		<div id="main">
-			<?php include $view; ?>
+			<?php include $_view_; ?>
 		</div>
 		
 		<?php include 'footer.php'; ?>

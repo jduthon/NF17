@@ -22,8 +22,7 @@ class Connection
 			$dsn = $dbms . ':host=' . $this->server . ';dbname=' . $this->database;
 			$this->connection = new \PDO($dsn , $this->username, $this->password);
 		}
-		catch (PDOException $e)
-		{
+		catch (PDOException $e) {
 			throw new DoteException('unable to connect to the database server : ' . $e->getMessage() . ', code error : ' . $e->getCode()); 
 		}
 	}
@@ -33,7 +32,7 @@ class Connection
 		return $this->connection->prepare($query);
 	}
 	
-	public function execute($query, $parameters = '')
+	public function execute(\PDOStatement $query, $parameters = array())
 	{
 		if ($query->execute($parameters)) 
 		{
@@ -45,7 +44,8 @@ class Connection
 			
 			return $answer;
 		}
-		else
+		else {
 			throw new DoteException('query failed : ' . mysql_error());
+		}
 	}
 }

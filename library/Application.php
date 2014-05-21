@@ -12,7 +12,6 @@ class Application
 	public function __construct()
 	{
 		$this->configure();
-		$this->connection = null;
 		$this->controller = null;
 	}
 	
@@ -59,7 +58,7 @@ class Application
 		// Make a connection, load the controller, the view and send the page
 		session_start();
 		
-		$this->connection = new Connection($this->connection['server'], $this->connection['username'], $this->connection['password'], $this->connection['database']);
+		$this->connection = new Connection($this->connection['server'], $this->connection['username'], $this->connection['password'], $this->connection['database'], $this->connection['dbms']);
 		
 		$this->loadPage();
 		$this->sendPage();
@@ -70,17 +69,10 @@ class Application
 		return $this->path[$type].'/'.$name;
 	}
 	
-	public function query($query, $parameters = '')
+	public function query($query, $parameters = array())
 	{
-		try
-		{
-			$sth = $this->connection->prepare($query);
-			return $this->connection->execute($sth, $parameters);
-		}
-		catch (DoteException $e)
-		{
-			exit($e);
-		}
+		$sth = $this->connection->prepare($query);
+		return $this->connection->execute($sth, $parameters);
 	}
 	
 	public function loadPage()
@@ -113,7 +105,8 @@ class Application
 	public function sendPage()
 	{
 		// Load and send page
-		$view = $this->path('view', $this->controller->getView());
+		extract($this->controller->getVars());
+		$_view_ = $this->path('view', $this->controller->getView());
 		require $this->path('layout', 'main.php');
 	}
 }

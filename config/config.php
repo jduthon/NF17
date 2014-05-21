@@ -1,5 +1,7 @@
 <?php
 
+namespace config;
+
 /* Path definitions */
 $path = array('root' => str_replace(array('\config', '/config'), '', __DIR__ ),
 			'config' => '/config',
@@ -17,7 +19,8 @@ $path = array('root' => str_replace(array('\config', '/config'), '', __DIR__ ),
 $connection = array('server' => 'localhost',
 					'username' => 'root',
 					'password' => '',
-					'database' => 'whatsup');
+					'database' => 'whatsup',
+					'dbms' => 'mysql');
 
 					
 /* Default values */

@@ -7,11 +7,14 @@ abstract class Controller
 	protected $app;
 	protected $page;
 	protected $view;
+	protected $vars;
 	
 	public function __construct(Application $app, $page)
 	{
+		$this->app = $app;
 		$this->page = $page;
 		$this->view = null;
+		$this->vars = array();
 	}
 	
 	public function execute($action)
@@ -27,5 +30,18 @@ abstract class Controller
 	public function getView()
 	{
 		return $this->view;
+	}
+	
+	public function addVars($vars)
+	{
+		foreach($vars as $var => $value)
+		{
+			$this->vars[$var] = $value;
+		}
+	}
+	
+	public function getVars()
+	{
+		return $this->vars;
 	}
 }
