@@ -2,13 +2,13 @@
 
 namespace library;
 
-abstract class Model
+abstract class Model 
 {
-	private $app;
+	private $application;
 	
-	public function __construct(Application $app)
+	public function __construct(Application $application)
 	{
-		$this->application = $app;
+		$this->application = $application;
 	}
 	
 	public function query($query, $parameters = '')

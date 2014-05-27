@@ -9,9 +9,9 @@ class Example extends library\Controller
 {
 	public function action_example()
 	{
-		$model = new model\Example($this->app);
+		$model = $this->getModel('model\Example');
 	
-		$var = 'shit';
+		$var = 'coucou';
 		$album = $model->getAlbum(17);
 		
 		$this->addVars(array('var' => $var, 'album' => $album));

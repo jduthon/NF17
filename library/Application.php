@@ -2,19 +2,30 @@
 
 namespace library;
 
+/*
+ * The Application is the heart of the website. It is designed as the Model-View-Controller pattern.
+ * It takes charge of load configuration, load the right page according to the URL and send it to user.
+ */
 class Application
 {
 	private $path;
 	private $connection;
 	private $controller;
 	private $default;
+	private $booted;
 	
+	/*
+	 * Constructor.
+	 * Call the configure method.
+	 */
 	public function __construct()
 	{
 		$this->configure();
-		$this->controller = null;
 	}
 	
+	/*
+	 * Load the configuration and initialize all the class attributes. 
+	 */
 	public function configure()
 	{
 		require_once '/../config/config.php';
@@ -24,7 +35,10 @@ class Application
 			$this->path['root'] = $path['root'];
 			foreach($path as $key => $value)
 			{
-				if($key != 'root') {
+				if (strpos($value, '/') != 0) {
+					$this->path[$key] = $value;
+				}
+				else if($key != 'root') {
 					$this->path[$key] = $this->path['root'].$value;
 				}
 			}
@@ -51,10 +65,17 @@ class Application
 		else {
 			throw new DoteException('default informations not found in ' . $this->path('config', 'config.php'));
 		}
+		
+		$this->controller = null;
+		$this->booted = false;
 	}
 	
 	public function boot()
 	{
+		if($this->booted == true) {
+			throw new DoteException('Application already booted');
+		}
+	
 		// Make a connection, load the controller, the view and send the page
 		session_start();
 		
@@ -62,11 +83,18 @@ class Application
 		
 		$this->loadPage();
 		$this->sendPage();
+		
+		$this->booted = true;
 	}
 	
-	public function path($type, $name)
+	public function path($type, $name = '')
 	{
-		return $this->path[$type].'/'.$name;
+		$res = $this->path[$type];
+		if(!empty($name)) {
+			$res .= '/'.$name;
+		}
+		
+		return $res;
 	}
 	
 	public function query($query, $parameters = array())
@@ -93,7 +121,7 @@ class Application
 		try
 		{
 			$controller_class = 'controller\\' . ucfirst($page);
-			$this->controller = new $controller_class($this, $page);
+			$this->controller = new $controller_class($this);
 			$this->controller->execute($action);
 		}
 		catch (DoteException $e)
@@ -107,6 +135,10 @@ class Application
 		// Load and send page
 		extract($this->controller->getVars());
 		$_view_ = $this->path('view', $this->controller->getView());
+		$_css_ = $this->path('css', '');
+		$_image_ = $this->path('image', '');
+		$_javascript_ = $this->path('javascript', '');
+		
 		require $this->path('layout', 'main.php');
 	}
 }

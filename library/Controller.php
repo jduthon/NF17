@@ -4,15 +4,13 @@ namespace library;
 
 abstract class Controller 
 {
-	protected $app;
-	protected $page;
+	protected $application;
 	protected $view;
 	protected $vars;
 	
-	public function __construct(Application $app, $page)
+	public function __construct(Application $application)
 	{
-		$this->app = $app;
-		$this->page = $page;
+		$this->application = $application;
 		$this->view = null;
 		$this->vars = array();
 	}
@@ -32,6 +30,11 @@ abstract class Controller
 		return $this->view;
 	}
 	
+	public function getVars()
+	{
+		return $this->vars;
+	}
+	
 	public function addVars($vars)
 	{
 		foreach($vars as $var => $value)
@@ -40,8 +43,8 @@ abstract class Controller
 		}
 	}
 	
-	public function getVars()
+	public function getModel($model)
 	{
-		return $this->vars;
+		return new $model($this->application);
 	}
 }

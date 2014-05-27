@@ -10,9 +10,9 @@ $path = array('root' => str_replace(array('\config', '/config'), '', __DIR__ ),
 			'library' => '/library',
 			'view' => '/view',
 			'layout' => '/view/layout',
-			'css' => '/web/css',
-			'javascript' => '/web/javascript',
-			'image' => '/web/image');
+			'css' => 'web/css',
+			'javascript' => 'web/javascript',
+			'image' => 'web/image');
 			
 			
 /* Connection informations */
