@@ -1,7 +1,7 @@
 <div class="contenu">
 		
 	<nav>
-		<a href="students_challenge">Le Students Challenge</a><a href="sand4l">L'équipage</a><a href="partenaires">Nos Partenaires</a><a href="documents">Documents</a><a href="contact">Contactez-nous</a>
+		<a href="students_challenge">Notre super site NF17</a><a href="sand4l">L'équipage</a><a href="partenaires">Nos Partenaires</a><a href="documents">Documents</a><a href="contact">Contactez-nous</a>
 	</nav>
 	
 	

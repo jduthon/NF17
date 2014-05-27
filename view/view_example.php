@@ -1,4 +1,4 @@
-<section>
+<div>
 
 	<?php echo $var; ?>
 	
@@ -8,5 +8,5 @@
 		<?php print_r($album); ?>
 	</pre>
 	
-</section>
+</div>
 

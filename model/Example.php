@@ -10,4 +10,5 @@ class Example extends library\Model
 	{
 		return $this->query("SELECT `id`,`titre`,`date` FROM albums WHERE id = :id", array(':id' => $id));
 	}
+	
 }
