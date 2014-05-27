@@ -8,6 +8,7 @@ namespace library;
  */
 class Application
 {
+	private static $instance = null;
 	private $path;
 	private $connection;
 	private $controller;
@@ -15,12 +16,25 @@ class Application
 	private $booted;
 	
 	/*
-	 * Constructor.
-	 * Call the configure method.
+	 * Constructor. Simply configure the Application which needs then to be booted.
 	 */
-	public function __construct()
+	private function __construct()
 	{
 		$this->configure();
+	}
+	
+	private function __clone() {}
+	
+	/*
+	 * Implemented the Singleton design pattern.
+	 */
+	public static function getInstance()
+	{
+		if(empty(self::$instance)) {
+			self::$instance = new self;
+		}
+		
+		return self::$instance;
 	}
 	
 	/*
@@ -70,13 +84,16 @@ class Application
 		$this->booted = false;
 	}
 	
+	/*
+	 * Boot the Application.
+	 * Initialize the session, make a connection with database, load the page and send it to the user.
+	 */
 	public function boot()
 	{
 		if($this->booted == true) {
 			throw new DoteException('Application already booted');
 		}
-	
-		// Make a connection, load the controller, the view and send the page
+		
 		session_start();
 		
 		$this->connection = new Connection($this->connection['server'], $this->connection['username'], $this->connection['password'], $this->connection['database'], $this->connection['dbms']);
