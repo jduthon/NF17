@@ -22,7 +22,7 @@ abstract class Controller
 			$this->view = $this->$action();
 		}
 		else
-			throw new DoteException('404');
+			throw new TommeException('404');
 	}
 	
 	public function getView()
