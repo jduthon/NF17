@@ -16,8 +16,7 @@ class Application
 	private $booted;
 	
 	/*
-	 * Constructor. 
-	 * Configure the Application which needs then to be booted.
+	 * Constructor, configure the Application which needs then to be booted.
 	 */
 	private function __construct()
 	{
@@ -59,7 +58,7 @@ class Application
 			}
 		} 
 		else {
-			throw new TommeException('Path definitions not found in /config/config.php');
+			throw new TommeException('path definitions not found in /config/config.php');
 		}
 		
 		if (!empty($connection))
@@ -67,7 +66,7 @@ class Application
 			$this->connection = $connection;
 		}
 		else {
-			throw new TommeException('Connection informations not found in ' . $this->path('config', 'config.php'));
+			throw new TommeException('connection informations not found in ' . $this->path('config', 'config.php'));
 		}
 		
 		if (!empty($default))
@@ -92,7 +91,7 @@ class Application
 	public function boot()
 	{
 		if($this->booted == true) {
-			throw new TommeException('Application already booted');
+			throw new TommeException('application already booted');
 		}
 		
 		session_start();
