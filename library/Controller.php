@@ -2,19 +2,30 @@
 
 namespace library;
 
-abstract class Controller 
+/**
+ * The Controller main class which all the controllers must inherit from.
+ * It provides methods needed by this controllers.
+ */
+abstract class Controller extends ApplicationComponent
 {
-	protected $application;
 	protected $view;
 	protected $vars;
 	
+	/**
+	 * Constructor, initialize attributes.
+	 */
 	public function __construct(Application $application)
 	{
-		$this->application = $application;
+		parent::__construct($application);
 		$this->view = null;
 		$this->vars = array();
 	}
 	
+	/**
+	 * Execute the specified action.
+	 *
+	 * @param	string	$action		The action name.
+	 */
 	public function execute($action)
 	{
 		if (is_callable(array($this, $action)))
@@ -25,16 +36,27 @@ abstract class Controller
 			throw new TommeException('404');
 	}
 	
+	/**
+	 * Return the path of the charged view.
+	 */
 	public function getView()
 	{
 		return $this->view;
 	}
 	
+	/**
+	 * Return the variables of the view.
+	 */
 	public function getVars()
 	{
 		return $this->vars;
 	}
 	
+	/**
+	 * Add a variables for the view
+	 *
+	 * @param	array	$vars	The vars.
+	 */
 	public function addVars($vars)
 	{
 		foreach($vars as $var => $value)
@@ -43,8 +65,16 @@ abstract class Controller
 		}
 	}
 	
+	/**
+	 * Return an instance of the specified model
+	 *
+	 * @param	string	$model	The name of the model.
+	 *
+	 * @return	The model instance.
+	 */
 	public function getModel($model)
 	{
-		return new $model($this->application);
+		$path = 'model\\' . $model;
+		return new $path($this->getApplication());
 	}
 }

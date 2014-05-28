@@ -2,7 +2,7 @@
 
 namespace library;
 
-/*
+/**
  * The Application is the heart of the website. It is designed as the Model-View-Controller pattern.
  * It takes charge of load configuration, load the right page according to the URL and send it to user.
  */
@@ -15,7 +15,7 @@ class Application
 	private $default;
 	private $booted;
 	
-	/*
+	/**
 	 * Constructor, configure the Application which needs then to be booted.
 	 */
 	private function __construct()
@@ -25,7 +25,7 @@ class Application
 	
 	private function __clone() {}
 	
-	/*
+	/**
 	 * Implemented the Singleton design pattern.
 	 */
 	public static function getInstance()
@@ -37,7 +37,7 @@ class Application
 		return self::$instance;
 	}
 	
-	/*
+	/**
 	 * Load the configuration and initialize all the class attributes. 
 	 */
 	public function configure()
@@ -84,7 +84,7 @@ class Application
 		$this->booted = false;
 	}
 	
-	/*
+	/**
 	 * Boot the Application.
 	 * Initialize the session, make a connection with database, load the page and send it to the user.
 	 */
@@ -104,7 +104,7 @@ class Application
 		$this->booted = true;
 	}
 	
-	/*
+	/**
 	 * Return the absolute path of the document (file or folder) requested.
 	 * 
 	 * @param	string	$type	The type of the document. List of types are defined in $this->path.
@@ -122,7 +122,7 @@ class Application
 		return $res;
 	}
 	
-	/*
+	/**
 	 * Prepare and execute a SQL query and return the results.
 	 *
 	 * @param	string	$query		The query.
@@ -136,7 +136,7 @@ class Application
 		return $this->connection->execute($sth, $parameters);
 	}
 	
-	/*
+	/**
 	 * Load the page requested by the user via the URL.
 	 * Find the right couple controller/action, then execute the action. If it has failed, execute a 404 error.
 	 */
@@ -166,7 +166,7 @@ class Application
 		}
 	}
 	
-	/*
+	/**
 	 * Prepare the page and send it to the user.
 	 * Prepare all the variables needed by the view, then included it in the layout to make the page.
 	 */
