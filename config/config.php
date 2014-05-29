@@ -24,5 +24,5 @@ $connection = array('server' => 'localhost',
 
 					
 /* Default values */
-$default = array('page' => 'Example',
-				'action' => 'action_example');
+/*$default = array('page' => 'Example',
+				'action' => 'action_example');*/

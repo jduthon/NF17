@@ -16,7 +16,7 @@ abstract class Model extends ApplicationComponent
 	/*
 	 * {@inheritdoc}
 	 */
-	public function query($query, $parameters = '')
+	public function query($query, $parameters = array())
 	{
 		return $this->getApplication()->query($query, $parameters);
 	}

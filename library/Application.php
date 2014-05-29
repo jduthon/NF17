@@ -11,8 +11,8 @@ class Application
 	private static $instance = null;
 	private $path;
 	private $connection;
+	private $router;
 	private $controller;
-	private $default;
 	private $booted;
 	
 	/**
@@ -69,18 +69,6 @@ class Application
 			throw new TommeException('connection informations not found in ' . $this->path('config', 'config.php'));
 		}
 		
-		if (!empty($default))
-		{
-			foreach($default as $key => $value)
-			{
-				$this->default[$key] = $value;
-			}
-		}
-		else {
-			throw new TommeException('default informations not found in ' . $this->path('config', 'config.php'));
-		}
-		
-		$this->controller = null;
 		$this->booted = false;
 	}
 	
@@ -97,6 +85,7 @@ class Application
 		session_start();
 		
 		$this->connection = new Connection($this->connection['server'], $this->connection['username'], $this->connection['password'], $this->connection['database'], $this->connection['dbms']);
+		$this->router = new Router($this->path('config', 'routes.xml'));
 		
 		$this->loadPage();
 		$this->sendPage();
@@ -130,7 +119,7 @@ class Application
 	 *
 	 * @return array	The results.
 	 */
-	public function query($query, $parameters = array())
+	public function query($query, array $parameters = array())
 	{
 		$sth = $this->connection->prepare($query);
 		return $this->connection->execute($sth, $parameters);
@@ -141,24 +130,18 @@ class Application
 	 * Find the right couple controller/action, then execute the action. If it has failed, execute a 404 error.
 	 */
 	public function loadPage()
-	{
-		// Routing
-		if(!empty($_GET['page']) AND !empty($_GET['action']))
-		{
-			$page = $_GET['page'];
-			$action = $_GET['action'];
-		}
-		else
-		{
-			$page = $this->default['page'];
-			$action = $this->default['action'];
-		}
-		
+	{	
 		try
 		{
-			$controller_class = 'controller\\' . ucfirst($page);
+			$route = $this->router->getRoute($_SERVER['REQUEST_URI']);
+			$controller_class = 'controller\\'.$route->getController();
+			$action = $route->getAction();
+			foreach($route->getVariables() as $variable) {
+				$arguments[$variable['name']] = $variable['value'];
+			}
+			
 			$this->controller = new $controller_class($this);
-			$this->controller->execute($action);
+			$this->controller->execute($action, $arguments);
 		}
 		catch (TommeException $e)
 		{

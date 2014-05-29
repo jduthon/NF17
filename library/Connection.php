@@ -33,7 +33,7 @@ class Connection
 		
 		try
 		{
-			$dsn = $dbms . ':host=' . $this->server . ';dbname=' . $this->database;
+			$dsn = $dbms . ':host=' . $this->server . ';charset=UTF8;dbname=' . $this->database;
 			$this->connection = new \PDO($dsn , $this->username, $this->password);
 		}
 		catch (PDOException $e) {
@@ -63,13 +63,13 @@ class Connection
 	 *
 	 * @return array			The results.
 	 */
-	public function execute(\PDOStatement $query, $parameters = array())
+	public function execute(\PDOStatement $query, array $parameters = array())
 	{
 		if ($query->execute($parameters)) 
 		{
 			$answer = $query->fetchAll();
 			$query->closeCursor();
-			
+						
 			if (count($answer) == 1) // In that case, we prefer fetch(PDO::FETCH_ASSOC) instead of fetchAll()
 				$answer = $answer[0];
 			

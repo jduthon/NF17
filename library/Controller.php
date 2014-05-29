@@ -26,11 +26,11 @@ abstract class Controller extends ApplicationComponent
 	 *
 	 * @param	string	$action		The action name.
 	 */
-	public function execute($action)
+	public function execute($action, $arguments)
 	{
 		if (is_callable(array($this, $action)))
 		{
-			$this->view = $this->$action();
+			$this->view = call_user_func_array(array($this, $action), $arguments);
 		}
 		else
 			throw new TommeException('404');
@@ -57,7 +57,7 @@ abstract class Controller extends ApplicationComponent
 	 *
 	 * @param	array	$vars	The vars.
 	 */
-	public function addVars($vars)
+	public function addVars(array $vars)
 	{
 		foreach($vars as $var => $value)
 		{
