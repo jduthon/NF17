@@ -2,16 +2,24 @@
 
 namespace library;
 
+/**
+ * The Router manages the Routes of the Application.
+ */
 class Router
 {
 	private $routes;
 	
-	public function __construct($routes_xml)
+	public function __construct($routes_file)
+	{
+		$this->configure($routes_file);
+	}
+
+	public function configure($routes_file)
 	{
 		$this->routes = array();
 		
 		$xml = new \DOMDocument;
-		$xml->load($routes_xml);
+		$xml->load($routes_file);
 		
 		$routes = $xml->getElementsByTagName('route');
 		foreach($routes as $route)
@@ -24,8 +32,7 @@ class Router
 	
 	public function addRoute(Route $route)
 	{
-		if (!in_array($route, $this->routes))
-		{
+		if (!in_array($route, $this->routes)) {
 			$this->routes[] = $route;
 		}
 	}
@@ -38,7 +45,7 @@ class Router
 				return $route;
 			}
 		}
-		exit;
+		
 		throw new TommeException('No route matching the URL.');
 	}
 	

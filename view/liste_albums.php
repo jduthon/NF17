@@ -3,7 +3,9 @@
 <div>
 	<?php foreach($liste_albums as $album) { ?>
 		<ul>
-			<li><?php echo $album['titre']; ?> - Publié le <?php echo $album['date']; ?></li>
+			<li>
+				<a href="/album-<?php echo $album['id']; ?>"><?php echo $album['titre']; ?></a> - Publié le <?php echo $album['date']; ?>
+			</li>
 		</ul>
 	<?php } ?>
 </div>

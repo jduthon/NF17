@@ -11,8 +11,8 @@ $path = array('root' => str_replace(array('\config', '/config'), '', __DIR__ ),
 			'view' => '/view',
 			'layout' => '/view/layout',
 			'css' => 'web/css',
-			'javascript' => 'web/javascript',
-			'image' => 'web/image');
+			'javascript' => 'web/js',
+			'image' => 'web/images');
 			
 			
 /* Connection informations */

@@ -7,11 +7,11 @@
 	
 	<title>Framework test</title>
 
-	<link rel="shortcut icon" href="<?php echo $_image_; ?>/favicon.png">
-	<link rel="apple-touch-icon" href="<?php echo $_image_; ?>/apple-touch-icon.png">
+	<link rel="shortcut icon" href="<?php echo $_images; ?>/favicon.png">
+	<link rel="apple-touch-icon" href="<?php echo $_images; ?>/apple-touch-icon.png">
 	
 	
-	<link rel="stylesheet" href="<?php echo $_css_; ?>/reset.css">
-	<link rel="stylesheet" href="<?php echo $_css_; ?>/style.css">
+	<link rel="stylesheet" href="<?php echo $_css; ?>/reset.css">
+	<link rel="stylesheet" href="<?php echo $_css; ?>/style.css">
 
 </head>

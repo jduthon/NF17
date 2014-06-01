@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__ . '/library/autoload.php';
+require_once 'library/autoload.php';
+$config_file = 'config/config.xml';
 
-$application = library\Application::getInstance();
+$application = library\Application::getInstance($config_file);
 $application->boot();

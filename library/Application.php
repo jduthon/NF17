@@ -18,57 +18,46 @@ class Application
 	/**
 	 * Constructor, configure the Application which needs then to be booted.
 	 */
-	private function __construct()
+	private function __construct($config_file)
 	{
-		$this->configure();
+		$this->configure($config_file);
 	}
-	
-	private function __clone() {}
 	
 	/**
 	 * Implemented the Singleton design pattern.
 	 */
-	public static function getInstance()
+	public static function getInstance($config_file)
 	{
 		if(empty(self::$instance)) {
-			self::$instance = new self;
+			self::$instance = new self($config_file);
 		}
 		
 		return self::$instance;
 	}
 	
 	/**
+	 * Implemented the Singleton design pattern.
+	 */
+	private function __clone() {}
+	
+	/**
 	 * Load the configuration and initialize all the class attributes. 
 	 */
-	public function configure()
+	public function configure($config_file)
 	{
-		require_once '/../config/config.php';
+		$config = new \DOMDocument;
+		$config->load($config_file);
 		
-		if (!empty($path))
-		{
-			$this->path['root'] = $path['root'];
-			foreach($path as $key => $value)
-			{
-				if (strpos($value, '/') != 0) {
-					$this->path[$key] = $value;
-				}
-				else if($key != 'root') {
-					$this->path[$key] = $this->path['root'].$value;
-				}
-			}
-		} 
-		else {
-			throw new TommeException('path definitions not found in /config/config.php');
+		$paths = $config->getElementsByTagName('path');
+		foreach($paths as $path) {
+			$this->path[$path->getAttribute('name')] = $path->getAttribute('value');
 		}
 		
-		if (!empty($connection))
-		{
-			$this->connection = $connection;
-		}
-		else {
-			throw new TommeException('connection informations not found in ' . $this->path('config', 'config.php'));
-		}
-		
+		$connection = $config->getElementsByTagName('connection')->item(0);
+		$this->connection = array('server' => $connection->getAttribute('server'), 'username' => $connection->getAttribute('username'), 'password' => $connection->getAttribute('password'), 'database' => $connection->getAttribute('database'), 'dbms' => $connection->getAttribute('dbms'));
+
+		$this->controller = null;
+		$this->router = null;
 		$this->booted = false;
 	}
 	
@@ -133,6 +122,7 @@ class Application
 	{	
 		try
 		{
+			//Prepare the couple controller/action
 			$route = $this->router->getRoute($_SERVER['REQUEST_URI']);
 			$controller_class = 'controller\\'.$route->getController();
 			$action = $route->getAction();
@@ -140,6 +130,7 @@ class Application
 				$arguments[$variable['name']] = $variable['value'];
 			}
 			
+			//Load and execute it
 			$this->controller = new $controller_class($this);
 			$this->controller->execute($action, $arguments);
 		}
@@ -156,10 +147,10 @@ class Application
 	public function sendPage()
 	{
 		extract($this->controller->getVars());
-		$_view_ = $this->path('view', $this->controller->getView());
-		$_css_ = $this->path('css', '');
-		$_image_ = $this->path('image', '');
-		$_javascript_ = $this->path('javascript', '');
+		$_view = $this->path('view', $this->controller->getView());
+		$_css = $this->path('css');
+		$_images = $this->path('images');
+		$_js = $this->path('js');
 		
 		require $this->path('layout', 'main.php');
 	}

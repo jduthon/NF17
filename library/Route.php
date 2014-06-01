@@ -2,6 +2,9 @@
 
 namespace library;
 
+/**
+ * A Route represent an URL associated to a controller/action couple
+ */
 class Route
 {
 	private $url;
