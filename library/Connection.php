@@ -13,9 +13,8 @@ class Connection
 	private $database;
 	private $connection;
 	
-	/*
-	 * Constructor.
-	 * Establish the connection to database by creating a PDO instance.
+	/**
+	 * Constructor. Establish the connection to database by creating a PDO instance.
 	 * 
 	 * @param	string	$server		The server name.
 	 * @param	string	$username	The user name.
@@ -41,7 +40,7 @@ class Connection
 		}
 	}
 	
-	/*
+	/**
 	 * Prepare the query.
 	 * Make a call to the PDO prepare method.
 	 *
@@ -54,14 +53,14 @@ class Connection
 		return $this->connection->prepare($query);
 	}
 	
-	/*
+	/**
 	 * Execute the statement and return query results.
 	 * Make calls to the PDO execute and fetchAll methods.
 	 *
 	 * @param	PDOStatement	$parameters		List of bound parameters of the query.
 	 * @param	array			$parameters		List of bound parameters of the query.
 	 *
-	 * @return array			The results.
+	 * @return 	array			The results.
 	 */
 	public function execute(\PDOStatement $query, array $parameters = array())
 	{

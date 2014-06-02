@@ -16,7 +16,7 @@ class Application
 	private $booted;
 	
 	/**
-	 * Constructor, configure the Application which needs then to be booted.
+	 * Constructor. Configure the Application which needs then to be booted.
 	 */
 	private function __construct($config_file)
 	{
@@ -41,7 +41,7 @@ class Application
 	private function __clone() {}
 	
 	/**
-	 * Load the configuration and initialize all the class attributes. 
+	 * Load the configuration file and initialize all the class attributes. 
 	 */
 	public function configure($config_file)
 	{
@@ -155,4 +155,3 @@ class Application
 		require $this->path('layout', 'main.php');
 	}
 }
-

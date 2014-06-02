@@ -12,7 +12,7 @@ abstract class Controller extends ApplicationComponent
 	protected $vars;
 	
 	/**
-	 * Constructor, initialize attributes.
+	 * Constructor. Initializes attributes.
 	 */
 	public function __construct(Application $application)
 	{
@@ -25,6 +25,7 @@ abstract class Controller extends ApplicationComponent
 	 * Execute the specified action.
 	 *
 	 * @param	string	$action		The action name.
+	 * @param	array	$arguments	The arguments of the action.
 	 */
 	public function execute($action, $arguments)
 	{
@@ -38,6 +39,8 @@ abstract class Controller extends ApplicationComponent
 	
 	/**
 	 * Return the path of the charged view.
+ 	 *
+	 * @return	string	The path.	
 	 */
 	public function getView()
 	{
@@ -46,6 +49,8 @@ abstract class Controller extends ApplicationComponent
 	
 	/**
 	 * Return the variables of the view.
+	 *
+	 * @return	array	The variables.
 	 */
 	public function getVars()
 	{
@@ -55,7 +60,7 @@ abstract class Controller extends ApplicationComponent
 	/**
 	 * Add a variables for the view
 	 *
-	 * @param	array	$vars	The vars.
+	 * @param	array	$vars	The variables.
 	 */
 	public function addVars(array $vars)
 	{
@@ -70,7 +75,7 @@ abstract class Controller extends ApplicationComponent
 	 *
 	 * @param	string	$model	The name of the model.
 	 *
-	 * @return	The model instance.
+	 * @return	$model	The model instance.
 	 */
 	public function getModel($model)
 	{

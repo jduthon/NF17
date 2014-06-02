@@ -8,12 +8,15 @@ namespace library;
  */
 abstract class Model extends ApplicationComponent
 {	
+	/**
+	 * Constructor. Initializes attributes.
+	 */
 	public function __construct(Application $application)
 	{
 		parent::__construct($application);
 	}
 	
-	/*
+	/**
 	 * {@inheritdoc}
 	 */
 	public function query($query, $parameters = array())

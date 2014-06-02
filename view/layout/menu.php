@@ -1,16 +1,16 @@
-<div class="contenu">
+<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<a href="/" class="navbar-brand">Tomme Framework</a>
+		</div>
+	
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="/">Accueil</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
 		
-	<nav>
-		<a href="students_challenge">Notre super site NF17</a><a href="sand4l">L'équipage</a><a href="partenaires">Nos Partenaires</a><a href="documents">Documents</a><a href="contact">Contactez-nous</a>
-	</nav>
-	
-	
-	<h1 class="logo">
-		<a href="./">
-			<img src="_/images/logo_petit.png" alt="logo SAND 4L" />
-			<span class="titre">SAND 4L </span><br />
-			<span style="position: relative; bottom: 2px;" class="slogan">Aventure Solidaire</span>
-		</a>
-	</h1>
-	
-</div>
+		<form class="pull-right">
+			<button type="submit" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-in"></span> Connexion</button>
+		</form>
+	</div>
+</nav>
