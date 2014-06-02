@@ -1,4 +1,4 @@
-dote-framework
+Tomme-framework
 ==============
 
-Down-to-earth
+A simple and light php framework.
