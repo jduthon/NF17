@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes>
+	<route url="/" controller="Example" action="action_example" />
+	<route url="/albums" controller="AnotherController" action="myaction" />
+	<route url="/album-([0-9]+)" controller="AnotherController" action="album" variables="id" />
+</routes>

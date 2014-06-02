@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+	<paths>
+		<path name="config" value="config" />
+		<path name="controller" value="controller" />
+		<path name="model" value="model" />
+		<path name="library" value="library" />
+		<path name="view" value="view" />
+		<path name="layout" value="view/layout" />
+		<path name="css" value="web/css" />
+		<path name="js" value="web/js" />
+		<path name="images" value="web/images" />
+	</paths>
+	
+	<connection server="localhost" username="root" password="" database="whatsup" dbms="mysql" />
+</configuration>
