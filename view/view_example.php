@@ -13,5 +13,13 @@
 		Voici un lien vers une autre vue : 
 		<a href="albums">liste des albums</a>
 	</div>
+	
 </section>
 
+<section class="row">
+	<?php include 'recherche.php'; ?>
+</section>
+
+<section class="row">
+	<?php include 'liste_vehicules.php'; ?>
+</section>
