@@ -1,1 +1,1 @@
-Recherche
+<h2>Vue Recherche</h2>

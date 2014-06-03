@@ -23,9 +23,11 @@
 		
 		<div class="container">
 			<?php include $_view; ?>
-		</div>
+			
+			<hr>
 		
-		<?php include 'footer.php'; ?>
+			<?php include 'footer.php'; ?>
+		</div>
 		
 		<script src="<?php echo $_js; ?>/jquery-2.1.1.js"></script>
 		<script src="<?php echo $_js; ?>/bootstrap.min.js"></script>

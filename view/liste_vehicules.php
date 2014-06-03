@@ -1,1 +1,1 @@
-Liste des véhicules
+<h2>Vue liste des véhicules</h2>

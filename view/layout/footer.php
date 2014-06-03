@@ -1,2 +1,3 @@
-<div>		
-</div>
+<footer>
+	<p>Copyrraaight</p>
+</footer>
