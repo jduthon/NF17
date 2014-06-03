@@ -62,7 +62,7 @@ abstract class Controller extends ApplicationComponent
 	 *
 	 * @param	array	$vars	The variables.
 	 */
-	public function addVars(array $vars)
+	public function addVars(array $vars = array())
 	{
 		foreach($vars as $var => $value)
 		{
