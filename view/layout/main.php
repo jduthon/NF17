@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-		<title>Framework test</title>
+		<title>NF17</title>
 
 		<link rel="shortcut icon" href="<?php echo $_images; ?>/favicon.png">
 		<link rel="apple-touch-icon" href="<?php echo $_images; ?>/apple-touch-icon.png">
@@ -19,15 +19,13 @@
 	</head>
 
 	<body>
-		<?php include 'menu.php'; ?>
+		<?php include 'nav.php'; ?>
 		
 		<div class="container">
 			<?php include $_view; ?>
 		</div>
 		
-		<div>
-			<?php include 'footer.php'; ?>
-		</div>
+		<?php include 'footer.php'; ?>
 		
 		<script src="<?php echo $_js; ?>/jquery-2.1.1.js"></script>
 		<script src="<?php echo $_js; ?>/bootstrap.min.js"></script>
