@@ -6,7 +6,7 @@ use library;
 
 class Anothercontroller extends library\Controller
 {
-	public function myaction()
+	public function albums()
 	{
 		$model = $this->getModel('Album');
 	

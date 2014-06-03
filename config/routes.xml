@@ -2,6 +2,6 @@
 
 <routes>
 	<route url="/" controller="Example" action="action_example" />
-	<route url="/albums" controller="AnotherController" action="myaction" />
+	<route url="/albums" controller="AnotherController" action="albums" />
 	<route url="/album-([0-9]+)" controller="AnotherController" action="album" variables="id" />
 </routes>
