@@ -5,15 +5,16 @@ namespace library;
 /**
  * The Router manages the Routes of the Application.
  */
-class Router
+class Router extends ApplicationComponent
 {
 	private $routes;
 	
 	/**
 	 * Constructor. Configure the Router.
 	 */
-	public function __construct($routes_file)
+	public function __construct(Application $application, $routes_file)
 	{
+		parent::__construct($application);
 		$this->configure($routes_file);
 	}
 	
@@ -31,7 +32,7 @@ class Router
 		foreach($routes as $route)
 		{
 			$route_variables = explode(',', $route->getAttribute('variables'));
-			$route_object = new Route($route->getAttribute('url'), $route->getAttribute('controller'), $route->getAttribute('action'), $route_variables);
+			$route_object = new Route($this->getApplication()->path('root') . $route->getAttribute('url'), $route->getAttribute('controller'), $route->getAttribute('action'), $route_variables);
 			$this->addRoute($route_object);
 		}
 	}

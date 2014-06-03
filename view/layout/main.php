@@ -19,15 +19,13 @@
 	</head>
 
 	<body>
-		<?php include 'menu.php'; ?>
+		<?php include 'nav.php'; ?>
 		
 		<div class="container">
 			<?php include $_view; ?>
 		</div>
 		
-		<div>
-			<?php include 'footer.php'; ?>
-		</div>
+		<?php include 'footer.php'; ?>
 		
 		<script src="<?php echo $_js; ?>/jquery-2.1.1.js"></script>
 		<script src="<?php echo $_js; ?>/bootstrap.min.js"></script>

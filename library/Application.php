@@ -48,6 +48,7 @@ class Application
 		$config = new \DOMDocument;
 		$config->load($config_file);
 		
+		$this->path['root'] = pathinfo($_SERVER['PHP_SELF'], PATHINFO_DIRNAME);	
 		$paths = $config->getElementsByTagName('path');
 		foreach($paths as $path) {
 			$this->path[$path->getAttribute('name')] = $path->getAttribute('value');
@@ -74,7 +75,7 @@ class Application
 		session_start();
 		
 		$this->connection = new Connection($this->connection['server'], $this->connection['username'], $this->connection['password'], $this->connection['database'], $this->connection['dbms']);
-		$this->router = new Router($this->path('config', 'routes.xml'));
+		$this->router = new Router($this, $this->path('config', 'routes.xml'));
 		
 		$this->loadPage();
 		$this->sendPage();
