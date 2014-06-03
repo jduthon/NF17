@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
-			<a href="/" class="navbar-brand">Tomme Framework</a>
+			<a href="/" class="navbar-brand">NF17</a>
 		</div>
 	
 		<ul class="nav navbar-nav">
