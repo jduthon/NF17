@@ -14,4 +14,4 @@
 	</paths>
 	
 	<connection server="localhost" username="root" password="" database="" dbms="mysql" />
-</configuration>
+
