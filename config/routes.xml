@@ -3,4 +3,11 @@
 <routes>
 	<route url="/" controller="general" action="accueil" />
 	<route url="/connexion" controller="general" action="connexion" />
+	<route url="/formulaire_client" controller="general" action="formulaire_client" />
+	<route url="/liste_pro" controller="general" action="liste_pro" />
+	<route url="/liste_agent" controller="general" action="liste_agent" />
+	<route url="/liste_entreprise" controller="general" action="liste_entreprise" />
+	
+	
+	
 </routes>
