@@ -13,5 +13,5 @@
 		<path name="images" value="web/images" />
 	</paths>
 	
-	<connection server="localhost" username="root" password="" database="whatsup" dbms="mysql" />
+	<connection server="localhost" username="root" password="" database="" dbms="mysql" />
 </configuration>
