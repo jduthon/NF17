@@ -8,37 +8,33 @@ class General extends library\Controller
 {
 	public function accueil()
 	{		
-		$this->addVars();
 		return 'accueil.php';
 	}	
 	
 	public function connexion()
-	{		
-		$this->addVars();
+	{
+		$this->addVars(array('connexion_client' => true));
 		return 'connexion.php';
 	}
 	
-	public function formulaire_client()
+	public function inscription()
 	{
-	$this->addVars();
-	return 'formulaire_client.php';
+		$this->addVars(array('type_client' => 'professionnel'));
+		return 'inscription.php';
 	}
 	
-	public function liste_pro()
+	public function liste_pros()
 	{
-	$this->addVars();
-	return 'liste_pro.php';
+		return 'liste_pro.php';
 	}
 	
-	public function liste_agent()
+	public function liste_agents()
 	{
-	$this->addVars();
-	return 'liste_agent.php';
+		return 'liste_agent.php';
 	}
 	
-	public function liste_entreprise()
+	public function liste_entreprises()
 	{
-	$this->addVars();
-	return 'liste_entreprise.php';
+		return 'liste_entreprise.php';
 	}
 }

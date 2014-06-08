@@ -1,21 +1,29 @@
 <section class="row">
-	<div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
+	<div class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
 
 		<form class="form-signin" role="form">
 			<h2 class="form-signin-heading">Connexion</h2>
 			
-			<input type="email" class="form-control" placeholder="Adresse mail" required autofocus>
-			
-			<input type="password" class="form-control" placeholder="Mot de passe" required>
+			<label for="adresse_email" class="sr-only">Adresse email</label>
+			<input type="email" class="form-control input-lg" id="adresse_email" name="adresse_email" placeholder="Adresse email" required autofocus>
+
+			<label for="mot_de_passe" class="sr-only">Mot de passe</label>			
+			<input type="password" class="form-control input-lg" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" required>
 			
 			<label class="checkbox">
-			  <input type="checkbox" value="remember-me"> Se souvenir de moi
+				<input type="checkbox" id="se_souvenir" name="se_souvenir" value="no"> Se souvenir de moi
 			</label>
 			
-			
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Pas encore inscrit ?</button>
 		</form>
+		
+		<br>
+		
+		<?php if (!empty($connexion_client) AND $connexion_client == true) { ?>
+			<p class="text-center">
+				Vous êtes un nouveau client ? <a href="inscription">Inscrivez-vous</a>
+			<p>
+		<?php } ?>
 
 	</div>
 </section>

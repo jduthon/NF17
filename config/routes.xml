@@ -3,11 +3,8 @@
 <routes>
 	<route url="/" controller="general" action="accueil" />
 	<route url="/connexion" controller="general" action="connexion" />
-	<route url="/formulaire_client" controller="general" action="formulaire_client" />
-	<route url="/liste_pro" controller="general" action="liste_pro" />
-	<route url="/liste_agent" controller="general" action="liste_agent" />
-	<route url="/liste_entreprise" controller="general" action="liste_entreprise" />
-	
-	
-	
+	<route url="/inscription" controller="general" action="inscription" />
+	<route url="/liste_pros" controller="general" action="liste_pros" />
+	<route url="/liste_agents" controller="general" action="liste_agents" />
+	<route url="/liste_entreprises" controller="general" action="liste_entreprises" />
 </routes>
