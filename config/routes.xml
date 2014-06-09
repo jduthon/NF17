@@ -7,4 +7,5 @@
 	<route url="/liste_conducteurs" controller="general" action="liste_conducteurs" />
 	<route url="/liste_agents" controller="general" action="liste_agents" />
 	<route url="/liste_entreprises" controller="general" action="liste_entreprises" />
+	<route url="/liste_location_particulier" controller="general" action="liste_location_particulier" />
 </routes>
