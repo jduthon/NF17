@@ -2,6 +2,7 @@
 
 <routes>
 	<route url="/" controller="general" action="accueil" />
+	<route url="/recherche" controller="general" action="recherche" />
 	<route url="/connexion" controller="general" action="connexion" />
 	<route url="/inscription" controller="general" action="inscription" />
 	<route url="/liste_conducteurs" controller="general" action="liste_conducteurs" />
