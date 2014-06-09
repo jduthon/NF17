@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+<header class="navbar navbar-inverse navbar-static-top" role="banner">
 	<div class="container">
 	
 		<div class="navbar-header">
@@ -12,10 +12,8 @@
 			<a href="./" class="navbar-brand"><span class="glyphicon glyphicon-home"></span></a>
 		</div>
 		
-		<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="./">Accueil</a></li>
-				
+		<nav class="collapse navbar-collapse" role="navigation">
+			<ul class="nav navbar-nav">			
 				<?php $utilisateur_connecte = true;
 				if(!empty($utilisateur_connecte) && $utilisateur_connecte) { ?> 
 					<li><a href="">Liste des locations</a></li>
@@ -27,6 +25,6 @@
 			<div class="pull-right hidden-xs">
 				<a href="connexion" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
 			</div>
-		</div>
+		</nav>
 	</div>
-</nav>
+</header>

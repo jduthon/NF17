@@ -3,7 +3,7 @@
 	
 		<h1>Inscription</h1>
 		
-		<form class="form-horizontal" method="POST" role="form">
+		<form class="form-horizontal" method="post" action="" role="form">
 			<h2 class="page-header">Informations personnelles</h2>
 			
 			<?php if (!empty($type_client) AND $type_client == 'particulier') { ?>
@@ -53,16 +53,16 @@
 				<div class="col-sm-10">
 					<div class="row">
 						<label for="jour_naissance" class="col-sm-1 control-label">Jour</label>
-						<div class="col-sm-2">
+						<div class="col-sm-3 col-md-2">
 							<input type="number" class="form-control" name="jour_naissance" id="jour_naissance" min="01" max="31" step="1" value="01" required>
 						</div>
 						
-						<label for="mois_naissance" class="col-sm-1 col-sm-offset-1 control-label">Mois</label>
-						<div class="col-sm-2">
+						<label for="mois_naissance" class="col-sm-1 col-md-offset-1 control-label">Mois</label>
+						<div class="col-sm-3 col-md-2">
 							<input type="number" class="form-control" name="mois_naissance" id="mois_naissance" min="01" max="12" step="1" value="01" required>
 						</div>
 						
-						<label for="annee_naissance" class="col-sm-1 col-sm-offset-1 control-label">Année</label>
+						<label for="annee_naissance" class="col-sm-1 col-md-offset-1 control-label">Année</label>
 						<div class="col-sm-3">
 							<input type="number" class="form-control" name="annee_naissance" id="annee_naissance" min="1920" max="2010" step="1" value="2014" required>
 						</div>

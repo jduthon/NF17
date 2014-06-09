@@ -1,7 +1,7 @@
 <section class="row">
 	<div class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
 
-		<form class="form-signin" role="form">
+		<form role="form" method="post" action="" id="connexion">
 			<h2 class="form-signin-heading">Connexion</h2>
 			
 			<label for="adresse_email" class="sr-only">Adresse email</label>
@@ -14,7 +14,7 @@
 				<input type="checkbox" id="se_souvenir" name="se_souvenir" value="no"> Se souvenir de moi
 			</label>
 			
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+			<button type="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
 		</form>
 		
 		<br>

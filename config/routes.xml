@@ -4,7 +4,7 @@
 	<route url="/" controller="general" action="accueil" />
 	<route url="/connexion" controller="general" action="connexion" />
 	<route url="/inscription" controller="general" action="inscription" />
-	<route url="/liste_pros" controller="general" action="liste_pros" />
+	<route url="/liste_conducteurs" controller="general" action="liste_conducteurs" />
 	<route url="/liste_agents" controller="general" action="liste_agents" />
 	<route url="/liste_entreprises" controller="general" action="liste_entreprises" />
 </routes>

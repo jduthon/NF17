@@ -12,6 +12,8 @@
 		<link rel="apple-touch-icon" href="<?php echo $_images; ?>/apple-touch-icon.png">
 		<link rel="stylesheet" href="<?php echo $_css; ?>/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo $_css; ?>/style.css">
+		<link rel="stylesheet" href="<?php echo $_css; ?>/bootstrap-datepicker.css">
+		<link rel="stylesheet" href="<?php echo $_css; ?>/bootstrap-timepicker.min.css">
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -29,5 +31,17 @@
 		
 		<script src="<?php echo $_js; ?>/jquery-2.1.1.js"></script>
 		<script src="<?php echo $_js; ?>/bootstrap.min.js"></script>
+		<script src="<?php echo $_js; ?>/bootstrap-datepicker.js"></script>
+		<script src="<?php echo $_js; ?>/locales/bootstrap-datepicker.fr.js" charset="UTF-8"></script>
+		<script src="<?php echo $_js; ?>/bootstrap-timepicker.min.js"></script>
+		<script>
+		$('.input-group.date').datepicker({
+			format: "dd/mm/yyyy",
+			todayBtn: "linked",
+			language: "fr",
+			autoclose: true,
+			todayHighlight: true
+		});
+		</script
 	</body>
 </html>

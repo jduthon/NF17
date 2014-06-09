@@ -1,4 +1,5 @@
-	<h2 class="form-signin-heading">Liste des entreprises</h2>
+<h1>Liste des entreprises</h1>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -10,8 +11,8 @@
         <!--mettre bouton modifier sur chaque ligne-->
     </tbody>
 </table>
-<div class="col-sm-3 ">
 
-			<button class="btn btn-lg btn-primary btn-block btn-sm" type="submit">Ajout entreprise</button>
-			<button class="btn btn-lg btn-primary btn-block btn-sm" type="submit">Supression entreprise</button>
+<div class="col-sm-3">
+	<button class="btn btn-lg btn-primary btn-block btn-sm">Ajout d'une entreprise</button>
+	<button class="btn btn-lg btn-primary btn-block btn-sm">Supression d'une entreprise</button>
 </div>

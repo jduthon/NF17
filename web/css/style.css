@@ -10,11 +10,22 @@ body {
 	margin-bottom: 50px;
 }
 
-	/*.form-signin .form-control {
-		font-size: 16px;
-		height: auto;
-		padding: 10px;
-	}*/
+	#connexion #adresse_email {
+		margin-bottom: 0px;
+		border-radius: 6px 6px 0 0;
+	}
+	#connexion #mot_de_passe {
+		border-radius: 0 0 6px 6px;
+		border-top-width: 0;
+	}
+	
+	#recherche input {
+		text-align: right;
+	}
+	#recherche .barre {
+		border-right: 1px solid #ccc;
+		padding-bottom: 25px;
+	}
 
 	
 footer {
