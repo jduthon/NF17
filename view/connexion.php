@@ -1,8 +1,9 @@
+<h1 class="text-center">Connexion</h1>
+
 <section class="row">
 	<div class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
 
 		<form role="form" method="post" action="" id="connexion">
-			<h2 class="form-signin-heading">Connexion</h2>
 			
 			<label for="adresse_email" class="sr-only">Adresse email</label>
 			<input type="email" class="form-control input-lg" id="adresse_email" name="adresse_email" placeholder="Adresse email" required autofocus>

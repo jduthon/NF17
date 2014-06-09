@@ -16,7 +16,10 @@
 			<ul class="nav navbar-nav">			
 				<?php $utilisateur_connecte = true;
 				if(!empty($utilisateur_connecte) && $utilisateur_connecte) { ?> 
-					<li><a href="">Liste des locations</a></li>
+					<li><a href="locations">Mes locations</a></li>
+					<li><a href="conducteurs">Conducteurs</a></li>
+					<li><a href="agents">Agents</a></li>
+					<li><a href="entreprises">Entreprises</a></li>
 				<?php } ?>				
 			</ul>
 			

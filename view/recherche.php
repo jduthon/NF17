@@ -3,7 +3,7 @@
 
 <h2 class="page-header">Recherche</h2>
 
-<section>
+<section class="row">
 	<?php include 'formulaire_recherche.php'; ?>
 </section>
 
