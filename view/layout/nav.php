@@ -14,20 +14,30 @@
 		
 		<nav class="collapse navbar-collapse" role="navigation">
 			<ul class="nav navbar-nav">			
-				<?php $utilisateur_connecte = true;
-				if(!empty($utilisateur_connecte) && $utilisateur_connecte) { ?> 
+				<?php if(isset($_SESSION['user'])) { ?> 
 					<li><a href="locations">Mes locations</a></li>
-					<li><a href="conducteurs">Conducteurs</a></li>
-					<li><a href="agents">Agents</a></li>
-					<li><a href="entreprises">Entreprises</a></li>
+					<?php if($_SESSION['user']->isProfessionnel()){ ?>
+						<li><a href="conducteurs">Conducteurs</a></li>
+					<?php } ?>
+					<?php if(isset($_SESSION['admin'])) { ?>
+						<li><a href="agents">Agents</a></li>
+						<li><a href="entreprises">Entreprises</a></li>
+					<?php } ?>
 				<?php } ?>				
 			</ul>
-			
-			<a href="connexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
-			
-			<div class="pull-right hidden-xs">
-				<a href="connexion" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
-			</div>
+			<?php if(isset($_SESSION['user'])) { ?> 
+				<a href="deconnexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
+				
+				<div class="pull-right hidden-xs">
+					<a href="deconnexion" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
+				</div>
+			<?php } else { ?>
+				<a href="connexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
+				
+				<div class="pull-right hidden-xs">
+					<a href="connexion" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
+				</div>
+			<?php } ?>
 		</nav>
 	</div>
 </header>

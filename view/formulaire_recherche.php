@@ -44,8 +44,8 @@
 			<label for="categorie" class="control-label sr-only">Catégorie</label>
 			<select class="form-control" name="categorie" id="categorie">
 				<?php foreach($categories as $cat) { ?>
-					<option selected="<?php echo ($cat == $categorie) ? true : false; ?>">
-						<?php echo $cat; ?>
+					<option <?php echo ($cat->getnom_categorie() == $categorie) ? "selected" : ""; ?>>
+						<?php echo $cat->getnom_categorie(); ?>
 					</option>
 				<?php } ?>
 			</select>

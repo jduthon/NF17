@@ -12,6 +12,7 @@ class Connection
 	private $password;
 	private $database;
 	private $connection;
+	private $dbms;
 	
 	/**
 	 * Constructor. Establish the connection to database by creating a PDO instance.
@@ -29,10 +30,14 @@ class Connection
 		$this->username = $username;
 		$this->password = $password;
 		$this->database = $database;
+		$this->dbms = $dbms;
 		
 		try
 		{
-			$dsn = $dbms . ':host=' . $this->server . ';charset=UTF8;dbname=' . $this->database;
+			$charset="";
+			if($dbms=="mysql")
+				$charset="charset=UTF8;";
+			$dsn = $dbms . ':host=' . $this->server . ';' . $charset . 'dbname=' . $this->database;
 			$this->connection = new \PDO($dsn , $this->username, $this->password);
 		}
 		catch (PDOException $e) {
@@ -75,7 +80,11 @@ class Connection
 			return $answer;
 		}
 		else {
-			throw new TommeException('query failed : ' . mysql_error());
+			throw new TommeException('query failed : ' . " SQL STATE : " . $this->connection->errorInfo()[0] . " DRIVER ERR : ". $this->connection->errorInfo()[1] . " ERR MESS : " . $this->connection->errorInfo()[2]);
 		}
+	}
+	
+	public function getDBMS(){
+		return $this->dbms;
 	}
 }

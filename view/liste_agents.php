@@ -10,6 +10,7 @@
 			<tr>
 				<th>Identifiant</th>
 				<th>Fonction</th>	
+				<th>Agence</th>	
 			</tr>
 		</thead>
 		<tbody>
@@ -17,10 +18,13 @@
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							<input type="text" class="form" name="identifiant" id="identifiant" value="<?php echo $agent['identifiant']; ?>" >
+							<input type="text" class="form" name="id_employe" id="id_employe" value="<?php echo $agent->getid_employe(); ?>" >
 						</td>
 						<td>
-							<input type="text" class="form" name="fonction" id="fonction" value="<?php echo $agent['fonction']; ?>" >
+							<input type="text" class="form" name="function" id="function" value="<?php echo $agent->getfunction(); ?>" >
+						</td>
+						<td>
+							<input type="text" class="form" name="nom_agence" id="nom_agence" value="<?php echo $agent->getnom_agence(); ?>" >
 						</td>
 						<td class="col-xs-4 text-right">
 							<div class="btn-group">

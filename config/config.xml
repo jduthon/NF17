@@ -13,5 +13,7 @@
 		<path name="images" value="web/images" />
 	</paths>
 	
-	<connection server="localhost" username="root" password="" database="" dbms="mysql" />
+	<connection server="localhost" username="postgres" password="koukou" database="nf17" dbms="pgsql" />
+	
+	<admin adminname="admin" password="admin" />
 </configuration>

@@ -8,7 +8,11 @@
 </section>
 
 <h2 class="page-header">Résultats</h2>
-
-<section class="row">
-	<?php include 'liste_vehicules.php'; ?>
-</section>
+	<section class="row">
+		<?php 	if($vehicules!==null){ 
+					include 'liste_vehicules.php'; 
+				} else { 
+					echo "Aucun résultat ne correspond à votre recherche";
+				}
+		?>
+	</section>

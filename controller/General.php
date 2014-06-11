@@ -7,9 +7,12 @@ use library;
 class General extends library\Controller
 {
 	public function accueil()
-	{	
-		$categories = array('Citadine', 'Berline', '4X4 SUV', 'Break', 'Pickup', 'Utilitaire');
+	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$vehicules=$modelManager->getAll("Vehicule");
+		$categories=$modelManager->getAll("Categorie");
 		
+		/*
 		//Ajout des véhicules
 		$vehicules['wv'] = array('numero_immatriculation' => 'wv', 'nom_categorie' => 'Utilitaire', 'marque' => 'Volkswagen', 'nom_modele' => 'Golf', 'nb_portes' => 2, 'boite_vitesse' => 'auto', 'puissance_fiscale' => '20ch', 'taille' => '4m', 'options' => array('antigravité'));
 		$vehicules['johny'] = array('numero_immatriculation' => 'johny', 'nom_categorie' => 'Citadine', 'marque' => 'Peugeolt', 'nom_modele' => '206', 'nb_portes' => 4, 'boite_vitesse' => 'manuelle', 'puissance_fiscale' => '40ch', 'taille' => '8m', 'options' => array('klaxon allumez le feu', 'flammes sur le côté'));
@@ -17,12 +20,13 @@ class General extends library\Controller
 		
 		foreach($vehicules as &$vehicule) {
 			$vehicule['seuil_km'] = 250;
-		}
+		}*/
 		
+		/*
 		//Calcul des prix
 		$vehicules['wv']['prix'] = '150';
 		$vehicules['johny']['prix'] = '250';
-		$vehicules['tractor']['prix'] = '300';
+		$vehicules['tractor']['prix'] = '300';*/
 		
 		//Sauvegarde des données du formulaire précédemment entrées
 		$post['date_depart'] = !empty($_POST['date_depart']) ? $_POST['date_depart'] : '';
@@ -37,7 +41,9 @@ class General extends library\Controller
 	
 	public function recherche() 
 	{
-		$categories = array('Citadine', 'Berline', '4X4 SUV', 'Break', 'Pickup', 'Utilitaire');
+	
+		$modelManager = $this->getApplication()->getModelManager();
+		$categories=$modelManager->getAll("Categorie");
 	
 		//Sauvegarde des données du formulaire précédemment entrées
 		$post['date_depart'] = !empty($_POST['date_depart']) ? $_POST['date_depart'] : '';
@@ -47,37 +53,63 @@ class General extends library\Controller
 		$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : '';
 		
 		//Ajout des véhicules
-		if ($post['categorie'] == 'Utilitaire') 
-		{
-			$vehicules['wv'] = array('numero_immatriculation' => 'wv', 'nom_categorie' => 'Utilitaire', 'marque' => 'Volkswagen', 'nom_modele' => 'Golf', 'nb_portes' => 2, 'boite_vitesse' => 'auto', 'puissance_fiscale' => '20ch', 'taille' => '4m', 'options' => array('antigravité'));
-			$vehicules['wv']['prix'] = '150';
-		} 
-		else if ($post['categorie'] == 'Citadine') 
-		{
-			$vehicules['johny'] = array('numero_immatriculation' => 'johny', 'nom_categorie' => 'Citadine', 'marque' => 'Peugeolt', 'nom_modele' => '206', 'nb_portes' => 4, 'boite_vitesse' => 'manuelle', 'puissance_fiscale' => '40ch', 'taille' => '8m', 'options' => array('klaxon allumez le feu', 'flammes sur le côté'));
-			$vehicules['johny']['prix'] = '250';
-		} 
-		else if ($post['categorie'] == '4X4 SUV') 
-		{
-			$vehicules['tractor'] = array('numero_immatriculation' => 'tractor', 'nom_categorie' => '4X4 SUV', 'marque' => 'Honda', 'nom_modele' => 'Tractooor', 'nb_portes' => 1, 'boite_vitesse' => 'manuelle', 'puissance_fiscale' => '150ch', 'taille' => '40m', 'options' => array('GPS', 'garde-boues'));
-			$vehicules['tractor']['prix'] = '300';
-		} 
-		else {
-			$vehicules = array();
-		}
-
-		foreach($vehicules as &$vehicule) {
-			$vehicule['seuil_km'] = 250;
-		}
-		
+		$vehicules=$modelManager->getAllBynom_categorie("Vehicule",$post['categorie']);
+		if(!is_array($vehicules))
+			if($vehicules!=null)
+				$vehicules=array($vehicules);
 		$this->addVars(array_merge($post, array('categories' => $categories, 'vehicules' => $vehicules)));
 		return 'recherche.php';
 	}
 	
 	public function connexion()
 	{
+		if(isset($_POST['adresse_email']) && isset($_POST['mot_de_passe'])){
+			//test dans BDD si existe
+			$modelManager = $this->getApplication()->getModelManager();
+			$client=$modelManager->getOneById_client("Client",$_POST['adresse_email'],array("password_gestion_compte" => $_POST['mot_de_passe']));
+			if($client!=null)
+				if($client->isParticulier()){
+					$_SESSION['user']=$client;
+				}
+			//$_SESSION['user']=$model;
+			$_SESSION['type_connexion']="client";
+			
+		}
 		$this->addVars(array('connexion_client' => true));
-		return 'connexion.php';
+		if(isset($_SESSION['user']))
+			return $this->accueil();
+		return "connexion.php";
+	}
+	
+	public function deconnexion()
+	{
+		if(isset($_SESSION['user'])){
+			unset($_SESSION['user']);
+			session_destroy();
+			session_regenerate_id();
+		}
+		$this->addVars(array('connexion_client' => true));
+		return $this->accueil();
+	}
+	
+	public function connexionAdmin()
+	{
+		if(isset($_POST['adresse_email']) && isset($_POST['mot_de_passe'])){
+			//test dans BDD si existe
+			$modelManager = $this->getApplication()->getModelManager();
+			$client=$modelManager->getOneById_client("Client",$_POST['adresse_email'],array("password_gestion_compte" => $_POST['mot_de_passe']));
+			if($client!=null)
+				if($client->isParticulier()){
+					$_SESSION['user']=$client;
+				}
+			//$_SESSION['user']=$model;
+			$_SESSION['type_connexion']="client";
+			
+		}
+		$this->addVars(array('connexion_client' => true));
+		if(isset($_SESSION['user']))
+			return $this->accueil();
+		return "connexion.php";
 	}
 	
 	public function inscription()
@@ -95,17 +127,6 @@ class General extends library\Controller
 		
 		$this->addVars(array('conducteurs' => $conducteurs));
 		return 'liste_conducteurs.php';
-	}
-	
-	public function liste_agents()
-	{
-		$agents[] = array('identifiant' => 01, 'fonction' => 'tech');
-		$agents[] = array('identifiant' => 02, 'fonction' => 'com');
-		$agents[] = array('identifiant' => 03, 'fonction' => 'com');
-		
-		
-		$this->addVars(array('agents' => $agents));
-		return 'liste_agents.php';
 	}
 	
 	public function liste_entreprises()
@@ -127,18 +148,6 @@ class General extends library\Controller
 		
 		$this->addVars(array('locations' => $locations));
 		return 'liste_location_particulier.php';
-	}
-	
-	public function ajouter_agent()
-	{
-	
-		return 'ajouter_agent.php';
-	}
-	
-		public function ajout_entreprise()
-	{
-	
-		return 'ajout_entreprise.php';
 	}
 	
 }
