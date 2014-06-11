@@ -7,13 +7,14 @@
 	<route url="/inscription" controller="general" action="inscription" />
 	
 	<route url="/locations" controller="client" action="liste_locations" />
+	<route url="/location-([a-z0-9]+)" controller="client" action="location" variables="num_contrat" />
 	<route url="/conducteurs" controller="client" action="liste_conducteurs" />
-	<route url="/ajout_conducteur" controller="client" action="ajouter_conducteur" />
+	<route url="/ajout_conducteur" controller="client" action="ajout_conducteur" />
 	
 	
 	<route url="/agents" controller="admin" action="liste_agents" />
 	<route url="/entreprises" controller="admin" action="liste_entreprises" />
 	
-	<route url="/ajouter_agent" controller="admin" action="ajouter_agent" />
+	<route url="/ajout_agent" controller="admin" action="ajout_agent" />
 	<route url="/ajout_entreprise" controller="admin" action="ajout_entreprise" />
 </routes>
