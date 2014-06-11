@@ -1,7 +1,7 @@
 <h1>Liste des entreprises</h1>
 
 <div>
-	<a href="ajout_entreprises" class="btn btn-primary" role="button">Ajout d'une entreprise</a>
+	<a href="ajout_entreprise" class="btn btn-primary" role="button">Ajout d'une entreprise</a>
 </div>
 
 <section class="table-responsive">

@@ -25,4 +25,17 @@ class Admin extends library\Controller
 		$this->addVars(array('entreprises' => $entreprises));
 		return 'liste_entreprises.php';
 	}
+	
+	public function ajouter_agent()
+	{
+	
+		return 'ajouter_agent.php';
+	}
+	public function ajout_entreprise()
+	{
+	
+		return 'ajout_entreprise.php';
+	}
+	
+	
 }
