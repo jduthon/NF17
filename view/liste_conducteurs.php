@@ -1,7 +1,7 @@
 <h1>Liste des conducteurs</h1>
 
 <div>
-	<a href="inscription" class="btn btn-primary" role="button">Ajouter un conducteur</a>
+	<a href="ajouter_conducteur" class="btn btn-primary" role="button">Ajouter un conducteur</a>
 </div>
 
 <section class="table-responsive">

@@ -128,17 +128,4 @@ class General extends library\Controller
 		$this->addVars(array('locations' => $locations));
 		return 'liste_location_particulier.php';
 	}
-	
-	public function ajouter_agent()
-	{
-	
-		return 'ajouter_agent.php';
-	}
-	
-		public function ajout_entreprise()
-	{
-	
-		return 'ajout_entreprise.php';
-	}
-	
 }

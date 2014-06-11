@@ -10,10 +10,6 @@
 	<route url="/conducteurs" controller="client" action="liste_conducteurs" />
 	<route url="/ajout_conducteur" controller="client" action="ajouter_conducteur" />
 	
-	
 	<route url="/agents" controller="admin" action="liste_agents" />
 	<route url="/entreprises" controller="admin" action="liste_entreprises" />
-	
-	<route url="/ajouter_agent" controller="admin" action="ajouter_agent" />
-	<route url="/ajout_entreprise" controller="admin" action="ajout_entreprise" />
 </routes>
