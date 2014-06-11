@@ -6,6 +6,12 @@ use library;
 
 class Client extends library\Controller
 {
+	public function __construct($application){
+		if(!isset($_SESSION['user']))
+			throw new \library\TommeException("You are not granted the rights to access this page\n");
+		parent::__construct($application);
+	}
+
 	public function liste_conducteurs()
 	{
 		$conducteurs[] = array('nom' => 'pute', 'prenom' => 'jean', 'numero_permis' => 7658);

@@ -10,6 +10,7 @@
 			<tr>
 				<th>Nom</th>
 				<th>Fonction</th>
+				<th>Agence</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,10 +18,13 @@
 					<tr>
 						<form class="form" method="post" action="" role="form">
 							<td>
-								<input type="text" class="form" name="nom" id="nom" value="<?php echo $entreprise['nom']; ?>" >
+								<input type="text" class="form" name="nom_entreprise" id="nom_entreprise" value="<?php echo $entreprise->getnom_entreprise(); ?>" >
 							</td>
 							<td>
-								<input type="text" class="form" name="fonction" id="fonction" value="<?php echo $entreprise['fonction']; ?>" >
+								<input type="text" class="form" name="type" id="type" value="<?php echo $entreprise->gettype(); ?>" >
+							</td>
+							<td>
+								<input type="text" class="form" name="nom_agence" id="nom_agence" value="<?php echo $entreprise->getnom_agence(); ?>" >
 							</td>
 							<td class="col-xs-4 text-right">
 								<div class="btn-group">

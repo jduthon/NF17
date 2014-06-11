@@ -14,6 +14,8 @@ class Application
 	private $router;
 	private $controller;
 	private $booted;
+	private $modelManager;
+	private $adminArray;
 	
 	/**
 	 * Constructor. Configure the Application which needs then to be booted.
@@ -22,7 +24,7 @@ class Application
 	{
 		$this->configure($config_file);
 	}
-	
+
 	/**
 	 * Implemented the Singleton design pattern.
 	 */
@@ -56,7 +58,9 @@ class Application
 		
 		$connection = $config->getElementsByTagName('connection')->item(0);
 		$this->connection = array('server' => $connection->getAttribute('server'), 'username' => $connection->getAttribute('username'), 'password' => $connection->getAttribute('password'), 'database' => $connection->getAttribute('database'), 'dbms' => $connection->getAttribute('dbms'));
-
+	
+		$adminArray = $config->getElementsByTagName('admin')->item(0);
+		$this->adminArray = array('adminName' => $adminArray->getAttribute('adminName'), 'password' => $adminArray->getAttribute('password'));
 		$this->controller = null;
 		$this->router = null;
 		$this->booted = false;
@@ -73,10 +77,11 @@ class Application
 		}
 		
 		session_start();
+		$_SESSION['type_connexion']="none";
 		
 		$this->connection = new Connection($this->connection['server'], $this->connection['username'], $this->connection['password'], $this->connection['database'], $this->connection['dbms']);
 		$this->router = new Router($this, $this->path('config', 'routes.xml'));
-		
+		$this->modelManager=ModelManager::getInstance($this);
 		$this->loadPage();
 		$this->sendPage();
 		
@@ -137,6 +142,7 @@ class Application
 		}
 		catch (TommeException $e)
 		{
+			print_r($e);
 			exit('404 error');
 		}
 	}
@@ -154,5 +160,17 @@ class Application
 		$_js = $this->path('js');
 		
 		require $this->path('layout', 'main.php');
+	}
+	
+	public function getModelManager(){
+		return $this->modelManager;
+	}
+	
+	public function getSQLDriverType(){
+		return $this->connection->getDBMS();
+	}
+	
+	public function checkAdmin($adminName,$password){
+		return strcmp($adminName,$this->adminArray['adminName'])==0 && strcmp($password,$this->adminArray['password'])==0;
 	}
 }

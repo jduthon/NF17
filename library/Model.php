@@ -6,21 +6,9 @@ namespace library;
  * The Controller main class which all the controllers must inherit from.
  * It provides methods needed by this controllers.
  */
-abstract class Model extends ApplicationComponent
-{	
-	/**
-	 * Constructor. Initializes attributes.
-	 */
-	public function __construct(Application $application)
-	{
-		parent::__construct($application);
-	}
+abstract class Model
+{
+	abstract public function getPrimaryKey();
 	
-	/**
-	 * {@inheritdoc}
-	 */
-	public function query($query, $parameters = array())
-	{
-		return $this->getApplication()->query($query, $parameters);
-	}
+	abstract public function getForeignKeys();
 }

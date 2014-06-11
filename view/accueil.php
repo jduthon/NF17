@@ -1,4 +1,7 @@
-<h1>Réservez un véhicule <br> <small>Ou <a href="connexion">connectez-vous</a> pour modifier/annuler/valider une réservation</a></small></h1>
+<h1>Réservez un véhicule <br> 
+<?php if(!isset($_SESSION['user']) && !isset($_SESSION['admin'])) { ?> 
+<small>Ou <a href="connexion">connectez-vous</a> pour modifier/annuler/valider une réservation</a></small></h1>
+<?php } ?>
 
 
 <h2 class="page-header">Recherche</h2>

@@ -28,8 +28,8 @@
 			<label for="categorie" class="control-label sr-only">Catégorie</label>
 			<select class="form-control" name="categorie" id="categorie">
 				<?php foreach($categories as $cat) { ?>
-					<option <?php echo ($cat == $categorie) ? 'selected' : ''; ?>>
-						<?php echo $cat; ?>
+					<option <?php echo ($cat->getnom_categorie() == $categorie) ? 'selected' : ''; ?>>
+						<?php echo $cat->getnom_categorie(); ?>
 					</option>
 				<?php } ?>
 			</select>

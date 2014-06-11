@@ -4,7 +4,11 @@
 	<route url="/" controller="general" action="accueil" />
 	<route url="/recherche" controller="general" action="recherche" />
 	<route url="/connexion" controller="general" action="connexion" />
+	<route url="/deconnexion" controller="general" action="deconnexion" />
 	<route url="/inscription" controller="general" action="inscription" />
+	
+	<route url="/connexionAdmin" controller="general" action="connexionAdmin" />
+	<route url="/deconnexionAdmin" controller="general" action="deconnexionAdmin" />
 	
 	<route url="/locations" controller="client" action="liste_locations" />
 	<route url="/location-([a-z0-9]+)" controller="client" action="location" variables="num_contrat" />
