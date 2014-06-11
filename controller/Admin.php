@@ -19,11 +19,24 @@ class Admin extends library\Controller
 		$agents=$modelManager->getAll("Employe");
 		if(!is_array($agents))
 			$agents=array($agents);
-			
-		/*
-		$agents[] = array('identifiant' => 01, 'fonction' => 'tech');
-		$agents[] = array('identifiant' => 02, 'fonction' => 'com');
-		$agents[] = array('identifiant' => 03, 'fonction' => 'com');*/
+		if(isset($_POST['modifier'])){
+			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
+			if($agentAModif==null)
+				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
+			else{
+				$agentTest=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->updateModel($agentTest);
+			}
+		}
+		if(isset($_POST['supprimer'])){
+			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
+			if($agentAModif==null)
+				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
+			else{
+				$agentTest=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->deleteModel($agentTest);
+			}
+		}
 		
 		$this->addVars(array('agents' => $agents));
 		return 'liste_agents.php';

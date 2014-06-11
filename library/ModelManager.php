@@ -220,14 +220,59 @@ class ModelManager {
 		return in_array($fieldName,$this->getModelVars($modelName));
 	}
 	
-	/*
-	public function commitModel($model){
+	
+	public function addModel($model){
 		$id=$model->getPrimaryKey();
-		$modelName=get_class($model);
+		$modelName=substr(get_class($model),strlen("model\\"));
 		$varsArray=$this->getModelVars($modelName);
-		if(!isset(call_user_func(array($model,"get".$id)))){
+		$stringQuery="INSERT INTO ". $modelName . " (";
+		foreach($varsArray as $key=>$var){
+			$stringQuery.=" $var ";
+			if($key!=count($varsArray)-1)
+				$stringQuery.=",";
 		}
-		*/
+		$stringQuery.=") VALUES (";
+		foreach($varsArray as $key=>$var){
+			$stringQuery.=" :$var ";
+			$parameters[$var]=call_user_func(array($model,"get" . $var));
+			if($key!=count($varsArray)-1)
+				$stringQuery.=",";
+		}
+		$stringQuery.=")";
+		$this->application->query($stringQuery, $parameters);
+	}
+	
+	public function updateModel($model){
+		$id=$model->getPrimaryKey();
+		$modelName=substr(get_class($model),strlen("model\\"));
+		$varsArray=$this->getModelVars($modelName);
+		$stringQuery="UPDATE ". $modelName;
+		$stringQuery.=" SET ";
+		foreach($varsArray as $key=>$var){
+			if(strcmp($id,$var)!=0){
+				$stringQuery.=" $var = :$var ";
+				if($key!=count($varsArray)-1)
+					$stringQuery.=",";
+			}
+			$parameters[$var]=call_user_func(array($model,"get" . $var));
+		}
+		$stringQuery.=" WHERE $id = :$id";
+		//print($stringQuery);
+		//print_r($parameters);
+		$this->application->query($stringQuery, $parameters);
+	}
+	
+	public function deleteModel($model){
+		$id=$model->getPrimaryKey();
+		$modelName=substr(get_class($model),strlen("model\\"));
+		$varsArray=$this->getModelVars($modelName);
+		$stringQuery="DELETE FROM ". $modelName;
+		$parameters[$id]=call_user_func(array($model,"get" . $id));
+		$stringQuery.=" WHERE $id = :$id";
+		//print($stringQuery);
+		//print_r($parameters);
+		$this->application->query($stringQuery, $parameters);
+	}
 }
 
 ?>

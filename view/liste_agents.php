@@ -4,6 +4,13 @@
 	<a href="ajouter_agent" class="btn btn-primary" role="button">Ajouter un agent</a>
 </div>
 
+<?php if(isset($err)){ ?>
+	<div class="alert alert-danger alert-dismissable">
+	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	  <strong>Warning!</strong> <?php echo $err; ?>
+	</div>
+<?php } ?>
+
 <section class="table-responsive">
 	<table class="table table-striped">
 		<thead>
