@@ -60,7 +60,16 @@ class Admin extends library\Controller
 	
 	public function ajouter_agent()
 	{
-	
+		$modelManager = $this->getApplication()->getModelManager();
+		if(isset($_POST['id_employe'])){
+			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
+			if($agentAModif!=null)
+				$this->addVars(array('err' => 'Already exists employe id :' . $_POST['id_employe']));
+			else{
+				$agentTest=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->addModel($agentTest);
+			}
+		}
 		return 'ajouter_agent.php';
 	}
 	public function ajout_entreprise()

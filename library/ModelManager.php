@@ -178,7 +178,10 @@ class ModelManager {
 			$fkArray=array($fkArray);
 		$varsArray= $this->getModelVars($modelName);
 		foreach($varsArray as $var){
-			call_user_func(array($newModel,"set" . $var),$valueArray[$var]);
+			if(isset($valueArray[$var]))
+				call_user_func(array($newModel,"set" . $var),$valueArray[$var]);
+			else
+				call_user_func(array($newModel,"set" . $var),null);
 		}
 		foreach($fkArray as $fk){
 			if($fk->isExternal()){
@@ -239,6 +242,8 @@ class ModelManager {
 				$stringQuery.=",";
 		}
 		$stringQuery.=")";
+		//print($stringQuery);
+		//print_r($parameters);
 		$this->application->query($stringQuery, $parameters);
 	}
 	
