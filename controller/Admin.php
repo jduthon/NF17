@@ -6,6 +6,13 @@ use library;
 
 class Admin extends library\Controller
 {	
+
+	public function __construct($application){
+		if(!isset($_SESSION['admin']))
+			throw new \library\TommeException("You are not granted the rights to access this page\n");
+		parent::__construct($application);
+	}
+	
 	public function liste_agents()
 	{
 		$modelManager = $this->getApplication()->getModelManager();

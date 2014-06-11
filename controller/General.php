@@ -94,22 +94,24 @@ class General extends library\Controller
 	
 	public function connexionAdmin()
 	{
-		if(isset($_POST['adresse_email']) && isset($_POST['mot_de_passe'])){
-			//test dans BDD si existe
-			$modelManager = $this->getApplication()->getModelManager();
-			$client=$modelManager->getOneById_client("Client",$_POST['adresse_email'],array("password_gestion_compte" => $_POST['mot_de_passe']));
-			if($client!=null)
-				if($client->isParticulier()){
-					$_SESSION['user']=$client;
-				}
-			//$_SESSION['user']=$model;
-			$_SESSION['type_connexion']="client";
-			
+		if(isset($_POST['adminName']) && isset($_POST['password'])){
+			if($this->getApplication()->checkAdmin($_POST['adminName'],$_POST['password'])){
+				$_SESSION['admin']=true;
+			}
 		}
-		$this->addVars(array('connexion_client' => true));
-		if(isset($_SESSION['user']))
+		if(isset($_SESSION['admin']))
 			return $this->accueil();
-		return "connexion.php";
+		return "connexionAdmin.php";
+	}
+	
+	public function deconnexionAdmin()
+	{
+		if(isset($_SESSION['admin'])){
+			unset($_SESSION['admin']);
+			session_destroy();
+			session_regenerate_id();
+		}
+		return $this->accueil();
 	}
 	
 	public function inscription()

@@ -11,10 +11,6 @@
 			<label for="mot_de_passe" class="sr-only">Mot de passe</label>			
 			<input type="password" class="form-control input-lg" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" required>
 			
-			<label class="checkbox">
-				<input type="checkbox" id="se_souvenir" name="se_souvenir" value="no"> Se souvenir de moi
-			</label>
-			
 			<button type="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
 		</form>
 		

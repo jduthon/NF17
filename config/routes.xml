@@ -8,6 +8,7 @@
 	<route url="/inscription" controller="general" action="inscription" />
 	
 	<route url="/connexionAdmin" controller="general" action="connexionAdmin" />
+	<route url="/deconnexionAdmin" controller="general" action="deconnexionAdmin" />
 	
 	<route url="/locations" controller="client" action="liste_locations" />
 	<route url="/conducteurs" controller="client" action="liste_conducteurs" />

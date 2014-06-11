@@ -60,8 +60,7 @@ class Application
 		$this->connection = array('server' => $connection->getAttribute('server'), 'username' => $connection->getAttribute('username'), 'password' => $connection->getAttribute('password'), 'database' => $connection->getAttribute('database'), 'dbms' => $connection->getAttribute('dbms'));
 	
 		$adminArray = $config->getElementsByTagName('admin')->item(0);
-		$adminArray = array('adminName' => $adminArray->getAttribute('adminName'), 'password' => $adminArray->getAttribute('password'));
-		
+		$this->adminArray = array('adminName' => $adminArray->getAttribute('adminName'), 'password' => $adminArray->getAttribute('password'));
 		$this->controller = null;
 		$this->router = null;
 		$this->booted = false;
@@ -169,5 +168,9 @@ class Application
 	
 	public function getSQLDriverType(){
 		return $this->connection->getDBMS();
+	}
+	
+	public function checkAdmin($adminName,$password){
+		return strcmp($adminName,$this->adminArray['adminName'])==0 && strcmp($password,$this->adminArray['password'])==0;
 	}
 }

@@ -15,5 +15,5 @@
 	
 	<connection server="localhost" username="postgres" password="koukou" database="nf17" dbms="pgsql" />
 	
-	<admin adminname="admin" password="admin" />
+	<admin adminName="admin" password="admin" />
 </configuration>

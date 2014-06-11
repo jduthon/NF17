@@ -19,17 +19,24 @@
 					<?php if($_SESSION['user']->isProfessionnel()){ ?>
 						<li><a href="conducteurs">Conducteurs</a></li>
 					<?php } ?>
+				<?php } ?>	
 					<?php if(isset($_SESSION['admin'])) { ?>
 						<li><a href="agents">Agents</a></li>
 						<li><a href="entreprises">Entreprises</a></li>
 					<?php } ?>
-				<?php } ?>				
+							
 			</ul>
 			<?php if(isset($_SESSION['user'])) { ?> 
 				<a href="deconnexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
 				
 				<div class="pull-right hidden-xs">
 					<a href="deconnexion" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
+				</div>
+			<?php } else if(isset($_SESSION['admin'])){ ?>
+				<a href="deconnexionAdmin" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
+				
+				<div class="pull-right hidden-xs">
+					<a href="deconnexionAdmin" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
 				</div>
 			<?php } else { ?>
 				<a href="connexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
