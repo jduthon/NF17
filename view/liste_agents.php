@@ -1,7 +1,7 @@
 <h1>Liste des agents</h1>
 
 <div>
-	<a href="ajouter_agent" class="btn btn-primary" role="button">Ajouter un agent</a>
+	<a href="ajout_agent" class="btn btn-primary" role="button">Ajouter un agent</a>
 </div>
 
 <?php if(isset($err)){ ?>

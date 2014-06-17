@@ -58,7 +58,7 @@ class Admin extends library\Controller
 		return 'liste_entreprises.php';
 	}
 	
-	public function ajouter_agent()
+	public function ajout_agent()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
 		if(isset($_POST['id_employe'])){
@@ -74,7 +74,16 @@ class Admin extends library\Controller
 	}
 	public function ajout_entreprise()
 	{
-	
+		$modelManager = $this->getApplication()->getModelManager();
+		if(isset($_POST['nom_entreprise'])){
+			$entrepriseAModif=$modelManager->getOneBynom_entreprise("Entreprise",$_POST['nom_entreprise']);
+			if($entrepriseAModif!=null)
+				$this->addVars(array('err' => 'Already exists nom entreprise :' . $_POST['nom_entreprise']));
+			else{
+				$entrepriseAjout=$modelManager->getNewModel("Entreprise",$_POST);
+				$modelManager->addModel($entrepriseAjout);
+			}
+		}
 		return 'ajout_entreprise.php';
 	}
 	
