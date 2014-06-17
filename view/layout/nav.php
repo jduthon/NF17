@@ -23,6 +23,7 @@
 				<?php if(isset($_SESSION['admin'])) { ?>
 					<li><a href="agents">Agents</a></li>
 					<li><a href="entreprises">Entreprises</a></li>
+					<li><a href="statistiques">Statistiques</a></li>
 				<?php } ?>
 							
 			</ul>

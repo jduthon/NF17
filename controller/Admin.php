@@ -87,5 +87,8 @@ class Admin extends library\Controller
 		return 'ajout_entreprise.php';
 	}
 	
+	public function statistiques(){
+		return "statistiques.php";
+	}
 	
 }

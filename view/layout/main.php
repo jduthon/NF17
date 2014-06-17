@@ -28,6 +28,7 @@
 		
 		<?php include 'footer.php'; ?>
 		
+		
 		<script src="<?php echo $_js; ?>/jquery-2.1.1.js"></script>
 		<script src="<?php echo $_js; ?>/bootstrap.min.js"></script>
 		<script src="<?php echo $_js; ?>/bootstrap-datepicker.js"></script>
