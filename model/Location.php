@@ -70,7 +70,7 @@ class Location extends library\Model
 	
 	public function getContrat(){
 		$mm=\library\ModelManager::getInstance();
-		if(!isset($this->num_contrat) || $this->num_contrat==null)
+		if((!isset($this->num_contrat) || $this->num_contrat==null) && !isset($this->_contratLoc))
 			return;
 		if(!isset($this->_contratLoc))
 			$this->_contratLoc=$mm->getOneByNum_contrat("Contrat_de_location",$this->num_contrat);
@@ -129,7 +129,7 @@ class Location extends library\Model
 			return "Validé";
 		if($this->_confirmation)
 			return "A valider";
-		return "A Confirmer";
+		return "A confirmer";
 	}
 	
 	public function getForeignKeys(){

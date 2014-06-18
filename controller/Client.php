@@ -53,11 +53,7 @@ class Client extends library\Controller
 			
 		if(!empty($_SESSION['locations']))
 			$locations = array_merge($locations,$_SESSION['locations']);
-		
-		echo '<pre>';
-		print_r($locations);
-		echo '</pre>';
-		
+			
 		$this->addVars(array('locations' => $locations));
 		return 'liste_locations.php';
 	}
@@ -78,25 +74,22 @@ class Client extends library\Controller
 	
 	public function ajoutLocation()
 	{
-		echo '<pre>';
 		if(empty($_SESSION['reserver']) || empty($_SESSION['reserver']['date_debut_loc']) || empty($_SESSION['reserver']['date_fin_loc']) || empty($_SESSION['reserver']['numero_immatriculation']))
 			header("Location: ./");
 		
 		$modelManager = $this->getApplication()->getModelManager();
 		
 		$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
-		// $contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
-		// $location->setContrat($contrat);
-		// $location->setConfirmation(false);
+		$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
+		$facture = $modelManager->getNewModel('Facture', array());
+		$contrat->setFacture($facture);
+		$location->setContrat($contrat);
+		$location->setConfirmation(false);
 		
-		//$_SESSION['locations'][] = $location;
-		//unset($_SESSION['reserver']);
+		$_SESSION['locations'][] = $location;
+		unset($_SESSION['reserver']);
 		
-		echo '<pre>';
-		print_r($_SESSION);
-		echo '</pre>';
-		
-		//header("Location: ./locations");
+		header("Location: ./locations");
 	}
 	
 	public function compte()

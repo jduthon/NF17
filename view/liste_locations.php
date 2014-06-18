@@ -9,7 +9,7 @@
 		<thead>
 			<tr>
 				<th class="col-xs-2">N° de contrat</th>
-				<th class="col-xs-2">Voiture</th>
+				<th class="col-xs-2">Véhicule</th>
 				<th class="col-xs-1">Départ</th>
 				<th class="col-xs-1">Retour</th>
 				<th class="col-xs-1">Montant</th>
@@ -27,6 +27,7 @@
 							<?php echo $location->getnum_contrat(); ?>
 						</td>
 						<td>
+							<?php echo $location->getVehicule()->getmarque(); ?>						
 							<?php echo $location->getVehicule()->getModele()->getnom_modele(); ?>						
 						</td>
 						<td>

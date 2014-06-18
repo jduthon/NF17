@@ -145,12 +145,13 @@ class General extends library\Controller
 				$newClient->setdate_inscription(date("Ymd"));
 				$modelManager->addModel($newClient);
 				try{
-					if($type_client != "professionnel")
+					if($type_client != "professionnel") {
 						$newParticulier=$modelManager->getNewModel("Particulier",array_merge($_POST,array("id_part" => $_POST["id_client"])));
 						$modelManager->addModel($newParticulier);
-					else
+					} else {
 						$newProfessionnel=$modelManager->getNewModel("Professionnel",array_merge($_POST,array("id_pro" => $_POST["id_client"])));
 						$modelManager->addModel($newProfessionnel);
+					}
 				} catch(TommeException $e){
 						$modelManager->delete($newClient);
 						throw $e;

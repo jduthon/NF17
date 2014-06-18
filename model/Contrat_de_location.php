@@ -105,7 +105,7 @@ class Contrat_de_location extends library\Model
 	
 	public function getFacture(){
 		$mm=\library\ModelManager::getInstance();
-		if(!isset($this->id_facture) || $this->id_facture==null)
+		if((!isset($this->id_facture) || $this->id_facture==null) && !isset($this->_facture))
 			return;
 		if(!isset($this->_facture))
 			$this->_facture=$mm->getOneById_facture("Facture",$this->id_facture);
