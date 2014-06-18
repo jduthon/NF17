@@ -25,7 +25,7 @@
 	
 	<route url="/vehicules-technique" controller="technique" action="listeVehicules" />
 	<route url="/vehicule-technique-([a-z0-9]+)" controller="technique" action="vehicule" variables="num_vehicule" />
-	<route url="/ajout-vehicule" controller="technique" action="ajoutVehicule" />
+	<route url="/ajout-modification-vehicule" controller="technique" action="ajoutModificationVehicule" />
 
 	<route url="/agents" controller="admin" action="liste_agents" />
 	<route url="/entreprises" controller="admin" action="liste_entreprises" />
