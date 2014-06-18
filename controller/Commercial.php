@@ -23,6 +23,19 @@ class Commercial extends library\Controller
 	public function location($num_contrat)
 	{
 		
-		return 'location_commercial.php';
+		return 'location_commercial.php'; 
+	}
+
+
+	public function listeLocationNonValidesLoc()  
+	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$locNonVal = $modelManager->getLocationsNonValidees();
+		if(empty($locNonVal))
+			$locNonVal=array();
+		if(!is_array($locNonVal))
+			$locNonVal=array($locNonVal);
+		$this->addVars(array('locations'=>$locNonVal));
+		return 'liste_locations_commercial.php';
 	}
 }

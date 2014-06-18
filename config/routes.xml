@@ -2,7 +2,6 @@
 
 <routes>
 	<route url="/" controller="general" action="accueil" />
-	<route url="/recherche" controller="general" action="recherche" />
 	<route url="/connexion" controller="general" action="connexion" />
 	<route url="/deconnexion" controller="general" action="deconnexion" />
 	<route url="/inscription((?:Pro)?)" controller="general" action="inscription" variables="type_client" />
@@ -18,14 +17,23 @@
 	<route url="/conducteurs" controller="client" action="listeConducteurs" />
 	<route url="/ajout-conducteur" controller="client" action="ajoutConducteur" />
 	<route url="/compte" controller="client" action="compte" />
+	<route url="/reserver" controller="client" action="reserver" />
+	<route url="/recherche" controller="client" action="recherche" />
 	
 	<route url="/locations-commercial" controller="commercial" action="listeLocations" />
 	<route url="/location-commercial-([a-z0-9]+)" controller="commercial" action="location" variables="num_contrat" />
+
+	<route url="/vehicules-commercial" controller="commercial" action="listeVehicules" />
+	<route url="/locations-non-validees" controller="commercial" action="listeLocationNonValidesLoc" />
+
 	
+	
+	<route url="/vehicules-techniques" controller="technique" action="listeVehiculesTech" />
+	<route url="/ajout_vehicule" controller="technique" action="ajoutVehicule" />
+	<route url="/modification_vehicule" controller="technique" action="modificationVehicule" />
 	<route url="/controle-locations" controller="technique" action="controleLocations" />
-	<route url="/gestion-vehicules" controller="technique" action="gestionVehicules" />
-	<route url="/gestion-vehicule-([a-zA-Z0-9-]+)" controller="technique" action="gestionVehicule" variables="numero_imatriculation" />
-	<route url="/ajout-vehicule" controller="technique" action="ajoutVehicule" />
+	
+
 	
 	<route url="/agents" controller="admin" action="liste_agents" />
 	<route url="/entreprises" controller="admin" action="liste_entreprises" />

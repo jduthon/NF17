@@ -13,7 +13,7 @@
 		</thead>
 		
 		<tbody>
-			<?php foreach($vehicules as $vehicule) { ?>
+			<?php foreach($vehicule as $vehicule) { ?>
 				
 				<?php include 'liste_vehicules_ligne.php'; ?>
 

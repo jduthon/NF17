@@ -21,7 +21,7 @@
 		<label for="immatriculation" class="col-sm-1 control-label">Immatriculation</label>
 		<div class="col-sm-10">
 			<div class="col-sm-5">
-				<input type="text" class="form-control" name="immatriculation" id="numero_immatriculation" placeholder="Immatriculation" value = "<?php if ($typemodif == 'modification') {echo $vehicule->getnumero_immatriculation();}?>" /> 
+				<input type="text" class="form-control" name="immatriculation" id="numero_immatriculation" placeholder="Immatriculation"  <?php if ($typemodif == 'modification'){echo 'disabled';}?> value = "<?php if ($typemodif == 'modification') {echo $vehicule->getnumero_immatriculation();}?>" /> 
 			</div>
 			<label for="model" class="col-sm-1 control-label">Modele</label>
 			<div class="col-sm-5">

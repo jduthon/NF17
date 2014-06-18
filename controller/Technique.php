@@ -28,12 +28,20 @@ class Technique extends library\Controller
 		return 'controle_locations.php';
 	}
 	
-	public function gestionVehicules()
+
+	public function listeVehiculesTech()
 	{
-		return 'gestion_vehicules.php';
+		$modelManager = $this->getApplication()->getModelManager();
+		$vehicule = $modelManager->getAll("Vehicule");
+		$statut = 'technique';
+		$this->addVars(array('vehicule'=>$vehicule,'statut'=>$statut));
+		return 'liste_vehicules.php';
+
 	}
 	
-	public function gestionVehicule($numero_imatriculation)
+
+	
+	public function modificationVehicule($numero_imatriculation)
 	{
 		$modelManager = $this->getApplication()->getModelManager();
 		$vehicules = $modelManager->getAll("Vehicule");
@@ -41,7 +49,7 @@ class Technique extends library\Controller
 		$typemodif = 'modification';
 		
 		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' => $typemodif));
-		return 'ajout_modificatio_vehicule.php';
+		return 'ajout_modification_vehicule.php';
 	}
 	
 	public function ajoutVehicule()
