@@ -28,8 +28,7 @@
 				<?php if(isset($_SESSION['agent'])) { ?>
 					<?php if($_SESSION['agent']->isCommercial()){ ?>
 						<li><a href="locations-commercial">Locations</a></li>
-						<li><a href="vehicules-commercial">Véhicules</a></li>
-					<?php } ?>
+						<?php } ?>
 					<?php if($_SESSION['agent']->isTechnique()){ ?>
 						<li><a href="vehicules-technique">Véhicules</a></li>
 					<?php } ?>
