@@ -15,28 +15,29 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($conducteurs as $conducteur) { ?>
-				<tr>
-					<form class="form" method="post" action="" role="form">
-						<td>
-							<input type="text" class="form-control" name="nom" id="nom" value="<?php echo $conducteur['nom']; ?>" >
-						</td>
-						<td>
-							<input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $conducteur['prenom']; ?>" >
-						</td>
-						<td>
-							<input type="text" class="form-control" name="numero_permis" id="numero_permis" value="<?php echo $conducteur['numero_permis']; ?>" >
-						</td>
-						<td class="col-xs-4 text-right">
-							<div class="btn-group">
-								<input type="hidden" name="id_conducteur" value="<?php $conducteur['id_conducteur']; ?>" />
-								<button name="modifier" class="btn btn-primary" type="submit">Modifier</button>
-								<button name="supprimer" class="btn btn-primary" type="submit">Supprimer</button>
-							</div>
-						</td>
-					</form>
-				</tr>
-			<?php } ?>
+			<?php if(isset($conducteurs)){ ?>
+				<?php foreach($conducteurs as $conducteur) { ?>
+					<tr>
+						<form class="form" method="post" action="" role="form">
+							<td>
+								<input type="text" class="form-control" name="nom" id="nom" value="<?php echo $conducteur->getnom(); ?>" >
+							</td>
+							<td>
+								<input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $conducteur->getprenom(); ?>" >
+							</td>
+							<td>
+								<input type="text" class="form-control" name="numero_permis" id="numero_permis" value="<?php echo $conducteur->getnumero_permis(); ?>" >
+							</td>
+							<td class="col-xs-4 text-right">
+								<div class="btn-group">
+									<input type="hidden" name="id_conducteur" value="<?php $conducteur->getid_conducteur(); ?>" />
+									<button name="modifier" class="btn btn-primary" type="submit">Modifier</button>
+									<button name="supprimer" class="btn btn-primary" type="submit">Supprimer</button>
+								</div>
+							</td>
+						</form>
+					</tr>
+				<?php }} ?>
 		</tbody>
 	</table>
 </section>
@@ -44,7 +45,7 @@
 
 
 <form class="form-horizontal" method="post" action="" role="form">
-	<h2 class="page-header">Ajout d'un conducteur'</h2>
+	<h2 class="page-header">Ajout d'un conducteur</h2>
 	
 	<?php?>
 		<div class="form-group">
@@ -66,9 +67,9 @@
 		<div class="form-group">
 			
 
-					<label for="permis" class="col-sm-3 control-label">Numéro de Permis</label>
+					<label for="numero_permis" class="col-sm-3 control-label">Numéro de Permis</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" name="permis" id="permis" placeholder="Numéro de Permis" required autofocus>
+						<input type="text" class="form-control" name="numero_permis" id="numero_permis" placeholder="Numéro de Permis" required autofocus>
 					</div>
 		</div>
 			
