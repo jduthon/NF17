@@ -62,10 +62,10 @@ class General extends library\Controller
 	
 	public function connexion()
 	{
-		if(isset($_POST['identifiant']) && isset($_POST['mot_de_passe'])){
+		if(isset($_POST['identifiant']) && isset($_POST['password'])){
 			//test dans BDD si existe
 			$modelManager = $this->getApplication()->getModelManager();
-			$client=$modelManager->getOneById_client("Client",$_POST['identifiant'],array("password_gestion_compte" => $_POST['mot_de_passe']));
+			$client=$modelManager->getOneById_client("Client",$_POST['identifiant'],array("password_gestion_compte" => $_POST['password']));
 			if($client!=null)
 				if($client->isParticulier()){
 					$_SESSION['user']=$client;
@@ -88,7 +88,28 @@ class General extends library\Controller
 			session_regenerate_id();
 		}
 		
-		$this->addVars(array('connexion_client' => true));
+		return $this->accueil();
+	}
+	
+	public function connexionAgent()
+	{
+		if(isset($_POST['identifiant']) && isset($_POST['password'])){
+			$_SESSION['agent'] = true;
+		}
+		
+		if(isset($_SESSION['agent']))
+			return $this->accueil();
+		return "connexion_agent.php";
+	}
+	
+	public function deconnexionAgent()
+	{
+		if(isset($_SESSION['agent'])){
+			unset($_SESSION['agent']);
+			session_destroy();
+			session_regenerate_id();
+		}
+		
 		return $this->accueil();
 	}
 	
@@ -111,6 +132,7 @@ class General extends library\Controller
 			session_destroy();
 			session_regenerate_id();
 		}
+	
 		return $this->accueil();
 	}
 	
