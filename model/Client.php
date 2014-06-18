@@ -49,7 +49,7 @@ class Client extends library\Model
 			if($this->_particulier!=null){
 				$this->_isParticulier=true;
 			} else {
-				$this->_professionnel=$mm->getOneById_part("Professionnel",$this->id_client);
+				$this->_professionnel=$mm->getOneById_pro("Professionnel",$this->id_client);
 				$this->_isParticulier=false;
 			}
 		}

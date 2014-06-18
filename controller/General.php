@@ -66,9 +66,9 @@ class General extends library\Controller
 			$modelManager = $this->getApplication()->getModelManager();
 			$client=$modelManager->getOneById_client("Client",$_POST['identifiant'],array("password_gestion_compte" => $_POST['password']));
 			if($client!=null)
-				if($client->isParticulier()){
-					$_SESSION['user']=$client;
-				}
+				$_SESSION['user']=$client;
+			else
+				$errs="Ces identifiants de connexion sont invalides";
 			//$_SESSION['user']=$model;
 			$_SESSION['type_connexion']="client";
 		}
@@ -76,6 +76,8 @@ class General extends library\Controller
 		$this->addVars(array('connexion_client' => true));
 		if(isset($_SESSION['user']))
 			header("Location: ./");
+		if(isset($errs))
+			$this->addVars(array("errs" => $errs));
 		return "connexion.php";
 	}
 	
@@ -94,14 +96,21 @@ class General extends library\Controller
 	{
 		if(isset($_POST['id_employe']) && isset($_POST['password'])){
 			$modelManager = $this->getApplication()->getModelManager();
-			print($_POST['id_employe']);
 			$agent=$modelManager->getOneById_employe("Employe",$_POST['id_employe'],array("password" => $_POST['password']));
 			if($agent!=null)
 				$_SESSION['agent']=$agent;
+			else
+				$errs="Identifiants fournis invalides";
 		}
 		
 		if(isset($_SESSION['agent']))
-			header("Location: ./");
+			if($_SESSION['agent']->isCommercial())
+				header("Location: ./locations-commercial");
+			else
+				header("Location: ./controle-locations");
+				//header("Location: ./");
+		if(isset($errs))
+			$this->addVars(array("errs" => $errs));
 		return "connexion_agent.php";
 	}
 	
@@ -124,7 +133,7 @@ class General extends library\Controller
 			}
 		}
 		if(isset($_SESSION['admin']))
-			header("Location: ./");
+			header("Location: ./agents");
 		return "connexionAdmin.php";
 	}
 	
