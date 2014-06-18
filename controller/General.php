@@ -76,7 +76,7 @@ class General extends library\Controller
 		
 		$this->addVars(array('connexion_client' => true));
 		if(isset($_SESSION['user']))
-			return $this->accueil();
+			header("Location: ./");
 		return "connexion.php";
 	}
 	
@@ -88,7 +88,7 @@ class General extends library\Controller
 			session_regenerate_id();
 		}
 		
-		return $this->accueil();
+		header("Location: ./");
 	}
 	
 	public function connexionAgent()
@@ -102,7 +102,7 @@ class General extends library\Controller
 		}
 		
 		if(isset($_SESSION['agent']))
-			return $this->accueil();
+			header("Location: ./");
 		return "connexion_agent.php";
 	}
 	
@@ -114,7 +114,7 @@ class General extends library\Controller
 			session_regenerate_id();
 		}
 		
-		return $this->accueil();
+		header("Location: ./");
 	}
 	
 	public function connexionAdmin()
@@ -125,7 +125,7 @@ class General extends library\Controller
 			}
 		}
 		if(isset($_SESSION['admin']))
-			return $this->accueil();
+			header("Location: ./");
 		return "connexionAdmin.php";
 	}
 	
@@ -137,7 +137,7 @@ class General extends library\Controller
 			session_regenerate_id();
 		}
 	
-		return $this->accueil();
+		header("Location: ./");
 	}
 	
 	public function inscription($type_client)

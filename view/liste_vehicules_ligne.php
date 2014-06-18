@@ -9,11 +9,12 @@
 		<strong><?php echo $vehicule->getmarque(); ?> <?php echo $vehicule->getnom_modele(); ?></strong>
 	</td>
 	<td>
-		<ul>
+		<ul class="no-padding">
 			<li><?php echo $vehicule->getmodele()->getnb_portes(); ?> portes</li>
 			<li>Boîte <?php echo $vehicule->getmodele()->getboite_vitesse(); ?></li>
-			<li>Taille : <?php echo $vehicule->getmodele()->gettaille(); ?></li>
-			<li>Puissance fiscale : <?php echo $vehicule->getmodele()->getpuissance_fiscale(); ?></li>
+			<li>Taille : <?php echo $vehicule->getmodele()->gettaille(); ?> m</li>
+			<li>Puissance fiscale : <?php echo $vehicule->getmodele()->getpuissance_fiscale(); ?> ch</li>
+			<li>Couleur : <?php echo $vehicule->getcouleur(); ?></li>
 		</ul>
 	</td>
 	<td>
