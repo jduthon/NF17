@@ -9,52 +9,38 @@ class General extends library\Controller
 	public function accueil()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$vehicules=$modelManager->getAll("Vehicule");
-		$categories=$modelManager->getAll("Categorie");
-		/*
-		//Ajout des véhicules
-		$vehicules['wv'] = array('numero_immatriculation' => 'wv', 'nom_categorie' => 'Utilitaire', 'marque' => 'Volkswagen', 'nom_modele' => 'Golf', 'nb_portes' => 2, 'boite_vitesse' => 'auto', 'puissance_fiscale' => '20ch', 'taille' => '4m', 'options' => array('antigravité'));
-		$vehicules['johny'] = array('numero_immatriculation' => 'johny', 'nom_categorie' => 'Citadine', 'marque' => 'Peugeolt', 'nom_modele' => '206', 'nb_portes' => 4, 'boite_vitesse' => 'manuelle', 'puissance_fiscale' => '40ch', 'taille' => '8m', 'options' => array('klaxon allumez le feu', 'flammes sur le côté'));
-		$vehicules['tractor'] = array('numero_immatriculation' => 'tractor', 'nom_categorie' => '4X4 SUV', 'marque' => 'Honda', 'nom_modele' => 'Tractooor', 'nb_portes' => 1, 'boite_vitesse' => 'manuelle', 'puissance_fiscale' => '150ch', 'taille' => '40m', 'options' => array('GPS', 'garde-boues'));
-		
-		foreach($vehicules as &$vehicule) {
-			$vehicule['seuil_km'] = 250;
-		}*/
-		
-		/*
-		//Calcul des prix
-		$vehicules['wv']['prix'] = '150';
-		$vehicules['johny']['prix'] = '250';
-		$vehicules['tractor']['prix'] = '300';*/
+		$vehicules = $modelManager->getAll("Vehicule");
+		$categories = $modelManager->getAll("Categorie");
 		
 		//Sauvegarde des données du formulaire précédemment entrées
-		$post['date_depart'] = !empty($_POST['date_depart']) ? $_POST['date_depart'] : '';
-		$post['heure_depart'] = !empty($_POST['heure_depart']) ? $_POST['heure_depart'] : '';
-		$post['date_retour'] = !empty($_POST['date_retour']) ? $_POST['date_retour'] : '';
-		$post['heure_retour'] = !empty($_POST['heure_retour']) ? $_POST['heure_retour'] : '';
+		$post['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
+		$post['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
 		$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : '';
 		
-		$this->addVars(array_merge($post, array('categories' => $categories, 'vehicules' => $vehicules)));
+		$this->addVars(array('post' => $post, 'categories' => $categories, 'vehicules' => $vehicules));
 		return 'accueil.php';
 	}
 		
 	public function connexion()
 	{
+		if(isset($_SESSION['user']))
+			header("Location: ./");
+	
 		if(isset($_POST['identifiant']) && isset($_POST['password'])){
-			//test dans BDD si existe
 			$modelManager = $this->getApplication()->getModelManager();
 			$client=$modelManager->getOneById_client("Client",$_POST['identifiant'],array("password_gestion_compte" => $_POST['password']));
-			if($client!=null)
+			if($client!=null) {
 				if($client->isParticulier()){
 					$_SESSION['user']=$client;
 				}
-			//$_SESSION['user']=$model;
+			}
 			$_SESSION['type_connexion']="client";
 		}
 		
+		if (!empty($_SESSION['reserver']))
+			header("Location: ./ajouter-location");
+		
 		$this->addVars(array('connexion_client' => true));
-		if(isset($_SESSION['user']))
-			header("Location: ./");
 		return "connexion.php";
 	}
 	
@@ -135,6 +121,52 @@ class General extends library\Controller
 	
 		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
 		return 'inscription.php';
+	}
+	
+	public function reserver()
+	{
+		$modelManager = $this->application->getModelManager();
+		if(empty($_POST['reserver']))
+			header("Location: ./");
+			
+		$vehicule = $modelManager->getOneByNumero_immatriculation("Vehicule", $_POST['numero_immatriculation']);
+		if(empty($vehicule))
+			header("Location: ./");
+		
+		$_SESSION['reserver']['date_debut_loc'] = $post['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
+		$_SESSION['reserver']['date_fin_loc'] = $post['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
+		$_SESSION['reserver']['numero_immatriculation'] = $vehicule->getnumero_immatriculation();
+		
+		if(!empty($post['date_debut_loc']) && !empty($post['date_fin_loc'])) {
+			if(!isset($_SESSION['user']))
+				header("Location: ./connexion");
+			else
+				header("Location: ./ajout-location");
+		}
+		
+		$this->addVars(array('post' => $post, "vehicule" => $vehicule));
+		return 'reservation.php';
+	}
+	
+	public function recherche() 
+	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$categories = $modelManager->getAll("Categorie");
+	
+		//Sauvegarde des données du formulaire précédemment entrées
+		$post['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
+		$post['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
+		$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : '';
+		
+		//Ajout des véhicules
+		$vehicules = $modelManager->getAllBynom_categorie("Vehicule",$post['categorie']);
+		if(!is_array($vehicules)) {
+			if($vehicules!=null)
+				$vehicules=array($vehicules);
+		}
+				
+		$this->addVars(array('post' => $post, 'categories' => $categories, 'vehicules' => $vehicules));
+		return 'recherche.php';
 	}
 
 }

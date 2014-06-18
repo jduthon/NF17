@@ -78,7 +78,7 @@ class Location extends library\Model
 	}
 	
 	public function setContrat($contrat){
-		$this->contrat=$contrat;
+		$this->_contratLoc=$contrat;
 	}
 	
 	public function getMontantPrevi(){
@@ -109,8 +109,8 @@ class Location extends library\Model
 		return $this->_confirmation;
 	}
 	
-	public function setConfirmation(){
-		$this->_confirmation=true;
+	public function setConfirmation($_confirmation = true){
+		$this->_confirmation=$_confirmation;
 	}
 	
 	public function isPasse(){

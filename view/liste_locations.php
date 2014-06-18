@@ -45,7 +45,7 @@
 						</td>
 						<td>
 							<div class="btn-group">
-								<?php if ($location->getEtat() == 'Passé' || $location->getEtat() == "Validé") { ?>
+								<?php if ($location->getEtat() == 'Passé' || $location->getEtat() == "Validé" || $location->getEtat() == "A valider") { ?>
 									<a href="location-<?php echo $location->getnum_contrat(); ?>" class="btn btn-primary" role="button">Voir</a>
 								<?php } else { ?>
 									<a href="location-<?php echo $location->getnum_contrat(); ?>" class="btn btn-primary" role="button">Modifier</a>

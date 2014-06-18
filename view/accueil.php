@@ -48,8 +48,8 @@
 </div>
 
 <h1>Réservez un véhicule <br> 
-<?php if(!isset($_SESSION['user']) && !isset($_SESSION['admin'])) { ?> 
-<small>Ou <a href="connexion">connectez-vous</a> pour modifier/annuler/valider une réservation</a></small></h1>
+<?php if(!isset($_SESSION['user']) && !isset($_SESSION['admin']) && !isset($_SESSION['agent'])) { ?> 
+	<small>Ou <a href="connexion">connectez-vous</a> pour modifier/annuler/valider une réservation</a></small></h1>
 <?php } ?>
 
 

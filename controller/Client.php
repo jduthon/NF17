@@ -25,12 +25,16 @@ class Client extends library\Controller
 	public function listeLocations()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$locations=$modelManager->getAllById_client("Location",$_SESSION['user']->getid_client());
+		$locations = $modelManager->getAllById_client("Location",$_SESSION['user']->getid_client());
 		if(!is_array($locations))
-			$locations=array($locations);
-		//$locations[] = array('num_contrat' => 'c1', 'vehicule' => '206', 'date_debut_loc' => '26/06/2014', 'date_fin_loc' => '27/06/2014', 'montant' => 100, 'moyen_paiement' => 'CB', 'etat' => 'A valider');
-		//$locations[] = array('num_contrat' => 'contrat42', 'vehicule' => 'Golf', 'date_debut_loc' => '16/03/2012', 'date_fin_loc' => '16/05/2012', 'montant' => 5099, 'moyen_paiement' => 'espèces', 'etat' => 'Passé');
-		//$locations[] = array('num_contrat' => '1234', 'vehicule' => 'Tractoor', 'date_debut_loc' => '25/05/2013', 'date_fin_loc' => '16/06/2015', 'montant' => 340, 'moyen_paiement' => 'chèque', 'etat' => 'Validé');
+			$locations = array($locations);
+			
+		if(!empty($_SESSION['locations']))
+			$locations = array_merge($locations,$_SESSION['locations']);
+		
+		echo '<pre>';
+		print_r($locations);
+		echo '</pre>';
 		
 		$this->addVars(array('locations' => $locations));
 		return 'liste_locations.php';
@@ -41,25 +45,36 @@ class Client extends library\Controller
 		$modelManager = $this->getApplication()->getModelManager();
 		$location=$modelManager->getOneByNum_contrat("Location",$num_contrat);
 		$vehicules=$modelManager->getAll("Vehicule");
-		//$vehicules = array('206', 'Golf', 'Tractoor');
-		//$moyens_paiements = array('CB', 'Chèque', 'Espèces');
-	
-		//$location = array('vehicule' => 'tapin', 'date_debut_loc' => '20/05/2014', 'date_fin_loc' => '24/05/2014', 'montant' => 840.13, 'etat' => 'Validé',
-		//				'moyen_paiement' => 'CB', 'seuil_km' => 250, 'kilometrage' => 1250.85, 'date_reglement' => '25/05/2014',
-		//				'frais_supplementaires' => 670.13, 'depassement_km' => 1000.85, 'reparations' => 1000.50, 'penalites' => 'suce des bites en enfer', 'essence' => 200);
-		//$location['num_contrat'] = $num_contrat;
-		//if($num_contrat == 'contrat42')
-		//	$location['etat'] = 'Passé';
 		
-		//$location['conducteurs'][] = array('nom' => 'Connard', 'prenom' => 'Odieux', 'copie_permis' => '666');
-		//$location['conducteurs'][] = array('nom' => 'Bismuth', 'prenom' => 'Paul', 'copie_permis' => 'cass toi pov\'con');
-		
-		//$this->addVars(array('location' => $location, 'vehicules' => $vehicules, 'moyens_paiements' => $moyens_paiements, 'professionnel' => true));
 		if($location==null){
 			//TODO
 		}
+		
 		$this->addVars(array('location' => $location,'professionnel' => false,'vehicules' => $vehicules,'moyens_paiements' => array("Cheque","Carte bancaire","Especes")));
 		return 'location.php';
+	}
+	
+	public function ajoutLocation()
+	{
+		echo '<pre>';
+		if(empty($_SESSION['reserver']) || empty($_SESSION['reserver']['date_debut_loc']) || empty($_SESSION['reserver']['date_fin_loc']) || empty($_SESSION['reserver']['numero_immatriculation']))
+			header("Location: ./");
+		
+		$modelManager = $this->getApplication()->getModelManager();
+		
+		$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
+		// $contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
+		// $location->setContrat($contrat);
+		// $location->setConfirmation(false);
+		
+		//$_SESSION['locations'][] = $location;
+		//unset($_SESSION['reserver']);
+		
+		echo '<pre>';
+		print_r($_SESSION);
+		echo '</pre>';
+		
+		//header("Location: ./locations");
 	}
 	
 	public function compte()
@@ -75,45 +90,8 @@ class Client extends library\Controller
 			$modelManager->updateModel($_SESSION['user']);
 			$modelManager->updateModel($_SESSION['user']->getParticulier());
 		}
+		
 		$this->addVars(array('client' => $_SESSION['user']));
 		return 'compte_client.php';
-	}
-	
-	public function reserver()
-	{
-		$modelManager = $this->application->getModelManager();
-		if(!isset($_POST['reserver']))
-			return $this->accueil();
-		$vehicule = $modelManager->getOneByNumero_immatriculation("Vehicule",$_POST['reserver']);
-		if(empty($vehicule))
-			return $this->accueil();
-		if(!isset($_SESSION['user'])){
-			$this->connexion();
-		}
-		$post['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
-		$post['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
-		$this->addVars(array("vehicule" => $vehicule, 'post' => $post));
-		return'reservation.php';
-	}
-	
-	public function recherche() 
-	{
-		$modelManager = $this->getApplication()->getModelManager();
-		$categories=$modelManager->getAll("Categorie");
-	
-		//Sauvegarde des données du formulaire précédemment entrées
-		$post['date_depart'] = !empty($_POST['date_depart']) ? $_POST['date_depart'] : '';
-		$post['heure_depart'] = !empty($_POST['heure_depart']) ? $_POST['heure_depart'] : '';
-		$post['date_retour'] = !empty($_POST['date_retour']) ? $_POST['date_retour'] : '';
-		$post['heure_retour'] = !empty($_POST['heure_retour']) ? $_POST['heure_retour'] : '';
-		$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : '';
-		
-		//Ajout des véhicules
-		$vehicules=$modelManager->getAllBynom_categorie("Vehicule",$post['categorie']);
-		if(!is_array($vehicules))
-			if($vehicules!=null)
-				$vehicules=array($vehicules);
-		$this->addVars(array_merge($post, array('categories' => $categories, 'vehicules' => $vehicules)));
-		return 'recherche.php';
 	}
 }
