@@ -28,8 +28,7 @@
 				<?php if(isset($_SESSION['agent'])) { ?>
 					<?php if($_SESSION['agent']->isCommercial()){ ?>
 						<li><a href="locations-commercial">Locations</a></li>
-						<li><a href="vehicules-commercial">Véhicules</a></li>
-					<?php } ?>
+						<?php } ?>
 					<?php if($_SESSION['agent']->isTechnique()){ ?>
 						<li><a href="vehicules-technique">Véhicules</a></li>
 					<?php } ?>
@@ -41,7 +40,7 @@
 				<li><a href="compte"><span class="glyphicon glyphicon-user"></span> Mon compte</a></li>
 				<li><a href="deconnexion"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else if(isset($_SESSION['agent'])){ ?>
-				<li><a href="deconnexionEmploye"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
+				<li><a href="deconnexionAgent"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else if(isset($_SESSION['admin'])){ ?>
 				<li><a href="deconnexionAdmin"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else { ?>

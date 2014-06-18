@@ -15,6 +15,9 @@ header {
 body {
 	margin-bottom: 50px;
 }
+	ul.no-padding {
+		padding-left: 0;
+	}
 
 	#connexion #identifiant {
 		margin-bottom: 0px;

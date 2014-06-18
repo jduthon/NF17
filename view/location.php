@@ -1,6 +1,6 @@
 <h1>
-	Location <?php echo $location['num_contrat']; ?>
-	<br><small>Etat : <?php echo $location['etat']; ?></small>
+	Location <?php echo $location->getnum_contrat(); ?>
+	<br><small>Etat : <?php echo $location->getEtat(); ?></small>
 </h1>
 
 <section class="row">
@@ -11,21 +11,21 @@
 			<div class="form-group">
 				<label class="col-sm-5 control-label">N° de contrat</label>
 				<div class="col-sm-7">
-					<p class="form-control-static"><?php echo $location['num_contrat']; ?></p>
+					<p class="form-control-static"><?php echo $location->getnum_contrat(); ?></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Véhicule</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location['etat'] == 'Passé') { ?>
-							<?php echo $location['vehicule']; ?>
+						<?php if ($location->getEtat() == 'Passé') { ?>
+							<?php echo $location->getVehicule()->getModele()->getnom_modele(); ?>
 						<?php } ?>
-						<?php if ($location['etat'] != 'Passé') { ?>
+						<?php if ($location->getEtat() != 'Passé') { ?>
 							<select class="form-control" name="vehicule" id="vehicule">
 								<?php foreach($vehicules as $vehicule) { ?>
-									<option <?php echo ($location['vehicule'] == $vehicule) ? 'selected' : ''; ?>>
-										<?php echo $vehicule; ?>
+									<option <?php echo ($location->getVehicule()->getnumero_immatriculation() == $vehicule->getnumero_immatriculation()) ? 'selected' : ''; ?>>
+										<?php echo $vehicule->getModele()->getnom_modele(); ?>
 									</option>
 								<?php } ?>
 							</select>
@@ -37,12 +37,12 @@
 				<label class="col-sm-5 control-label" for="date_debut_loc">Date de départ</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location['etat'] == 'Passé') { ?>
-							<?php echo $location['date_debut_loc']; ?>
+						<?php if ($location->getEtat() == 'Passé') { ?>
+							<?php echo $location->getContrat()->getdate_debut_loc(); ?>
 						<?php } ?>
-						<?php if ($location['etat'] != 'Passé') { ?>
+						<?php if ($location->getEtat() != 'Passé') { ?>
 							<div class="input-group date">
-								<input type="datetime" class="form-control" name="date_debut_loc" id="date_debut_loc" value="<?php echo $location['date_debut_loc']; ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input type="datetime" class="form-control" name="date_debut_loc" id="date_debut_loc" value="<?php echo $location->getContrat()->getdate_debut_loc(); ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						<?php } ?>
 					</p>
@@ -52,12 +52,12 @@
 				<label class="col-sm-5 control-label" for="date_fin_loc">Date de retour</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location['etat'] == 'Passé') { ?>
-							<?php echo $location['date_fin_loc']; ?>
+						<?php if ($location->getEtat() == 'Passé') { ?>
+							<?php echo $location->getdate_fin_loc(); ?>
 						<?php } ?>
-						<?php if ($location['etat'] != 'Passé') { ?>
+						<?php if ($location->getEtat() != 'Passé') { ?>
 							<div class="input-group date">
-								<input type="datetime" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $location['date_fin_loc']; ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input type="datetime" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $location->getContrat()->getdate_fin_loc(); ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						<?php } ?>
 					</p>
@@ -66,10 +66,10 @@
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Seuil de kilométrage</label>
 				<div class="col-sm-7">
-					<p class="form-control-static"><?php echo $location['seuil_km']; ?> km</p>
+					<p class="form-control-static"><?php echo $location->getContrat()->getseuil_km(); ?> km</p>
 				</div>
 			</div>
-			<?php if ($location['etat'] != 'Passé') { ?>
+			<?php if ($location->getEtat() != 'Passé') { ?>
 				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</div>
@@ -85,7 +85,7 @@
 				<label class="col-sm-5 control-label">Montant</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php echo $location['montant']; ?> €
+						<?php echo $location->getMontantPrevi(); ?> €
 					</p>
 				</div>
 			</div>
@@ -93,7 +93,7 @@
 				<label class="col-sm-5 control-label">Kilométrage</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php echo $location['kilometrage']; ?> km
+						<?php echo $location->getContrat()->getkm_initial(); ?> km
 					</p>
 				</div>
 			</div>
@@ -101,21 +101,7 @@
 				<label class="col-sm-5 control-label">Frais supplémentaires</label>
 				<div class="col-sm-7">
 					<div class="form-control-static">
-						<?php echo $location['frais_supplementaires']; ?> €
-						<ul class="list-unstyled">
-							<?php if ($location['depassement_km'] > 0) { ?>
-								<li>Dépassement : <?php echo $location['depassement_km']; ?> km</li>
-							<?php } ?>
-							<?php if (!empty($location['reparations'])) { ?>
-								<li>Réparations : <?php echo $location['reparations']; ?> €</li>
-							<?php } ?>							
-							<?php if (!empty($location['penalite'])) { ?>
-								<li>Pénalité : <?php echo $location['penalite']; ?> jours</li>
-							<?php } ?>							
-							<?php if ($location['essence'] > 0) { ?>
-								<li>Essence : <?php echo $location['essence']; ?> €</li>
-							<?php } ?>
-						</ul>
+						<?php echo $location->getFraisSupplementaires(); ?> €
 					</div>
 				</div>
 			</div>
@@ -123,10 +109,10 @@
 				<label class="col-sm-5 control-label" class="moyen_paiement">Moyen de paiement</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location['etat'] == 'Passé') { ?>
-							<?php echo $location['moyen_paiement']; ?>
+						<?php if ($location->getEtat() == 'Passé') { ?>
+							<?php echo $location->getContrat()->getFacture()->getmoyen_paiement(); ?>
 						<?php } ?>
-						<?php if ($location['etat'] != 'Passé') { ?>
+						<?php if ($location->getEtat() != 'Passé') { ?>
 						<select class="form-control" name="moyen_paiement" id="moyen_paiement">
 							<?php foreach($moyens_paiements as $moyen_paiement) { ?>
 								<option <?php echo ($location['moyen_paiement'] == $moyen_paiement) ? 'selected' : ''; ?>>
@@ -141,10 +127,10 @@
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Date de règlement</label>
 				<div class="col-sm-7">
-					<p class="form-control-static"><?php echo $location['date_reglement']; ?></p>
+					<p class="form-control-static"><?php echo $location->getContrat()->getFacture()->getdate_reglement(); ?></p>
 				</div>
 			</div>
-			<?php if ($location['etat'] != 'Passé') { ?>
+			<?php if ($location->getEtat() != 'Passé') { ?>
 				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</div>
