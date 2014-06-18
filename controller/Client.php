@@ -12,7 +12,7 @@ class Client extends library\Controller
 		parent::__construct($application);
 	}
 
-	public function liste_conducteurs()
+	public function listeConducteurs()
 	{
 		$conducteurs[] = array('nom' => 'pute', 'prenom' => 'jean', 'numero_permis' => 7658);
 		$conducteurs[] = array('nom' => 'biatch', 'prenom' => 'Erwan', 'numero_permis' => 7658);
@@ -22,7 +22,7 @@ class Client extends library\Controller
 		return 'liste_conducteurs.php';
 	}
 	
-	public function liste_locations()
+	public function listeLocations()
 	{
 		$vehicules = array('206', 'Golf', 'Tractoor');
 		$moyens_paiements = array('CB', 'Chèque', 'Espèces');
