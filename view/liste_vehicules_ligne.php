@@ -31,7 +31,9 @@
 		<small><?php echo $vehicule->getseuil_km(); ?> km inclus gratuits</small>
 	</td>
 	<td>
-		<form role="form" method="post" action="">
+
+	<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
+		<form role="form" method="post" action="reserver">
 			<?php if(empty($statut)) { ?>
 			<button type="submit" name="reserver" value="<?php echo 'Reserver'; ?>" class="btn btn-primary">Réserver</button>
 			<?php } ?>	
