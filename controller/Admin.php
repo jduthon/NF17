@@ -88,6 +88,16 @@ class Admin extends library\Controller
 	}
 	
 	public function statistiques(){
+		$statMod = new \model\Statistiques($this->getApplication());
+		$locByType = $statMod->getLocByType();
+		$colors = array("#1BBC9B","#2D3E50","#E64C66","#AEAEAE");
+		$i=0;
+		foreach($locByType as $key=>$loc){
+			$locByType[$key]["color"]=$colors[$i%count($colors)];
+			++$i;
+		}
+		$locTypeByDate=$statMod->getLocTypeByDate();
+		$this->addVars(array('locByType' => $locByType));
 		return "statistiques.php";
 	}
 	

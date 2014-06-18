@@ -5,13 +5,14 @@
   <div class="panel-heading">Nombre de locations </div>
 
 
-<canvas id="locCliProChart" width="1000" height="600"></canvas>
+<canvas id="locCliProChart" width="800" height="600"></canvas>
 	<p style="color:rgba(220,220,220,1);"> Nombre de locations particuliers</p>
 	<p style="color:rgba(151,187,205,1);"> Nombre de locations professionnels</p>
 </div>
 
-<div class="panel panel-primary">
+<div class="panel panel-info">
   <div class="panel-heading">Locations par type de véhicule </div>
+  <?php if(is_array($locByType) && !empty($locByType)){ ?>
 	<div class="row">
 	  <div class="col-md-8"> <canvas id="typeVoitChart" width="800" height="600"></canvas> </div>
 	  <div class="col-md-4">	
@@ -19,16 +20,53 @@
 								<div class="panel-heading">Légende</div>
 								<div class="panel-body"> 
 									<ul>
-										<li style="color:#F7464A;"> Berline </li>
-										<li style="color:#E2EAE9;"> Citadine </li>
-										<li style="color:#D4CCC5;"> Utilitaire </li>
-										<li style="color:#949FB1;"> Tapin </li>
+										<?php foreach($locByType as $loc)
+											echo "<li style=\"color:" . $loc["color"] . ";\">". $loc["categorie"] . " </li>";
+										?>
 									</ul>
 								</div>
 							</div>
 		</div>
+	</div>
+	<?php } else { ?>
+	<div class="alert alert-warning"> Donnnées indisponibles </div> 
+	<?php } ?>
 </div>
 
+<div class="panel panel-primary">
+  <div class="panel-heading"> Chiffre d'affaire, Charges, Résultat</div>
+  <br/>
+  <div class="row">
+	  <div class="col-md-2"> </div>
+	  <div class="col-md-4">
+		  <div class="btn-group" data-toggle="buttons">
+			  <label class="btn btn-primary active" id="btnca">
+				<input type="checkbox"> Chiffre d'affaire
+			  </label>
+			  <label class="btn btn-primary" id="btncharges">
+				<input type="checkbox"> Charges
+			  </label>
+			  <label class="btn btn-primary" id="btnres">
+				<input type="checkbox"> Résultat
+			  </label>
+			</div>
+		</div>
+		<div class="col-md-6"> </div>
+	</div>
+	<div class="row">
+	  <div class="col-md-8"> <canvas id="caChart" width="800" height="600"></canvas> </div>
+	  <div class="col-md-4">	
+							<div class="panel panel-default">
+								<div class="panel-heading">Légende</div>
+								<div class="panel-body"> 
+									<ul id="ulcaChart">
+										<li id="lica" style="color:rgba(27,188,155,0.5);"> Chiffre d'affaires </li>
+									</ul>
+								</div>
+							</div>
+		</div>
+	</div>
+</div>
 
 <script src="<?php echo $_js; ?>/Chart.js"></script>
 <script type="text/javascript"> 
@@ -112,36 +150,102 @@ var options = {
 	onAnimationComplete : null
 };
 new myNewChart.Line(data,options);
+<?php if(is_array($locByType) && !empty($locByType)){ ?>
+	var  typeVoitChart = document.getElementById("typeVoitChart").getContext("2d");
+	var data = [
+	<?php 
+		$affichage="";
+		foreach($locByType as $loc)
+			$affichage.="{value: " . $loc["nbloc"] . ",color:\"" . $loc["color"] . "\"},";
+		substr($affichage,0,strlen($affichage)-2);
+		echo $affichage;
+	?>
+	];
+	options = {
+		//Boolean - Whether we should show a stroke on each segment
+		segmentShowStroke : true,
+		//String - The colour of each segment stroke
+		segmentStrokeColor : "#fff",
+		//Number - The width of each segment stroke
+		segmentStrokeWidth : 2,
+		//The percentage of the chart that we cut out of the middle.
+		percentageInnerCutout : 50,
+		//Boolean - Whether we should animate the chart	
+		animation : true,
+		//Number - Amount of animation steps
+		animationSteps : 100,
+		//String - Animation easing effect
+		animationEasing : "easeOutBounce",
+		//Boolean - Whether we animate the rotation of the Doughnut
+		animateRotate : true,
+		//Boolean - Whether we animate scaling the Doughnut from the centre
+		animateScale : false,
+		//Function - Will fire on animation completion.
+		onAnimationComplete : null
+	}
+	new Chart(typeVoitChart).Doughnut(data,options);
+<?php } ?>
 
-var  typeVoitChart = document.getElementById("typeVoitChart").getContext("2d");
-var data = [
-	{value: 30,color:"#F7464A"},
-	{value : 50,color : "#E2EAE9"},
-	{value : 100,color : "#D4CCC5"},
-	{value : 40,color : "#949FB1"},
-	{value : 120,color : "#4D5360"}
-];
-options = {
-	//Boolean - Whether we should show a stroke on each segment
-	segmentShowStroke : true,
-	//String - The colour of each segment stroke
-	segmentStrokeColor : "#fff",
-	//Number - The width of each segment stroke
-	segmentStrokeWidth : 2,
-	//The percentage of the chart that we cut out of the middle.
-	percentageInnerCutout : 50,
-	//Boolean - Whether we should animate the chart	
-	animation : true,
-	//Number - Amount of animation steps
-	animationSteps : 100,
-	//String - Animation easing effect
-	animationEasing : "easeOutBounce",
-	//Boolean - Whether we animate the rotation of the Doughnut
-	animateRotate : true,
-	//Boolean - Whether we animate scaling the Doughnut from the centre
-	animateScale : false,
-	//Function - Will fire on animation completion.
-	onAnimationComplete : null
+var datasetsArr = { ca: {
+			fillColor : "rgba(27,188,155,0.5)",
+			strokeColor : "rgba(27,188,155,1)",
+			data : [65,59,90,81,56,55,40]
+		}};
+var data = {
+	labels : ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet"],
+	datasets : [datasetsArr.ca]
+};
+var caChart = document.getElementById("caChart").getContext("2d");
+new Chart(caChart).Bar(data,options);
+
+var fixedDataSet = {
+	ca : {
+			fillColor : "rgba(27,188,155,0.5)",
+			strokeColor : "rgba(27,188,155,1)",
+			data : [65,59,90,81,56,55,40]
+		},
+	charges : {
+			fillColor : "rgba(230,76,102,0.5)",
+			strokeColor : "rgba(230,76,102,1)",
+			data : [65,59,90,81,56,55,40]
+		},
+	res : {
+			fillColor : "rgba(220,220,220,0.5)",
+			strokeColor : "rgba(220,220,220,1)",
+			data : [65,59,90,81,56,55,40]
+		},
+	txt : {
+			ca : "Chiffre d'Affaire",
+			res : "Résultat",
+			charges: "Charges"
+			}
+	};
+
+function actualize(eventObject){
+	var act = eventObject.target.id.substring(3);
+	if(act in datasetsArr){
+		delete datasetsArr[act];
+		jQuery("#li" + act).remove();
+	}
+	else{
+		datasetsArr[act]=fixedDataSet[act];
+		jQuery("#ulcaChart").append("<li id=li" + act + " style=\"color:" + fixedDataSet[act].strokeColor + ";\"> " + fixedDataSet.txt[act] + "</li>");
+	}
+	if(typeof datasetsArr != "object")
+		datasetsArr=Array();
+	actualizeGraph();
 }
-new Chart(typeVoitChart).Doughnut(data,options);
+
+function actualizeGraph(){
+	var numArray = Array();
+	for(items in datasetsArr)
+		numArray[numArray.length]=datasetsArr[items];
+	data.datasets=numArray;
+	new Chart(caChart).Bar(data,options);
+}
+window.onload=function(){
+jQuery("#btnca").click(actualize);
+jQuery("#btnres").click(actualize);
+jQuery("#btncharges").click(actualize);
+};
 </script>
