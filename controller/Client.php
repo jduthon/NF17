@@ -47,7 +47,15 @@ class Client extends library\Controller
 		$location['conducteurs'][] = array('nom' => 'Connard', 'prenom' => 'Odieux', 'copie_permis' => '666');
 		$location['conducteurs'][] = array('nom' => 'Bismuth', 'prenom' => 'Paul', 'copie_permis' => 'cass toi pov\'con');
 		
-		$this->addVars(array('location' => $location,  'vehicules' => $vehicules, 'moyens_paiements' => $moyens_paiements, 'professionnel' => true));
+		$this->addVars(array('location' => $location, 'vehicules' => $vehicules, 'moyens_paiements' => $moyens_paiements, 'professionnel' => true));
 		return 'location.php';
+	}
+	
+	public function compte()
+	{
+		$client = array('prenom' => 'Paul', 'nom' => 'Bismuth', 'adresse' => 'L\'Elysee', 'ville' => 'PSG', 'jour_naissance' => 28, 'mois_naissance' => 01, 'annee_naissance' => 1955, 'telephone' => '666', 'permis' => 'demandez à mamadou mon chauffeur');
+		
+		$this->addVars(array('post' => $client, 'type_client' => 'particulier'));
+		return 'compte_client.php';
 	}
 }

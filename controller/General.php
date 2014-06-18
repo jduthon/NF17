@@ -41,7 +41,6 @@ class General extends library\Controller
 	
 	public function recherche() 
 	{
-	
 		$modelManager = $this->getApplication()->getModelManager();
 		$categories=$modelManager->getAll("Categorie");
 	
@@ -117,7 +116,17 @@ class General extends library\Controller
 	
 	public function inscription()
 	{
-		$this->addVars(array('type_client' => 'particulier'));
+		$post['prenom'] = !empty($_POST['prenom']) ? $_POST['prenom'] : '';
+		$post['nom'] = !empty($_POST['nom']) ? $_POST['nom'] : '';
+		$post['adresse'] = !empty($_POST['adresse']) ? $_POST['adresse'] : '';
+		$post['ville'] = !empty($_POST['ville']) ? $_POST['ville'] : '';
+		$post['jour_naissance'] = !empty($_POST['jour_naissance']) ? $_POST['jour_naissance'] : '';
+		$post['mois_naissance'] = !empty($_POST['mois_naissance']) ? $_POST['mois_naissance'] : '';
+		$post['annee_naissance'] = !empty($_POST['annee_naissance']) ? $_POST['annee_naissance'] : '';
+		$post['telephone'] = !empty($_POST['telephone']) ? $_POST['telephone'] : '';
+		$post['permis'] = !empty($_POST['permis']) ? $_POST['permis'] : '';
+	
+		$this->addVars(array('post' => $post, 'type_client' => 'particulier', 'inscription' => true));
 		return 'inscription.php';
 	}
 	
