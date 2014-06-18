@@ -114,7 +114,7 @@ class General extends library\Controller
 		return $this->accueil();
 	}
 	
-	public function inscription()
+	public function inscription($type_client)
 	{
 		$post['prenom'] = !empty($_POST['prenom']) ? $_POST['prenom'] : '';
 		$post['nom'] = !empty($_POST['nom']) ? $_POST['nom'] : '';
@@ -126,7 +126,7 @@ class General extends library\Controller
 		$post['telephone'] = !empty($_POST['telephone']) ? $_POST['telephone'] : '';
 		$post['permis'] = !empty($_POST['permis']) ? $_POST['permis'] : '';
 	
-		$this->addVars(array('post' => $post, 'type_client' => 'particulier', 'inscription' => true));
+		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
 		return 'inscription.php';
 	}
 	
