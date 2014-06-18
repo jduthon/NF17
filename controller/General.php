@@ -141,7 +141,32 @@ class General extends library\Controller
 		$post['telephone'] = !empty($_POST['telephone']) ? $_POST['telephone'] : '';
 		$post['permis'] = !empty($_POST['permis']) ? $_POST['permis'] : '';
 		$post['nom_entreprise'] = !empty($_POST['nom_entreprise']) ? $_POST['nom_entreprise'] : '';
-	
+		
+		$modelManager=$this->getApplication()->getModelManager();
+		
+		if(isset($_POST["id_client"])){
+			$clientTest=$modelManager->getOneById_client("Client",$_POST["id_client"]);
+			if($clientTest!=null)
+				$errs="Cet identifiant existe déjà, merci d'en saisir un autre";
+			else {
+				$newClient=$modelManager->getNewModel("Client",$_POST);
+				$newClient->setdate_inscription(date("Ymd"));
+				$modelManager->addModel($newClient);
+				try{
+					if($type_client != "professionnel")
+						$newParticulier=$modelManager->getNewModel("Particulier",array_merge($_POST,array("id_part" => $_POST["id_client"])));
+						$modelManager->addModel($newParticulier);
+					else
+						$newProfessionnel=$modelManager->getNewModel("Professionnel",array_merge($_POST,array("id_pro" => $_POST["id_client"])));
+						$modelManager->addModel($newProfessionnel);
+				} catch(TommeException $e){
+						$modelManager->delete($newClient);
+						throw $e;
+					}
+			}
+		}
+		if(isset($errs))
+			$this->addVars(array('errs' => $errs));
 		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
 		return 'inscription.php';
 	}

@@ -67,7 +67,7 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="telephone" class="col-sm-2 control-label">Téléphone</label>
+			<label for="numero_tel" class="col-sm-2 control-label">Téléphone</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-4">
@@ -91,12 +91,12 @@
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-5">
-						<input type="text" class="form-control" name="identifiant" id="identifiant" placeholder="Identifiant" required>
+						<input type="text" class="form-control" name="id_client" id="identifiant" placeholder="Identifiant" required>
 					</div>
 
 					<label for="mot_de_passe" class="col-sm-3 control-label">Mot de passe</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" placeholder="Mot de passe" required>
+						<input type="password" class="form-control" name="password_gestion_compte" id="mot_de_passe" placeholder="Mot de passe" required>
 					</div>
 				</div>
 			</div>

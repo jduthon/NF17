@@ -26,11 +26,13 @@ class Client extends library\Controller
 		}
 		if(isset($_POST["modifier"]) || isset($_POST["supprimer"])){
 			$conducteurAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
-			if($agentAModif!=null)
-				$this->addVars(array('err' => 'Already exists employe id :' . $_POST['id_employe']));
+			if($conducteurAModif==null)
+				$this->addVars(array('err' => 'Probléme de conducteur, veuillez recommencer'));
 			else{
-				$agent=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->addModel($agent);
+				if($_POST["modifier"])
+					$modelManager->updateModel($conducteurAModif);
+				else
+					$modelManager->deleteModel($conducteurAModif);
 			}
 		}
 		/*
