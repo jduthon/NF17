@@ -12,7 +12,7 @@
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							<input type="text" class="form" name="id_loc" id="id_loc" value="<?php echo $location['id']; ?>" >
+							<input type="text" class="form-control" name="id_loc" id="id_loc" value="<?php echo $location['id']; ?>" >
 						</td>
 
 						<td class="col-xs-4 text-right">

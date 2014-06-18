@@ -7,64 +7,48 @@ use library;
 class Technique extends library\Controller
 {	
 
-	/*public function __construct($application){
-		if(!isset($_SESSION['technique']))
-			throw new \library\TommeException("You are not granted the rights to access this page\n");
+	public function __construct($application){
+		/*if(!isset($_SESSION['technique']))
+			throw new \library\TommeException("You are not granted the rights to access this page\n");*/
 		parent::__construct($application);
 	}
-	
-	public function liste_agents()
+		
+	public function controleLocations()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$agents=$modelManager->getAll("Employe");
-		if(!is_array($agents))
-			$agents=array($agents);
-		if(isset($_POST['modifier'])){
-			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
-			if($agentAModif==null)
-				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
-			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->updateModel($agentTest);
-			}
-		}
-		if(isset($_POST['supprimer'])){
-			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
-			if($agentAModif==null)
-				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
-			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->deleteModel($agentTest);
-			}
-		}
+		$locations = $modelManager->getAll("Location");
 		
-		$this->addVars(array('agents' => $agents));
-		return 'liste_agents.php';
-	}*/
+		$post['id_location'] = !empty($_POST['id_location']) ? $_POST['niveau_carb'] : '';
+		$post['niveau_carb'] = !empty($_POST['niveau_carb']) ? $_POST['niveau_carb'] : '';
+		$post['km'] = !empty($_POST['km']) ? $_POST['km'] : '';
+		$post['degats_eventuels'] = !empty($_POST['degats_eventuels']) ? $_POST['degats_eventuels'] : '';
+		$montant = 0;
+		
+		$this->addVars(array('locations' => $locations, 'post' => $post, 'montant' => $montant));
+		return 'controle_locations.php';
+	}
+	
+	public function gestionVehicules()
+	{
+		return 'gestion_vehicules.php';
+	}
+	
+	public function gestionVehicule($numero_imatriculation)
+	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$vehicules = $modelManager->getAll("Vehicule");
+		$options = array('AC','GPS');
+		$typemodif = 'modification';
+		
+		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' => $typemodif));
+		return 'ajout_modificatio_vehicule.php';
+	}
 	
 	public function ajoutVehicule()
 	{
-		$modelManager = $this->getApplication()->getModelManager();
-		$vehicules=$modelManager->getAll("Vehicule");
-		$options = array('AC','GPS');
 		$typemodif = 'ajout';
-		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' =>$typemodif));
-	
-		return 'ajout_modification_vehicule.php';
-	}
-	
-		public function modificationVehicule()
-	{
-		$modelManager = $this->getApplication()->getModelManager();
-		$vehicules=$modelManager->getAll("Vehicule");
-		$options = array('AC','GPS');
-		$typemodif = 'modification';
-		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' =>$typemodif));
 		
-		return 'ajout_modification_vehicule.php';
-	}
-	
-	
-
-	
+		$this->addVars(array('typemodif' => $typemodif));
+		return 'ajout_modificatio_vehicule.php';
+	}	
 }
