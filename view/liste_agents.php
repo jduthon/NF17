@@ -24,10 +24,11 @@
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							<input type="text" class="form" name="id_employe" id="id_employe" value="<?php echo $agent->getid_employe(); ?>" >
+							<?php echo $agent->getid_employe(); ?>
+							<input type="hidden" name="id_employe" value="<?php echo $agent->getid_employe(); ?>" >
 						</td>
 						<td>
-							<input type="text" class="form" name="function" id="function" value="<?php echo $agent->getfunction(); ?>" >
+							<input type="text" class="form-control" name="function" id="function" value="<?php echo $agent->getfunction(); ?>" >
 						</td>
 						<td class="col-xs-4 text-right">
 							<div class="btn-group">

@@ -30,7 +30,8 @@
 						<li><a href="locations-commercial">Locations</a></li>
 						<?php } ?>
 					<?php if($_SESSION['agent']->isTechnique()){ ?>
-						<li><a href="vehicules-technique">Véhicules</a></li>
+						<li><a href="controle-locations">Véhicules à contrôler</a></li>
+						<li><a href="gestion-vehicules">Gestion du parc</a></li>
 					<?php } ?>
 				<?php } ?>
 			</ul>

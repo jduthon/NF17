@@ -18,13 +18,13 @@
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							<input type="text" class="form" name="nom" id="nom" value="<?php echo $conducteur['nom']; ?>" >
+							<input type="text" class="form-control" name="nom" id="nom" value="<?php echo $conducteur['nom']; ?>" >
 						</td>
 						<td>
-							<input type="text" class="form" name="prenom" id="prenom" value="<?php echo $conducteur['prenom']; ?>" >
+							<input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $conducteur['prenom']; ?>" >
 						</td>
 						<td>
-							<input type="text" class="form" name="numero_permis" id="numero_permis" value="<?php echo $conducteur['numero_permis']; ?>" >
+							<input type="text" class="form-control" name="numero_permis" id="numero_permis" value="<?php echo $conducteur['numero_permis']; ?>" >
 						</td>
 						<td class="col-xs-4 text-right">
 							<div class="btn-group">
