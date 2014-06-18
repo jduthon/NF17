@@ -143,7 +143,7 @@ class General extends library\Controller
 		$post['nom_entreprise'] = !empty($_POST['nom_entreprise']) ? $_POST['nom_entreprise'] : '';
 		
 		$modelManager=$this->getApplication()->getModelManager();
-		
+		$errs="";
 		if(isset($_POST["id_client"])){
 			$clientTest=$modelManager->getOneById_client("Client",$_POST["id_client"]);
 			if($clientTest!=null)
@@ -153,21 +153,33 @@ class General extends library\Controller
 				$newClient->setdate_inscription(date("Ymd"));
 				$modelManager->addModel($newClient);
 				try{
-					if($type_client != "professionnel")
-						$newParticulier=$modelManager->getNewModel("Particulier",array_merge($_POST,array("id_part" => $_POST["id_client"])));
-						$modelManager->addModel($newParticulier);
-					else
+					if($type_client != "professionnel"){
+						$dateNaiss=$_POST["annee_naissance"].$_POST["mois_naissance"].$_POST["jour_naissance"];
+						$dateNaissTime = new \DateTime($dateNaiss);
+						$dateNow = new \DateTime();
+						$dateInterval = $dateNow->diff($dateNaissTime);
+						$age=$dateInterval->y;
+						if($age<21){
+							$errs="Vous n'avez pas l'âge pour vous inscrire (21 ans)";
+							$modelManager->deleteModel($newClient);
+						}
+						else{
+							$newParticulier=$modelManager->getNewModel("Particulier",array_merge($_POST,array("id_part" => $_POST["id_client"],"date_naissance" => $dateNaiss)));
+							$modelManager->addModel($newParticulier);
+						}
+					}
+					else{
 						$newProfessionnel=$modelManager->getNewModel("Professionnel",array_merge($_POST,array("id_pro" => $_POST["id_client"])));
 						$modelManager->addModel($newProfessionnel);
-				} catch(TommeException $e){
-						$modelManager->delete($newClient);
-						throw $e;
 					}
+				} catch(\library\TommeException $e){
+						print("SALUT LERREUR");
+						$modelManager->deleteModel($newClient);
+						throw $e;
+				}
 			}
 		}
-		if(isset($errs))
-			$this->addVars(array('errs' => $errs));
-		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
+		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true,'errs' => $errs));
 		return 'inscription.php';
 	}
 
