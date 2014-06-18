@@ -5,8 +5,8 @@
 
 		<form role="form" method="post" action="" id="connexion">
 			
-			<label for="adminName" class="sr-only">Identifiant</label>
-			<input type="text" class="form-control input-lg" id="adminName" name="adminName" placeholder="Identifiant" required autofocus>
+			<label for="identifiant" class="sr-only">Identifiant</label>
+			<input type="text" class="form-control input-lg" id="identifiant" name="adminName" placeholder="Identifiant" required autofocus>
 
 			<label for="password" class="sr-only">Mot de passe</label>			
 			<input type="password" class="form-control input-lg" id="password" name="password" placeholder="Mot de passe" required>

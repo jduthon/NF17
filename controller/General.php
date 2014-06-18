@@ -157,37 +157,5 @@ class General extends library\Controller
 		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
 		return 'inscription.php';
 	}
-	
-	public function liste_conducteurs()
-	{
-		$conducteurs[] = array('nom' => 'pute', 'prenom' => 'jean', 'Numéro de permis' => 7658);
-		$conducteurs[] = array('nom' => 'biatch', 'prenom' => 'Erwan', 'Numéro de permis' => 7658);
-		$conducteurs[] = array('nom' => 'Salope', 'prenom' => 'Antoine', 'Numéro de permis' => 7658);
 		
-		
-		$this->addVars(array('conducteurs' => $conducteurs));
-		return 'liste_conducteurs.php';
-	}
-	
-	public function liste_entreprises()
-	{
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		
-		
-		$this->addVars(array('entreprises' => $entreprises));
-		return 'liste_entreprises.php';
-	}
-	public function liste_location_particulier()
-	{
-		$locations[] = array('id location' => 'pute', 'voiture' => 'tapin', 'date debut' => 'tapin', 'date fin' => 'tapin', 'etat' => 'lala');
-		$locations[] = array('id location' => 'pute', 'voiture' => 'tapin', 'date debut' => 'tapin', 'date fin' => 'tapin', 'etat' => 'lala');
-		$locations[] = array('id location' => 'pute', 'voiture' => 'tapin', 'date debut' => 'tapin', 'date fin' => 'tapin', 'etat' => 'lala');
-		
-		
-		$this->addVars(array('locations' => $locations));
-		return 'liste_location_particulier.php';
-	}
-	
 }
