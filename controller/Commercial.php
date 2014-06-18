@@ -36,6 +36,6 @@ class Commercial extends library\Controller
 		if(!is_array($locNonVal))
 			$locNonVal=array($locNonVal);
 		$this->addVars(array('locations'=>$locNonVal));
-		return 'liste_contrat_agent_com.php';
+		return 'liste_locations_commercial.php';
 	}
 }

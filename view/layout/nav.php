@@ -31,7 +31,7 @@
 						<?php } ?>
 					<?php if($_SESSION['agent']->isTechnique()){ ?>
 						<li><a href="controle-locations">Véhicules à contrôler</a></li>
-						<li><a href="gestion-vehicules">Gestion du parc</a></li>
+						<li><a href="vehicules-techniques">Gestion du parc</a></li>
 					<?php } ?>
 				<?php } ?>
 			</ul>
