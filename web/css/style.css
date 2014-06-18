@@ -20,7 +20,7 @@ body {
 		margin-bottom: 0px;
 		border-radius: 6px 6px 0 0;
 	}
-	#connexion #mot_de_passe {
+	#connexion #password {
 		border-radius: 0 0 6px 6px;
 		border-top-width: 0;
 	}

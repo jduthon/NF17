@@ -13,6 +13,7 @@ class Entreprise extends library\Model
 	static private $foreignKey=null;
 	
 	public function __construct(){
+		$this->nom_agence="LoukoumKar";
 	}
 	
 	public function getnom_entreprise(){
@@ -36,7 +37,8 @@ class Entreprise extends library\Model
 	}
 	
 	public function setnom_agence($nom_agence){
-		$this->nom_agence=$nom_agence;
+		if($nom_agence!=null)
+			$this->nom_agence=$nom_agence;
 	}
 	
 	public function getPrimaryKey(){

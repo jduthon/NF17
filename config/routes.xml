@@ -3,12 +3,15 @@
 <routes>
 	<route url="/" controller="general" action="accueil" />
 	<route url="/recherche" controller="general" action="recherche" />
-	<route url="/connexion((?:Pro)?)" controller="general" action="connexion" variables="type_client" />
+	<route url="/connexion" controller="general" action="connexion" />
 	<route url="/deconnexion" controller="general" action="deconnexion" />
-	<route url="/inscription" controller="general" action="inscription" />
+	<route url="/inscription((?:Pro)?)" controller="general" action="inscription" variables="type_client" />
 	
+	<route url="/connexionAgent" controller="general" action="connexionAgent" />
+	<route url="/deconnexionAgent" controller="general" action="deconnexionAgent" />
 	<route url="/connexionAdmin" controller="general" action="connexionAdmin" />
 	<route url="/deconnexionAdmin" controller="general" action="deconnexionAdmin" />
+
 	
 	<route url="/locations" controller="client" action="listeLocations" />
 	<route url="/location-([a-zA-Z0-9]+)" controller="client" action="location" variables="num_contrat" />
@@ -26,9 +29,7 @@
 
 	<route url="/agents" controller="admin" action="liste_agents" />
 	<route url="/entreprises" controller="admin" action="liste_entreprises" />
-	
 	<route url="/statistiques" controller="admin" action="statistiques" />
-	
 	<route url="/ajout_agent" controller="admin" action="ajout_agent" />
 	<route url="/ajout_entreprise" controller="admin" action="ajout_entreprise" />
 </routes>

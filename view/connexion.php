@@ -8,8 +8,8 @@
 			<label for="identifiant" class="sr-only">Identifiant</label>
 			<input type="text" class="form-control input-lg" id="identifiant" name="identifiant" placeholder="Identifiant" required autofocus>
 
-			<label for="mot_de_passe" class="sr-only">Mot de passe</label>			
-			<input type="password" class="form-control input-lg" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" required>
+			<label for="password" class="sr-only">Mot de passe</label>			
+			<input type="password" class="form-control input-lg" id="password" name="password" placeholder="Mot de passe" required>
 			
 			<br>
 			
@@ -20,7 +20,7 @@
 		
 		<?php if (!empty($connexion_client) AND $connexion_client == true) { ?>
 			<p class="text-center">
-				Vous êtes un nouveau client ? <a href="inscription">Inscrivez-vous</a>
+				Vous êtes un nouveau client ? Inscrivez-vous en tant que <a href="inscription">particulier</a> ou <a href="inscriptionPro">professionel</a>.
 			<p>
 		<?php } ?>
 

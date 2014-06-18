@@ -10,7 +10,6 @@
 			<tr>
 				<th>Nom</th>
 				<th>Fonction</th>
-				<th>Agence</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,9 +21,6 @@
 							</td>
 							<td>
 								<input type="text" class="form" name="type" id="type" value="<?php echo $entreprise->gettype(); ?>" >
-							</td>
-							<td>
-								<input type="text" class="form" name="nom_agence" id="nom_agence" value="<?php echo $entreprise->getnom_agence(); ?>" >
 							</td>
 							<td class="col-xs-4 text-right">
 								<div class="btn-group">
