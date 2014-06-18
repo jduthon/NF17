@@ -116,6 +116,8 @@ class General extends library\Controller
 	
 	public function inscription($type_client)
 	{
+		$type_client = ($type_client == 'Pro') ? 'professionnel' : 'particulier';
+	
 		$post['prenom'] = !empty($_POST['prenom']) ? $_POST['prenom'] : '';
 		$post['nom'] = !empty($_POST['nom']) ? $_POST['nom'] : '';
 		$post['adresse'] = !empty($_POST['adresse']) ? $_POST['adresse'] : '';
@@ -125,6 +127,7 @@ class General extends library\Controller
 		$post['annee_naissance'] = !empty($_POST['annee_naissance']) ? $_POST['annee_naissance'] : '';
 		$post['telephone'] = !empty($_POST['telephone']) ? $_POST['telephone'] : '';
 		$post['permis'] = !empty($_POST['permis']) ? $_POST['permis'] : '';
+		$post['nom_entreprise'] = !empty($_POST['nom_entreprise']) ? $_POST['nom_entreprise'] : '';
 	
 		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
 		return 'inscription.php';

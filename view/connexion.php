@@ -20,7 +20,7 @@
 		
 		<?php if (!empty($connexion_client) AND $connexion_client == true) { ?>
 			<p class="text-center">
-				Vous êtes un nouveau client ? <a href="inscription">Inscrivez-vous</a>
+				Vous êtes un nouveau client ? Inscrivez-vous en tant que <a href="inscription">particulier</a> ou <a href="inscriptionPro">professionel</a>.
 			<p>
 		<?php } ?>
 

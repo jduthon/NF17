@@ -3,9 +3,9 @@
 <routes>
 	<route url="/" controller="general" action="accueil" />
 	<route url="/recherche" controller="general" action="recherche" />
-	<route url="/connexion((?:Pro)?)" controller="general" action="connexion" variables="type_client" />
+	<route url="/connexion" controller="general" action="connexion" />
 	<route url="/deconnexion" controller="general" action="deconnexion" />
-	<route url="/inscription" controller="general" action="inscription" />
+	<route url="/inscription((?:Pro)?)" controller="general" action="inscription" variables="type_client" />
 	
 	<route url="/connexionAdmin" controller="general" action="connexionAdmin" />
 	<route url="/deconnexionAdmin" controller="general" action="deconnexionAdmin" />
