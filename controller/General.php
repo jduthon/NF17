@@ -11,7 +11,6 @@ class General extends library\Controller
 		$modelManager = $this->getApplication()->getModelManager();
 		$vehicules=$modelManager->getAll("Vehicule");
 		$categories=$modelManager->getAll("Categorie");
-		
 		/*
 		//Ajout des véhicules
 		$vehicules['wv'] = array('numero_immatriculation' => 'wv', 'nom_categorie' => 'Utilitaire', 'marque' => 'Volkswagen', 'nom_modele' => 'Golf', 'nb_portes' => 2, 'boite_vitesse' => 'auto', 'puissance_fiscale' => '20ch', 'taille' => '4m', 'options' => array('antigravité'));
@@ -137,5 +136,5 @@ class General extends library\Controller
 		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
 		return 'inscription.php';
 	}
-	
+
 }

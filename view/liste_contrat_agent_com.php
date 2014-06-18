@@ -1,5 +1,9 @@
 <h1>Liste locations</h1>
 
+<?php if(empty($locations)){ ?>
+			<h3>Pas de locations non validees.</h3>
+		
+		<?php } else {?>
 <section class="table-responsive">
 	<table class="table table-striped">
 		<thead>
@@ -8,11 +12,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($conducteurs as $conducteur) { ?>
+		
+			<?php foreach($locations as $loc) { ?>
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							<input type="text" class="form" name="id_loc" id="id_loc" value="<?php echo $location['id']; ?>" >
+							<input type="text" class="form-control" name="id_loc" id="id_loc" value="<?php echo $loc['id']; ?>" >
 						</td>
 
 						<td class="col-xs-4 text-right">
@@ -24,6 +29,8 @@
 					</form>
 				</tr>
 			<?php } ?>
+		
 		</tbody>
 	</table>
 </section>
+<?php } ?>

@@ -31,9 +31,21 @@
 		<small><?php echo $vehicule->getseuil_km(); ?> km inclus gratuits</small>
 	</td>
 	<td>
+
 	<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
 		<form role="form" method="post" action="reserver">
-			<button type="submit" name="reserver" value="<?php echo $vehicule->getnumero_immatriculation(); ?>" class="btn btn-primary">Réserver</button>
+			<?php if(empty($statut)) { ?>
+			<button type="submit" name="reserver" value="<?php echo 'Reserver'; ?>" class="btn btn-primary">Réserver</button>
+			<?php } ?>	
+			<?php if(!empty($statut)) { ?>
+				<button type="submit" name="entretien" value="<?php echo 'entretien'; ?>" class="btn btn-primary">Entretien</button>
+			<?php } ?>
+			<?php if(!empty($statut)) { ?>
+				<button type="submit" name="réparation" value="<?php echo 'reparation'; ?>" class="btn btn-primary">Réparation</button>
+			<?php } ?>
+			<?php if(!empty($statut)) { ?>
+				<button type="submit" name="supprimer" value="<?php echo 'supprimer'; ?>" class="btn btn-primary">Supprimer</button>
+			<?php } ?>
 		</form>
 	</td>
 </tr>

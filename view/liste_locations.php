@@ -19,40 +19,39 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($locations as $location) { ?>
+			<?php if(!empty($locations))
+					foreach($locations as $location) { ?>
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							<?php echo $location['num_contrat']; ?>
+							<?php echo $location->getnum_contrat(); ?>
 						</td>
 						<td>
-							<?php echo $location['vehicule']; ?>						
+							<?php echo $location->getVehicule()->getModele()->getnom_modele(); ?>						
 						</td>
 						<td>
-							<?php echo $location['date_debut_loc']; ?>
+							<?php echo $location->getContrat()->getdate_debut_loc(); ?>
 						</td>
 						<td>
-							<?php echo $location['date_fin_loc']; ?>
+							<?php echo $location->getContrat()->getdate_fin_loc(); ?>
 						<td>
-							<?php echo $location['montant']; ?> €
+							<?php echo $location->getMontantPrevi(); ?> €
 						</td>
 						<td>
-							<?php echo $location['moyen_paiement']; ?>
+							<?php echo $location->getContrat()->getFacture()->getmoyen_de_paiement(); ?>
 						</td>
 						<td>
-							<?php echo $location['etat']; ?>
+							<?php echo $location->getEtat(); ?>
 						</td>
 						<td>
 							<div class="btn-group">
-								<?php if ($location['etat'] == 'Passé') { ?>
-									<a href="location-<?php echo $location['num_contrat']; ?>" class="btn btn-primary" role="button">Voir</a>
+								<?php if ($location->getEtat() == 'Passé' || $location->getEtat() == "Validé") { ?>
+									<a href="location-<?php echo $location->getnum_contrat(); ?>" class="btn btn-primary" role="button">Voir</a>
+								<?php } else { ?>
+									<a href="location-<?php echo $location->getnum_contrat(); ?>" class="btn btn-primary" role="button">Modifier</a>
 								<?php } ?>
 								
-								<?php if ($location['etat'] != 'Passé') { ?>
-									<a href="location-<?php echo $location['num_contrat']; ?>" class="btn btn-primary" role="button">Modifier</a>
-								<?php } ?>
-								
-								<?php if ($location['etat'] == 'A valider') { ?>
+								<?php if ($location->getEtat() == 'A confirmer') { ?>
 									<button name="annuler" class="btn btn-primary" type="submit">Annuler</button>
 									<button name="valider" class="btn btn-primary" type="submit">Valider</button>
 								<?php } ?>
