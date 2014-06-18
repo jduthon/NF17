@@ -10,6 +10,9 @@ class Location extends library\Model
 	private $id_client;
 	private $num_contrat;
 	private $numero_immatriculation;
+	private $_vehicule;
+	private $_contratLoc;
+	private $_montantPrevi;
 	
 	static private $foreignKey=null;
 	
@@ -46,6 +49,26 @@ class Location extends library\Model
 	
 	public function setnumero_immatriculation($numero_immatriculation){
 		$this->numero_immatriculation=$numero_immatriculation;
+	}
+	
+	public function getVehicule(){
+		$mm=\library\ModelManager::getInstance();
+		if(!isset($this->_vehicule))
+			$this->_vehicule=$mm->getOneByNumero_immatriculation($this->numero_immatriculation);
+		return $this->_vehicule;
+	}
+	
+	public function getContrat(){
+		$mm=\library\ModelManager::getInstance();
+		if(!isset($this->_contratLoc))
+			$this->_contratLoc=$mm->getOneByNum_contrat($this->num_contrat);
+		return $this->_contratLoc;
+	}
+	
+	public function getMontantPrevi(){
+		//TODO CALCULER UN FUCKING MONTANT EN FONCTION DE NBJOURS ET DE VEHICULE
+		//Multiplier la somme pourrie par le nb de jours
+		return 50;
 	}
 	
 	public function getPrimaryKey(){

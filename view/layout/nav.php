@@ -41,7 +41,7 @@
 				<li><a href="compte"><span class="glyphicon glyphicon-user"></span> Mon compte</a></li>
 				<li><a href="deconnexion"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else if(isset($_SESSION['agent'])){ ?>
-				<li><a href="deconnexionEmploye"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
+				<li><a href="deconnexionAgent"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else if(isset($_SESSION['admin'])){ ?>
 				<li><a href="deconnexionAdmin"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else { ?>

@@ -1,65 +1,66 @@
 <form class="form-horizontal" method="post" action="" role="form">
 	<h2 class="page-header">Informations personnelles</h2>
 	
-	<?php if (!empty($type_client) AND $type_client == 'particulier') { ?>
+	<?php if ($client->isParticulier()) { ?>
 		<div class="form-group">
 			<label for="nom" class="col-sm-2 control-label">Nom</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" value="<?php echo $post['nom']; ?>" required autofocus>
+				<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" value="<?php echo $client->getParticulier()->getnom(); ?>" required autofocus>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="prenom" class="col-sm-2 control-label">Prénom</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom" value="<?php echo $post['prenom']; ?>" required>
+				<input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom" value="<?php echo $client->getParticulier()->getprenom(); ?>" required>
 			</div>
 		</div>
 	<?php } ?>
 	
-	<?php if (!empty($type_client) AND $type_client == 'professionnel') { ?>
+	<?php if ($client->isProfessionnel()) { ?>
 		<div class="form-group">
 			<label for="nom_entreprise" class="col-sm-2 control-label">Nom de l'entreprise</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nom_entreprise" id="nom_entreprise" placeholder="Nom de l'entreprise" value="<?php echo $post['nom_entreprise']; ?>" required autofocus>
+				<input type="text" class="form-control" name="nom_entreprise" id="nom_entreprise" placeholder="Nom de l'entreprise" value="<?php echo $client->getProfessionnel()->getnom_entreprise(); ?>" required autofocus>
 			</div>
 		</div>
 	<?php } ?>
 	
-	<div class="form-group">
+
+	
+	<?php if ($client->isParticulier()) { ?>
+		<div class="form-group">
 		<label for="adresse" class="col-sm-2 control-label">Adresse</label>
 		<div class="col-sm-10">
 			<div class="row">
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="adresse" id="adresse" placeholder="Adresse" value="<?php echo $post['adresse']; ?>" required>
+					<input type="text" class="form-control" name="adresse" id="adresse" placeholder="Adresse" value="<?php echo $client->getParticulier()->getadresse(); ?>" required>
 				</div>
 
 				<label for="ville" class="col-sm-1 control-label">Ville</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" name="ville" id="ville" placeholder="Ville" value="<?php echo $post['ville']; ?>" required>
+					<input type="text" class="form-control" name="ville" id="ville" placeholder="Ville" value="<?php echo $client->getParticulier()->getville(); ?>" required>
 				</div>
 			</div>
 		</div>
 	</div> 
-	
-	<?php if (!empty($type_client) AND $type_client == 'particulier') { ?>
 		<div class="form-group">
 			<span class="col-sm-2 control-label">Date de naissance</span>
 			<div class="col-sm-10">
 				<div class="row">
 					<label for="jour_naissance" class="col-sm-1 control-label">Jour</label>
 					<div class="col-sm-3 col-md-2">
-						<input type="number" class="form-control" name="jour_naissance" id="jour_naissance" min="01" max="31" step="1" value="<?php echo $post['jour_naissance']; ?>" required>
+						<input type="number" class="form-control" name="jour_naissance" id="jour_naissance" min="01" max="31" step="1" value="<?php echo $client->getParticulier()->getdate_naissance(); ?>" required>
 					</div>
 					
 					<label for="mois_naissance" class="col-sm-1 col-md-offset-1 control-label">Mois</label>
 					<div class="col-sm-3 col-md-2">
-						<input type="number" class="form-control" name="mois_naissance" id="mois_naissance" min="01" max="12" step="1" value="<?php echo $post['mois_naissance']; ?>" required>
+						<input type="number" class="form-control" name="mois_naissance" id="mois_naissance" min="01" max="12" step="1" value="<?php echo $client->getParticulier()->getdate_naissance(); ?>" required>
 					</div>
 					
 					<label for="annee_naissance" class="col-sm-1 col-md-offset-1 control-label">Année</label>
 					<div class="col-sm-3">
-						<input type="number" class="form-control" name="annee_naissance" id="annee_naissance" min="1920" max="2010" step="1" value="<?php echo $post['annee_naissance']; ?>" required>
+						<input type="number" class="form-control" name="annee_naissance" id="annee_naissance" min="1920" max="2010" step="1" value="<?php echo $client->getParticulier()->getdate_naissance(); ?>" required>
 					</div>
 				</div>
 			</div>
@@ -70,12 +71,12 @@
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="telephone" id="telephone" placeholder="Téléphone" value="<?php echo $post['telephone']; ?>" required>
+						<input type="text" class="form-control" name="numero_tel" id="numero_tel" placeholder="Téléphone" value="<?php echo $client->getParticulier()->getnumero_tel(); ?>" required>
 					</div>
 
 					<label for="permis" class="col-sm-3 control-label">Numéro de Permis</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" name="permis" id="permis" placeholder="Numéro de Permis" value="<?php echo $post['permis']; ?>" required>
+						<input type="text" class="form-control" name="copie_permis" id="copie_permis" placeholder="Numéro de Permis" value="<?php echo $client->getParticulier()->getcopie_permis(); ?>" required>
 					</div>
 				</div>
 			</div>

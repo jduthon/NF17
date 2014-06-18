@@ -53,9 +53,18 @@ class Client extends library\Controller
 	
 	public function compte()
 	{
-		$client = array('prenom' => 'Paul', 'nom' => 'Bismuth', 'adresse' => 'L\'Elysee', 'ville' => 'PSG', 'jour_naissance' => 28, 'mois_naissance' => 01, 'annee_naissance' => 1955, 'telephone' => '666', 'permis' => 'demandez à mamadou mon chauffeur');
-		
-		$this->addVars(array('post' => $client, 'type_client' => 'particulier'));
+		$modelManager = $this->getApplication()->getModelManager();
+		if(isset($_POST['nom'])){
+			foreach($_POST as $key=>$value){
+				if(method_exists($_SESSION['user'],"set" . $key))
+					call_user_func(array($_SESSION['user'],"set" . $key),$value);
+				else if(method_exists($_SESSION['user']->getParticulier(),"set" . $key))
+					call_user_func(array($_SESSION['user']->getParticulier(),"set" . $key),$value);
+			}
+			$modelManager->updateModel($_SESSION['user']);
+			$modelManager->updateModel($_SESSION['user']->getParticulier());
+		}
+		$this->addVars(array('client' => $_SESSION['user']));
 		return 'compte_client.php';
 	}
 }

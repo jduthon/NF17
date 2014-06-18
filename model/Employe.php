@@ -55,6 +55,14 @@ class Employe extends library\Model
 		return "id_employe";
 	}
 	
+	public function isCommercial(){
+		return $this->function=="com";
+	}
+	
+	public function isTechnique(){
+		return $this->function=="tech";
+	}
+	
 	public function getForeignKeys(){
 		if(self::$foreignKey==null){
 			self::$foreignKey=array();
