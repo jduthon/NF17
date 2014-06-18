@@ -8,11 +8,13 @@ class Employe extends library\Model
 {
 	private $id_employe;
 	private $nom_agence;
+	private $password;
 	private $function;
 	
 	static private $foreignKey=null;
 	
 	public function __construct(){
+		$this->nom_agence="LoukoumKar";
 	}
 	
 	public function getid_employe(){
@@ -28,6 +30,8 @@ class Employe extends library\Model
 	}
 	
 	public function setnom_agence($nom_agence){
+		if($nom_agence==null)
+			return;
 		$this->nom_agence=$nom_agence;
 	}
 	
@@ -37,6 +41,14 @@ class Employe extends library\Model
 	
 	public function setfunction($function){
 		$this->function=$function;
+	}
+	
+	public function getpassword(){
+		return $this->password;
+	}
+	
+	public function setpassword($password){
+		$this->password=$password;
 	}
 	
 	public function getPrimaryKey(){

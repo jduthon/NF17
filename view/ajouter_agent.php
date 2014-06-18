@@ -19,7 +19,7 @@
 			<div class="form-group">
 				<label for="mot de passe" class="col-sm-2 control-label">Mot de passe</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="mot de passe" id="mot de passe" placeholder="mot de passe" required>
+					<input type="password" class="form-control" name="password" id="password" placeholder="mot de passe" required>
 				</div>
 			</div>
 			
@@ -27,13 +27,6 @@
 				<label for="function" class="col-sm-2 control-label">Fonction</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="function" id="function" placeholder="fonction" required>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="nom_agence" class="col-sm-2 control-label">Agence</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="nom_agence" id="nom_agence" placeholder="Nom Agence" required>
 				</div>
 			</div>
 		

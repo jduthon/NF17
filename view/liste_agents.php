@@ -17,7 +17,6 @@
 			<tr>
 				<th>Identifiant</th>
 				<th>Fonction</th>	
-				<th>Agence</th>	
 			</tr>
 		</thead>
 		<tbody>
@@ -29,9 +28,6 @@
 						</td>
 						<td>
 							<input type="text" class="form" name="function" id="function" value="<?php echo $agent->getfunction(); ?>" >
-						</td>
-						<td>
-							<input type="text" class="form" name="nom_agence" id="nom_agence" value="<?php echo $agent->getnom_agence(); ?>" >
 						</td>
 						<td class="col-xs-4 text-right">
 							<div class="btn-group">
