@@ -1,3 +1,5 @@
+<?php include("errList.php"); ?>
+
 <h1 class="text-center">Connexion agent</h1>
 
 <section class="row">

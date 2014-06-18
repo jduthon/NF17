@@ -14,11 +14,33 @@ class Client extends library\Controller
 
 	public function listeConducteurs()
 	{
+		if($_SESSION['user']->isParticulier())
+			throw new \library\TommeException("You are not granted the rights to access this page\n");
+			
+		$modelManager = $this->getApplication()->getModelManager();
+		$listeCond = $modelManager->getAllById_pro("Liste_conducteurs",$_SESSION['user']->getid_client());
+		if(!is_array($listeCond) && !empty($listeCond)){
+			$listeCond=array($listeCond);
+			foreach($listeCond as $key=>$value)
+				$conducteurs[$key] = $value;
+		}
+		if(isset($_POST["modifier"]) || isset($_POST["supprimer"])){
+			$conducteurAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
+			if($conducteurAModif==null)
+				$this->addVars(array('err' => 'Probléme de conducteur, veuillez recommencer'));
+			else{
+				if($_POST["modifier"])
+					$modelManager->updateModel($conducteurAModif);
+				else
+					$modelManager->deleteModel($conducteurAModif);
+			}
+		}
+		/*
 		$conducteurs[] = array('nom' => 'pute', 'prenom' => 'jean', 'numero_permis' => 7658, 'id_conducteur' => '');
 		$conducteurs[] = array('nom' => 'biatch', 'prenom' => 'Erwan', 'numero_permis' => 7658, 'id_conducteur' => '');
-		$conducteurs[] = array('nom' => 'Salope', 'prenom' => 'Antoine', 'numero_permis' => 7658, 'id_conducteur' => '');
-		
-		$this->addVars(array('conducteurs' => $conducteurs));
+		$conducteurs[] = array('nom' => 'Salope', 'prenom' => 'Antoine', 'numero_permis' => 7658, 'id_conducteur' => '');*/
+		if(isset($conducteurs))
+			$this->addVars(array('conducteurs' => $conducteurs));
 		return 'liste_conducteurs.php';
 	}
 	

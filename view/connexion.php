@@ -1,3 +1,5 @@
+<?php include("errList.php"); ?>
+
 <h1 class="text-center">
 	Connexion
 	<?php if (!empty($_SESSION['reserver'])) { ?>
@@ -30,4 +32,4 @@
 		<?php } ?>
 
 	</div>
-</section>
+</section> 

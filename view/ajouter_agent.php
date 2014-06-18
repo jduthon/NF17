@@ -30,6 +30,13 @@
 				<input type="text" class="form-control" name="function" id="function" placeholder="Fonction" required>
 			</div>
 		</div>
+		
+		<div class="form-group">
+			<label for="password" class="col-sm-2 control-label">Mot de passe</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="password" id="password" placeholder="Mot de passe" required>
+			</div>
+		</div>
 	
 		<div class="form-group text-right">
 		<button type="submit" class="btn btn-primary">Créer</button>

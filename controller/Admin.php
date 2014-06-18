@@ -25,8 +25,8 @@ class Admin extends library\Controller
 			if($agentAModif==null)
 				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
 			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->updateModel($agentTest);
+				$agent=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->updateModel($agent);
 			}
 		}
 		
@@ -35,8 +35,8 @@ class Admin extends library\Controller
 			if($agentAModif==null)
 				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
 			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->deleteModel($agentTest);
+				$agent=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->deleteModel($agent);
 			}
 		}
 		
@@ -50,6 +50,26 @@ class Admin extends library\Controller
 		$entreprises=$modelManager->getAll("Entreprise");
 		if(!is_array($entreprises))
 			$entreprises=array($entreprises);
+			
+		if(isset($_POST['modifier'])){
+			$entrepriseAModif=$modelManager->getOneByNom_entreprise("Entreprise",$_POST['nom_entreprise']);
+			if($entrepriseAModif==null)
+				$this->addVars(array('err' => 'Invalid entreprise name :' . $_POST['nom_entreprise']));
+			else{
+				$entreprise=$modelManager->getNewModel("Entreprise",$_POST);
+				$modelManager->updateModel($entreprise);
+			}
+		}
+		
+		if(isset($_POST['supprimer'])){
+			$entrepriseAModif=$modelManager->getOneByNom_entreprise("Entreprise",$_POST['nom_entreprise']);
+			if($entrepriseAModif==null)
+				$this->addVars(array('err' => 'Invalid entreprise name :' . $_POST['nom_entreprise']));
+			else{
+				$entreprise=$modelManager->getNewModel("Entreprise",$_POST);
+				$modelManager->deleteModel($entreprise);
+			}
+		}
 	
 		/*
 		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
@@ -68,8 +88,8 @@ class Admin extends library\Controller
 			if($agentAModif!=null)
 				$this->addVars(array('err' => 'Already exists employe id :' . $_POST['id_employe']));
 			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->addModel($agentTest);
+				$agent=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->addModel($agent);
 			}
 		}
 		return 'ajouter_agent.php';

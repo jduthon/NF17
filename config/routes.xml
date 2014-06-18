@@ -30,16 +30,11 @@
 
 	
 	
-	<route url="/vehicules-technique" controller="technique" action="listeVehiculesTech" />
-	<route url="/vehicule-technique-([a-z0-9]+)" controller="technique" action="vehicule" variables="num_vehicule" />
+	<route url="/vehicules-techniques" controller="technique" action="listeVehiculesTech" />
 	<route url="/ajout_vehicule" controller="technique" action="ajoutVehicule" />
 	<route url="/modification_vehicule" controller="technique" action="modificationVehicule" />
-
-	
 	<route url="/controle-locations" controller="technique" action="controleLocations" />
-	<route url="/gestion-vehicules" controller="technique" action="gestionVehicules" />
-	<route url="/gestion-vehicule-([a-zA-Z0-9-]+)" controller="technique" action="gestionVehicule" variables="numero_imatriculation" />
-	<route url="/ajout-vehicule" controller="technique" action="ajoutVehicule" />
+	
 
 	
 	<route url="/agents" controller="admin" action="liste_agents" />
