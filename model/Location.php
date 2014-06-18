@@ -92,12 +92,12 @@ class Location extends library\Model
 	}
 	
 	public function get_validation($_validation){
+		if($this->_validation==null)
+			return false;
 		return $this->_validation;
 	}
 	
 	public function set_validation($_validation){
-		if($this->_validation==null)
-			return false;
 		$this->_validation=$_validation;
 	}
 	

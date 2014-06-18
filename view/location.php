@@ -22,7 +22,7 @@
 							<?php echo $location->getVehicule()->getModele()->getnom_modele(); ?>
 						<?php } ?>
 						<?php if ($location->getEtat() != 'Passé') { ?>
-							<select class="form-control" name="vehicule" id="vehicule">
+							<select class="form-control" name="vehicule" id="vehicule" <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>>
 								<?php foreach($vehicules as $vehicule) { ?>
 									<option <?php echo ($location->getVehicule()->getnumero_immatriculation() == $vehicule->getnumero_immatriculation()) ? 'selected' : ''; ?>>
 										<?php echo $vehicule->getModele()->getnom_modele(); ?>
@@ -42,7 +42,7 @@
 						<?php } ?>
 						<?php if ($location->getEtat() != 'Passé') { ?>
 							<div class="input-group date">
-								<input type="datetime" class="form-control" name="date_debut_loc" id="date_debut_loc" value="<?php echo $location->getContrat()->getdate_debut_loc(); ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input type="datetime" class="form-control" name="date_debut_loc" id="date_debut_loc" value="<?php echo $location->getContrat()->getdate_debut_loc(); ?>" required <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						<?php } ?>
 					</p>
@@ -57,7 +57,7 @@
 						<?php } ?>
 						<?php if ($location->getEtat() != 'Passé') { ?>
 							<div class="input-group date">
-								<input type="datetime" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $location->getContrat()->getdate_fin_loc(); ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input type="datetime" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $location->getContrat()->getdate_fin_loc(); ?>" required <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						<?php } ?>
 					</p>
@@ -113,9 +113,9 @@
 							<?php echo $location->getContrat()->getFacture()->getmoyen_paiement(); ?>
 						<?php } ?>
 						<?php if ($location->getEtat() != 'Passé') { ?>
-						<select class="form-control" name="moyen_paiement" id="moyen_paiement">
+						<select class="form-control" name="moyen_paiement" id="moyen_paiement" <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>>
 							<?php foreach($moyens_paiements as $moyen_paiement) { ?>
-								<option <?php echo ($location['moyen_paiement'] == $moyen_paiement) ? 'selected' : ''; ?>>
+								<option <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
 									<?php echo $moyen_paiement; ?>
 								</option>
 							<?php } ?>
