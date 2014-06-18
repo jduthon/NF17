@@ -15,6 +15,7 @@ class Admin extends library\Controller
 	
 	public function liste_agents()
 	{
+		$success='';
 		$modelManager = $this->getApplication()->getModelManager();
 		$agents = $modelManager->getAll("Employe");
 		
@@ -27,6 +28,7 @@ class Admin extends library\Controller
 			else{
 				$agent=$modelManager->getNewModel("Employe",$_POST);
 				$modelManager->updateModel($agent);
+				$success='Agent modifié';
 			}
 		}
 		
@@ -37,10 +39,11 @@ class Admin extends library\Controller
 			else{
 				$agent=$modelManager->getNewModel("Employe",$_POST);
 				$modelManager->deleteModel($agent);
+				$success = 'Agent supprimé';
 			}
 		}
 		
-		$this->addVars(array('agents' => $agents));
+		$this->addVars(array('agents' => $agents,'success' => $success));
 		return 'liste_agents.php';
 	}
 	
@@ -48,6 +51,7 @@ class Admin extends library\Controller
 	{
 		$modelManager = $this->getApplication()->getModelManager();
 		$entreprises=$modelManager->getAll("Entreprise");
+		$success="";
 		if(!is_array($entreprises))
 			$entreprises=array($entreprises);
 			
@@ -58,7 +62,8 @@ class Admin extends library\Controller
 			else{
 				$entreprise=$modelManager->getNewModel("Entreprise",$_POST);
 				$modelManager->updateModel($entreprise);
-			}
+				$success="Modifications effectuées";
+				}
 		}
 		
 		if(isset($_POST['supprimer'])){
@@ -68,20 +73,17 @@ class Admin extends library\Controller
 			else{
 				$entreprise=$modelManager->getNewModel("Entreprise",$_POST);
 				$modelManager->deleteModel($entreprise);
+				$success="Entreprise supprimée";
 			}
 		}
-	
-		/*
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');*/
 		
-		$this->addVars(array('entreprises' => $entreprises));
+		$this->addVars(array('entreprises' => $entreprises,'success' => $success));
 		return 'liste_entreprises.php';
 	}
 	
 	public function ajout_agent()
 	{
+		$success='';
 		$modelManager = $this->getApplication()->getModelManager();
 		if(isset($_POST['id_employe'])){
 			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
@@ -90,12 +92,15 @@ class Admin extends library\Controller
 			else{
 				$agent=$modelManager->getNewModel("Employe",$_POST);
 				$modelManager->addModel($agent);
+				$success = 'Agent ajouté';
 			}
 		}
+		$this->addVars(array('success' => $success));
 		return 'ajouter_agent.php';
 	}
 	public function ajout_entreprise()
 	{
+		$success="";
 		$modelManager = $this->getApplication()->getModelManager();
 		if(isset($_POST['nom_entreprise'])){
 			$entrepriseAModif=$modelManager->getOneBynom_entreprise("Entreprise",$_POST['nom_entreprise']);
@@ -104,8 +109,10 @@ class Admin extends library\Controller
 			else{
 				$entrepriseAjout=$modelManager->getNewModel("Entreprise",$_POST);
 				$modelManager->addModel($entrepriseAjout);
+				$success="Entreprise ajoutée";
 			}
 		}
+		$this->addVars(array('success' => $success));
 		return 'ajout_entreprise.php';
 	}
 	
