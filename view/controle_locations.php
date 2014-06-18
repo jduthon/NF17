@@ -7,13 +7,13 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Modèle</th>
-				<th>Dates de location</th>	
-				<th>Niveau de carburant au retour</th>	
-				<th>Km au retour</th>	
-				<th>Dégâts éventuels</th>	
-				<th>Montant calculé</th>
-				<th>Actions</th>
+				<th class="col-xs-1">Modèle</th>
+				<th class="col-xs-1">Dates de location</th>	
+				<th class="col-xs-1">Niveau de carburant au retour</th>	
+				<th class="col-xs-2">Km au retour</th>	
+				<th class="col-xs-3">Dégâts éventuels</th>	
+				<th class="col-xs-1">Montant calculé</th>
+				<th class="col-xs-3">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,26 +21,26 @@
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							Modèle véhicules
+							<?php echo $location->getVehicule()->getmarque(); ?> <?php echo $location->getVehicule()->getnom_modele(); ?>
 						</td>
 						<td>
-							date début - date fin
+							<?php echo $location->getContrat()->getdate_debut_loc(); ?> <?php echo $location->getContrat()->getdate_fin_loc(); ?>
 						</td>
 						<td>
-							<input type="number" class="form-control" name="niveau_carb" id="niveau_carb" min="00" max="1000" step="0.1" value="<?php echo $location['niveau_carb']; ?>" required>
+							<input type="number" class="form-control" name="niveau_carb" id="niveau_carb" min="00" max="1000" step="0.1" value="<?php echo $post['niveau_carb']; ?>" required>
 						</td>
 						<td>
-							<input type="number" class="form-control" name="km" id="km" min="00" max="1000000" step="0.1" value="<?php echo $location['km']; ?>" required>
+							<input type="number" class="form-control" name="km" id="km" min="00" max="1000000" step="0.1" value="<?php echo $post['km']; ?>" required>
 						</td>
 						<td>
-							<textarea name="degats_eventuels"><?php echo $location['degats_eventuels']; ?></textarea>
+							<textarea name="degats_eventuels" class="form-control"><?php echo $post['degats_eventuels']; ?></textarea>
 						</td>
 						<td>
-							<?php echo $montant; ?>
+							<?php echo $location->getContrat()->getFacture()->getmontant(); ?> €
 						</td>
-						<td class="col-xs-4 text-right">
+						<td>
+							<input type="hidden" name="id_location" value="<?php echo $location->getid_location(); ?>" />
 							<div class="btn-group">
-								<input type="hidden" name="id_location" value="<?php echo $location->getid_location(); ?>" />
 								<button name="calculer" class="btn btn-primary" type="submit">Modifier</button>
 								<button name="valider" class="btn btn-primary" type="submit">Valider le montant</button>
 							</div>

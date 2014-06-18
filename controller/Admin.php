@@ -16,7 +16,8 @@ class Admin extends library\Controller
 	public function liste_agents()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$agents=$modelManager->getAll("Employe");
+		$agents = $modelManager->getAll("Employe");
+		
 		if(!is_array($agents))
 			$agents=array($agents);
 		if(isset($_POST['modifier'])){
@@ -28,6 +29,7 @@ class Admin extends library\Controller
 				$modelManager->updateModel($agentTest);
 			}
 		}
+		
 		if(isset($_POST['supprimer'])){
 			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
 			if($agentAModif==null)

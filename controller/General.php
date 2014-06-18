@@ -93,8 +93,12 @@ class General extends library\Controller
 	
 	public function connexionAgent()
 	{
-		if(isset($_POST['identifiant']) && isset($_POST['password'])){
-			$_SESSION['agent'] = true;
+		if(isset($_POST['id_employe']) && isset($_POST['password'])){
+			$modelManager = $this->getApplication()->getModelManager();
+			print($_POST['id_employe']);
+			$agent=$modelManager->getOneById_employe("Employe",$_POST['id_employe'],array("password" => $_POST['password']));
+			if($agent!=null)
+				$_SESSION['agent']=$agent;
 		}
 		
 		if(isset($_SESSION['agent']))

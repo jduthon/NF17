@@ -18,6 +18,7 @@ class Technique extends library\Controller
 		$modelManager = $this->getApplication()->getModelManager();
 		$locations = $modelManager->getAll("Location");
 		
+		$post['id_location'] = !empty($_POST['id_location']) ? $_POST['niveau_carb'] : '';
 		$post['niveau_carb'] = !empty($_POST['niveau_carb']) ? $_POST['niveau_carb'] : '';
 		$post['km'] = !empty($_POST['km']) ? $_POST['km'] : '';
 		$post['degats_eventuels'] = !empty($_POST['degats_eventuels']) ? $_POST['degats_eventuels'] : '';
@@ -32,15 +33,22 @@ class Technique extends library\Controller
 		return 'gestion_vehicules.php';
 	}
 	
-	public function gestionVehicule()
+	public function gestionVehicule($numero_imatriculation)
 	{
-		return 'gestion_vehicule.php';
-	}
-	
-	public function ajoutModificationVehicule()
-	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$vehicules = $modelManager->getAll("Vehicule");
+		$options = array('AC','GPS');
+		$typemodif = 'modification';
 		
-		return 'ajout_modification_vehicule.php';
+		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' => $typemodif));
+		return 'ajout_modificatio_vehicule.php';
 	}
 	
+	public function ajoutVehicule()
+	{
+		$typemodif = 'ajout';
+		
+		$this->addVars(array('typemodif' => $typemodif));
+		return 'ajout_modificatio_vehicule.php';
+	}	
 }

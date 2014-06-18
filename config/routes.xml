@@ -24,9 +24,9 @@
 	
 	<route url="/controle-locations" controller="technique" action="controleLocations" />
 	<route url="/gestion-vehicules" controller="technique" action="gestionVehicules" />
-	<route url="/gestion-vehicule-([a-z0-9]+)" controller="technique" action="gestionVehicule" variables="num_vehicule" />
-	<route url="/ajout-modification-vehicule" controller="technique" action="ajoutModificationVehicule" />
-
+	<route url="/gestion-vehicule-([a-zA-Z0-9-]+)" controller="technique" action="gestionVehicule" variables="numero_imatriculation" />
+	<route url="/ajout-vehicule" controller="technique" action="ajoutVehicule" />
+	
 	<route url="/agents" controller="admin" action="liste_agents" />
 	<route url="/entreprises" controller="admin" action="liste_entreprises" />
 	<route url="/statistiques" controller="admin" action="statistiques" />

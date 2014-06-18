@@ -16,7 +16,8 @@
 		<thead>
 			<tr>
 				<th>Identifiant</th>
-				<th>Fonction</th>	
+				<th>Fonction</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
