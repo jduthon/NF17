@@ -2,6 +2,8 @@
 	if(isset($err)){
 		$errs=$err;
 	}
+	if(empty($errs))
+		$errs=array();
 	if(!is_array($errs))
 		$errs=array($errs);
 ?>

@@ -279,8 +279,8 @@ class ModelManager {
 		$stringQuery="DELETE FROM ". $modelName;
 		$parameters[$id]=call_user_func(array($model,"get" . $id));
 		$stringQuery.=" WHERE $id = :$id";
-		//print($stringQuery);
-		//print_r($parameters);
+		print($stringQuery);
+		print_r($parameters);
 		$this->application->query($stringQuery, $parameters);
 	}
 	

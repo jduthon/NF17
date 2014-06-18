@@ -1,3 +1,4 @@
+<?php include("successlist.php"); ?>
 <h1>Liste des entreprises</h1>
 
 <div>
@@ -17,7 +18,8 @@
 					<tr>
 						<form class="form" method="post" action="" role="form">
 							<td>
-								<input type="text" class="form-control" name="nom_entreprise" id="nom_entreprise" value="<?php echo $entreprise->getnom_entreprise(); ?>" >
+								<input type="hidden" name="nom_entreprise" value="<?php echo $entreprise->getnom_entreprise(); ?>" >
+								<?php echo $entreprise->getnom_entreprise(); ?>
 							</td>
 							<td>
 								<input type="text" class="form-control" name="type" id="type" value="<?php echo $entreprise->gettype(); ?>" >
