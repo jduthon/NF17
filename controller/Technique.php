@@ -42,11 +42,28 @@ class Technique extends library\Controller
 		return 'liste_agents.php';
 	}*/
 	
-	public function ajoutModificationVehicule()
+	public function ajoutVehicule()
 	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$vehicules=$modelManager->getAll("Vehicule");
+		$options = array('AC','GPS');
+		$typemodif = 'ajout';
+		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' =>$typemodif));
+	
+		return 'ajout_modification_vehicule.php';
+	}
+	
+		public function modificationVehicule()
+	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$vehicules=$modelManager->getAll("Vehicule");
+		$options = array('AC','GPS');
+		$typemodif = 'modification';
+		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' =>$typemodif));
 		
 		return 'ajout_modification_vehicule.php';
 	}
+	
 	
 
 	
