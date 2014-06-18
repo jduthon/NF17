@@ -2,7 +2,6 @@
 
 <routes>
 	<route url="/" controller="general" action="accueil" />
-	<route url="/recherche" controller="general" action="recherche" />
 	<route url="/connexion" controller="general" action="connexion" />
 	<route url="/deconnexion" controller="general" action="deconnexion" />
 	<route url="/inscription((?:Pro)?)" controller="general" action="inscription" variables="type_client" />
@@ -18,6 +17,8 @@
 	<route url="/conducteurs" controller="client" action="listeConducteurs" />
 	<route url="/ajout-conducteur" controller="client" action="ajoutConducteur" />
 	<route url="/compte" controller="client" action="compte" />
+	<route url="/reserver" controller="client" action="reserver" />
+	<route url="/recherche" controller="client" action="recherche" />
 	
 	<route url="/locations-commercial" controller="commercial" action="listeLocations" />
 	<route url="/location-commercial-([a-z0-9]+)" controller="commercial" action="location" variables="num_contrat" />

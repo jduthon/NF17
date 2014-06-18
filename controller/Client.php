@@ -67,4 +67,42 @@ class Client extends library\Controller
 		$this->addVars(array('client' => $_SESSION['user']));
 		return 'compte_client.php';
 	}
+	
+	public function reserver()
+	{
+		$modelManager = $this->application->getModelManager();
+		if(!isset($_POST['reserver']))
+			return $this->accueil();
+		$vehicule = $modelManager->getOneByNumero_immatriculation("Vehicule",$_POST['reserver']);
+		if(empty($vehicule))
+			return $this->accueil();
+		if(!isset($_SESSION['user'])){
+			$this->connexion();
+		}
+		$post['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
+		$post['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
+		$this->addVars(array("vehicule" => $vehicule, 'post' => $post));
+		return'reservation.php';
+	}
+	
+	public function recherche() 
+	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$categories=$modelManager->getAll("Categorie");
+	
+		//Sauvegarde des données du formulaire précédemment entrées
+		$post['date_depart'] = !empty($_POST['date_depart']) ? $_POST['date_depart'] : '';
+		$post['heure_depart'] = !empty($_POST['heure_depart']) ? $_POST['heure_depart'] : '';
+		$post['date_retour'] = !empty($_POST['date_retour']) ? $_POST['date_retour'] : '';
+		$post['heure_retour'] = !empty($_POST['heure_retour']) ? $_POST['heure_retour'] : '';
+		$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : '';
+		
+		//Ajout des véhicules
+		$vehicules=$modelManager->getAllBynom_categorie("Vehicule",$post['categorie']);
+		if(!is_array($vehicules))
+			if($vehicules!=null)
+				$vehicules=array($vehicules);
+		$this->addVars(array_merge($post, array('categories' => $categories, 'vehicules' => $vehicules)));
+		return 'recherche.php';
+	}
 }

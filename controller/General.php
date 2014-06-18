@@ -38,28 +38,7 @@ class General extends library\Controller
 		$this->addVars(array_merge($post, array('categories' => $categories, 'vehicules' => $vehicules)));
 		return 'accueil.php';
 	}
-	
-	public function recherche() 
-	{
-		$modelManager = $this->getApplication()->getModelManager();
-		$categories=$modelManager->getAll("Categorie");
-	
-		//Sauvegarde des données du formulaire précédemment entrées
-		$post['date_depart'] = !empty($_POST['date_depart']) ? $_POST['date_depart'] : '';
-		$post['heure_depart'] = !empty($_POST['heure_depart']) ? $_POST['heure_depart'] : '';
-		$post['date_retour'] = !empty($_POST['date_retour']) ? $_POST['date_retour'] : '';
-		$post['heure_retour'] = !empty($_POST['heure_retour']) ? $_POST['heure_retour'] : '';
-		$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : '';
 		
-		//Ajout des véhicules
-		$vehicules=$modelManager->getAllBynom_categorie("Vehicule",$post['categorie']);
-		if(!is_array($vehicules))
-			if($vehicules!=null)
-				$vehicules=array($vehicules);
-		$this->addVars(array_merge($post, array('categories' => $categories, 'vehicules' => $vehicules)));
-		return 'recherche.php';
-	}
-	
 	public function connexion()
 	{
 		if(isset($_POST['identifiant']) && isset($_POST['password'])){
@@ -157,38 +136,6 @@ class General extends library\Controller
 	
 		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true));
 		return 'inscription.php';
-	}
-	
-	public function liste_conducteurs()
-	{
-		$conducteurs[] = array('nom' => 'pute', 'prenom' => 'jean', 'Numéro de permis' => 7658);
-		$conducteurs[] = array('nom' => 'biatch', 'prenom' => 'Erwan', 'Numéro de permis' => 7658);
-		$conducteurs[] = array('nom' => 'Salope', 'prenom' => 'Antoine', 'Numéro de permis' => 7658);
-		
-		
-		$this->addVars(array('conducteurs' => $conducteurs));
-		return 'liste_conducteurs.php';
-	}
-	
-	public function liste_entreprises()
-	{
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		
-		
-		$this->addVars(array('entreprises' => $entreprises));
-		return 'liste_entreprises.php';
-	}
-	public function liste_location_particulier()
-	{
-		$locations[] = array('id location' => 'pute', 'voiture' => 'tapin', 'date debut' => 'tapin', 'date fin' => 'tapin', 'etat' => 'lala');
-		$locations[] = array('id location' => 'pute', 'voiture' => 'tapin', 'date debut' => 'tapin', 'date fin' => 'tapin', 'etat' => 'lala');
-		$locations[] = array('id location' => 'pute', 'voiture' => 'tapin', 'date debut' => 'tapin', 'date fin' => 'tapin', 'etat' => 'lala');
-		
-		
-		$this->addVars(array('locations' => $locations));
-		return 'liste_location_particulier.php';
 	}
 	
 }
