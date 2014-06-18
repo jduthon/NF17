@@ -23,6 +23,7 @@
 	<route url="/location-commercial-([a-z0-9]+)" controller="commercial" action="location" variables="num_contrat" />
 
 	<route url="/vehicules-commercial" controller="commercial" action="listeVehicules" />
+	<route url="/locations-non-validees" controller="commercial" action="listeLocationNonValidesLoc" />
 
 	
 	
