@@ -16,6 +16,7 @@ class Contrat_de_location extends library\Model
 	private $cb_presentee;
 	private $id_employe;
 	private $id_facture;
+	private $_facture;
 	
 	static private $foreignKey=null;
 	
@@ -100,6 +101,19 @@ class Contrat_de_location extends library\Model
 	
 	public function setid_facture($id_facture){
 		$this->id_facture=$id_facture;
+	}
+	
+	public function getFacture(){
+		$mm=\library\ModelManager::getInstance();
+		if(!isset($this->id_facture) || $this->id_facture==null)
+			return;
+		if(!isset($this->_facture))
+			$this->_facture=$mm->getOneById_facture("Facture",$this->id_facture);
+		return $this->_facture;
+	}
+	
+	public function setFacture($facture){
+		$this->_facture = $facture;
 	}
 	
 	public function getPrimaryKey(){
