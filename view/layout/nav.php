@@ -25,7 +25,14 @@
 					<li><a href="entreprises">Entreprises</a></li>
 					<li><a href="statistiques">Statistiques</a></li>
 				<?php } ?>
-							
+				<?php if(isset($_SESSION['agent'])) { ?>
+					<?php if($_SESSION['agent']->isCommercial()){ ?>
+						<li><a href="locations-commercial">Locations</a></li>
+					<?php } ?>
+					<?php if($_SESSION['agent']->isTechnique()){ ?>
+						<li><a href="vehicules">Véhicules</a></li>
+					<?php } ?>
+				<?php } ?>
 			</ul>
 			<?php if(isset($_SESSION['user'])) { ?> 
 				<a href="deconnexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
