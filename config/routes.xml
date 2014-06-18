@@ -22,8 +22,10 @@
 	<route url="/locations-commercial" controller="commercial" action="listeLocations" />
 	<route url="/location-commercial-([a-z0-9]+)" controller="commercial" action="location" variables="num_contrat" />
 	<route url="/vehicules-commercial" controller="commercial" action="listeVehicules" />
+	<route url="/vehicules-commercial" controller="commercial" action="listeVehicules" />
 	
-	<route url="/vehicules-technique" controller="technique" action="listeVehicules" />
+	
+	<route url="/vehicules-technique" controller="technique" action="listeVehiculesTech" />
 	<route url="/vehicule-technique-([a-z0-9]+)" controller="technique" action="vehicule" variables="num_vehicule" />
 	<route url="/ajout_vehicule" controller="technique" action="ajoutVehicule" />
 	<route url="/modification_vehicule" controller="technique" action="modificationVehicule" />

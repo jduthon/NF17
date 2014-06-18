@@ -42,6 +42,17 @@ class Technique extends library\Controller
 		return 'liste_agents.php';
 	}*/
 	
+	public function listeVehiculesTech()
+	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$vehicule = $modelManager->getAll("Vehicule");
+		$statut = 'technique';
+		$this->addVars(array('vehicule'=>$vehicule,'statut'=>$statut));
+		return 'liste_vehicules.php';
+		
+	
+	}
+	
 	public function ajoutVehicule()
 	{
 		$modelManager = $this->getApplication()->getModelManager();

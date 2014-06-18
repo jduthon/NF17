@@ -32,7 +32,18 @@
 	</td>
 	<td>
 		<form role="form" method="post" action="">
-			<button type="submit" name="reserver" value="<?php echo $vehicule->getnumero_immatriculation(); ?>" class="btn btn-primary">Réserver</button>
+			<?php if(empty($statut)) { ?>
+			<button type="submit" name="reserver" value="<?php echo 'Reserver'; ?>" class="btn btn-primary">Réserver</button>
+			<?php } ?>	
+			<?php if(!empty($statut)) { ?>
+				<button type="submit" name="entretien" value="<?php echo 'entretien'; ?>" class="btn btn-primary">Entretien</button>
+			<?php } ?>
+			<?php if(!empty($statut)) { ?>
+				<button type="submit" name="réparation" value="<?php echo 'reparation'; ?>" class="btn btn-primary">Réparation</button>
+			<?php } ?>
+			<?php if(!empty($statut)) { ?>
+				<button type="submit" name="supprimer" value="<?php echo 'supprimer'; ?>" class="btn btn-primary">Supprimer</button>
+			<?php } ?>
 		</form>
 	</td>
 </tr>
