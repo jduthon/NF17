@@ -102,7 +102,7 @@
 	</div> 
   
 	<div class="form-group text-right">
-	  <button type="submit" class="btn btn-primary">Valider</button>
+		<button type="submit" class="btn btn-primary">Valider</button>
 	</div>
 	
 </form>

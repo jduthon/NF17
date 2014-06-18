@@ -11,7 +11,7 @@
 	<route url="/deconnexionAdmin" controller="general" action="deconnexionAdmin" />
 	
 	<route url="/locations" controller="client" action="listeLocations" />
-	<route url="/location-([a-z0-9]+)" controller="client" action="location" variables="num_contrat" />
+	<route url="/location-([a-zA-Z0-9]+)" controller="client" action="location" variables="num_contrat" />
 	<route url="/conducteurs" controller="client" action="listeConducteurs" />
 	<route url="/ajout-conducteur" controller="client" action="ajoutConducteur" />
 	<route url="/compte" controller="client" action="compte" />
