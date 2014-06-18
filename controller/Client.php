@@ -58,7 +58,7 @@ class Client extends library\Controller
 		if($location==null){
 			//TODO
 		}
-		$this->addVars(array('location' => $location,'professionnel' => false));
+		$this->addVars(array('location' => $location,'professionnel' => false,'vehicules' => $vehicules,'moyens_paiements' => array("Cheque","Carte bancaire","Especes")));
 		return 'location.php';
 	}
 	
