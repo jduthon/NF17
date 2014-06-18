@@ -5,11 +5,13 @@
 
 		<form role="form" method="post" action="" id="connexion">
 			
-			<label for="adresse_email" class="sr-only">Adresse email</label>
-			<input type="email" class="form-control input-lg" id="adresse_email" name="adresse_email" placeholder="Adresse email" required autofocus>
+			<label for="identifiant" class="sr-only">Identifiant</label>
+			<input type="text" class="form-control input-lg" id="identifiant" name="identifiant" placeholder="Identifiant" required autofocus>
 
 			<label for="mot_de_passe" class="sr-only">Mot de passe</label>			
 			<input type="password" class="form-control input-lg" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" required>
+			
+			<br>
 			
 			<button type="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
 		</form>

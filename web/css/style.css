@@ -5,12 +5,18 @@ html {
 	min-height: 100%;
 }
 
+header {
+}
+
+	header li:hover {
+		background-color: #158f76
+	}
 
 body {
 	margin-bottom: 50px;
 }
 
-	#connexion #adresse_email {
+	#connexion #identifiant {
 		margin-bottom: 0px;
 		border-radius: 6px 6px 0 0;
 	}

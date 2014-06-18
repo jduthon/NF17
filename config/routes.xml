@@ -14,6 +14,7 @@
 	<route url="/location-([a-z0-9]+)" controller="client" action="location" variables="num_contrat" />
 	<route url="/conducteurs" controller="client" action="listeConducteurs" />
 	<route url="/ajout-conducteur" controller="client" action="ajoutConducteur" />
+	<route url="/compte" controller="client" action="compte" />
 	
 	<route url="/locations-commercial" controller="commercial" action="listeLocations" />
 	<route url="/location-commercial-([a-z0-9]+)" controller="commercial" action="location" variables="num_contrat" />

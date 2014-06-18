@@ -35,25 +35,17 @@
 					<?php } ?>
 				<?php } ?>
 			</ul>
+			
+			<ul class="nav navbar-nav pull-right">
 			<?php if(isset($_SESSION['user'])) { ?> 
-				<a href="deconnexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
-				
-				<div class="pull-right hidden-xs">
-					<a href="deconnexion" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
-				</div>
+				<li><a href="compte"><span class="glyphicon glyphicon-user"></span> Mon compte</a></li>
+				<li><a href="deconnexion"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else if(isset($_SESSION['admin'])){ ?>
-				<a href="deconnexionAdmin" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
-				
-				<div class="pull-right hidden-xs">
-					<a href="deconnexionAdmin" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
-				</div>
+				<li><a href="deconnexionAdmin"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
 			<?php } else { ?>
-				<a href="connexion" class="btn btn-default navbar-btn visible-xs"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
-				
-				<div class="pull-right hidden-xs">
-					<a href="connexion" class="btn btn-default btn-xs navbar-btn"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
-				</div>
+				<li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
 			<?php } ?>
+			</ul>
 		</nav>
 	</div>
 </header>
