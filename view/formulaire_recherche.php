@@ -6,7 +6,7 @@
 			<div>
 				<label for="date_depart" class="control-label hidden-lg">Date</label>
 				<div class="input-group date">
-					<input type="text" class="form-control" name="date_depart" id="date_depart" value="<?php echo $date_depart; ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input type="text" class="form-control" name="date_depart" id="date_depart" value="<?php echo $date_depart; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				</div>
 			</div>
 		</div>
@@ -17,7 +17,7 @@
 			<div>
 				<label for="date_retour" class="control-label hidden-lg">Date</label>
 				<div class="input-group date">
-					<input type="text" class="form-control" name="date_retour" id="date_retour" value="<?php echo $date_retour; ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input type="text" class="form-control" name="date_retour" id="date_retour" value="<?php echo $date_retour; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				</div>
 			</div>
 		</div>
