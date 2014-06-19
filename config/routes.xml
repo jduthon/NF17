@@ -30,7 +30,7 @@
 	
 	<route url="/vehicules-techniques" controller="technique" action="listeVehiculesTech" />
 	<route url="/ajout_vehicule" controller="technique" action="ajoutVehicule" />
-	<route url="/modification_vehicule" controller="technique" action="modificationVehicule" />
+	<route url="/modification_vehicule([a-z0-9]+)" controller="technique" action="modificationVehicule" />
 	<route url="/controle-locations" controller="technique" action="controleLocations" />
 	
 

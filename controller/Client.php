@@ -96,7 +96,26 @@ class Client extends library\Controller
 			}
 			$modelManager->updateModel($_SESSION['user']);
 			$modelManager->updateModel($_SESSION['user']->getParticulier());
+		} else if (isset($_POST['nom_entreprise'])){
+			foreach($_POST as $key=>$value){
+				if(method_exists($_SESSION['user'],"set" . $key))
+					call_user_func(array($_SESSION['user'],"set" . $key),$value);
+				else if(method_exists($_SESSION['user']->getProfessionnel(),"set" . $key)){
+					print($key);
+					call_user_func(array($_SESSION['user']->getProfessionnel(),"set" . $key),$value);
+				}
+			}
+			$modelManager->updateModel($_SESSION['user']);
+			$modelManager->updateModel($_SESSION['user']->getProfessionnel());
 		}
+		
+		/*
+		print_r($_POST);
+		print_r($_SESSION['user']->getProfessionnel());
+		if(method_exists($_SESSION['user']->getProfessionnel(),"set" . "nom_entreprise"))
+			//call_user_func(array($_SESSION['user']->getProfessionnel(),"set" . "nom_entreprise"),"EntrepriseLOLILOLO");
+		print("DEDEDEDE3");
+		print_r($_SESSION['user']);*/
 		$this->addVars(array('client' => $_SESSION['user']));
 		return 'compte_client.php';
 	}

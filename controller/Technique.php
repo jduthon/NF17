@@ -8,8 +8,10 @@ class Technique extends library\Controller
 {	
 
 	public function __construct($application){
-		/*if(!isset($_SESSION['technique']))
-			throw new \library\TommeException("You are not granted the rights to access this page\n");*/
+		if(!isset($_SESSION['agent']))
+			throw new \library\TommeException("You are not granted the rights to access this page\n");
+		if(!$_SESSION['agent']->isTechnique())
+			throw new \library\TommeException("You are not granted the rights to access this page\n");
 		parent::__construct($application);
 	}
 		
@@ -36,19 +38,18 @@ class Technique extends library\Controller
 		$statut = 'technique';
 		$this->addVars(array('vehicule'=>$vehicule,'statut'=>$statut));
 		return 'liste_vehicules.php';
-
 	}
 	
 
 	
-	public function modificationVehicule($numero_imatriculation)
+	public function modificationVehicule($numero_immatriculation)
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$vehicules = $modelManager->getAll("Vehicule");
+		$vehicule = $modelManager->getOneByNumero_immatriculation("Vehicule",$numero_immatriculation);
 		$options = array('AC','GPS');
 		$typemodif = 'modification';
 		
-		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' => $typemodif));
+		$this->addVars(array('vehicule' => $vehicule, 'options' => $options, 'typemodif' => $typemodif));
 		return 'ajout_modification_vehicule.php';
 	}
 	
@@ -57,6 +58,6 @@ class Technique extends library\Controller
 		$typemodif = 'ajout';
 		
 		$this->addVars(array('typemodif' => $typemodif));
-		return 'ajout_modificatio_vehicule.php';
+		return 'ajout_modification_vehicule.php';
 	}	
 }
