@@ -196,7 +196,7 @@ class General extends library\Controller
 			if(!isset($_SESSION['user']))
 				header("Location: ./connexion");
 			else
-				header("Location: ./ajout-location");
+				header("Location: ./locations");
 		}
 		
 		$this->addVars(array('post' => $post, "vehicule" => $vehicule));
