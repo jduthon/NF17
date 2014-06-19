@@ -293,8 +293,13 @@ class ModelManager {
 		foreach($result as $key=>$locBDD){
 			$return[$key]=$this->getNewModel("Location",$locBDD);
 		}
-		print_r($return);
+		return $return;
 	}
+	
+	public function validateLocation($id_employe,$id_location){
+		$query="INSERT INTO gerer(id_employe,id_location,validation_finale_isdone)VALUES($id_employe,$id_location,true)";
+		$this->application->query($query);
+		}
 }
 
 ?>

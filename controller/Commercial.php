@@ -16,7 +16,17 @@ class Commercial extends library\Controller
 	
 	public function listeLocations()
 	{
-	
+		$modelManager = $this->getApplication()->getModelManager();
+		
+		if(isset($_POST["valider"])){
+			$modelManager->validateLocation($_SESSION["agent"]->getid_employe(),$_POST["id_loc"]);
+		}
+		$locNonVal = $modelManager->getLocationsNonValidees();
+		if(empty($locNonVal))
+			$locNonVal=array();
+		if(!is_array($locNonVal))
+			$locNonVal=array($locNonVal);
+		$this->addVars(array('locations'=>$locNonVal));
 		return 'liste_locations_commercial.php';
 	}
 	
