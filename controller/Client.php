@@ -51,6 +51,28 @@ class Client extends library\Controller
 		if(!is_array($locations))
 			$locations = array($locations);
 			
+		if(!empty($_SESSION['reserver']) && !empty($_SESSION['reserver']['date_debut_loc']) && !empty($_SESSION['reserver']['date_fin_loc']) && !empty($_SESSION['reserver']['numero_immatriculation']))
+		{
+			$modelManager = $this->getApplication()->getModelManager();
+			
+			$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
+			$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
+			$facture = $modelManager->getNewModel('Facture', array());
+			$contrat->setFacture($facture);
+			$location->setContrat($contrat);
+			$location->setConfirmation(false);
+			
+			$_SESSION['locations'][] = $location;
+			unset($_SESSION['reserver']);
+		}
+		
+		if(!empty($_POST['annuler'])) {
+			foreach($_SESSION['locations'] as $i => $location) {
+				if($location->getVehicule()->getnumero_immatriculation() == $_POST['numero_immatriculation'])
+					unset($_SESSION['locations'][$i]);
+			}
+		}
+			
 		if(!empty($_SESSION['locations']))
 			$locations = array_merge($locations,$_SESSION['locations']);
 			
@@ -70,26 +92,6 @@ class Client extends library\Controller
 		
 		$this->addVars(array('location' => $location,'professionnel' => false,'vehicules' => $vehicules,'moyens_paiements' => array("Cheque","Carte bancaire","Especes")));
 		return 'location.php';
-	}
-	
-	public function ajoutLocation()
-	{
-		if(empty($_SESSION['reserver']) || empty($_SESSION['reserver']['date_debut_loc']) || empty($_SESSION['reserver']['date_fin_loc']) || empty($_SESSION['reserver']['numero_immatriculation']))
-			header("Location: ./");
-		
-		$modelManager = $this->getApplication()->getModelManager();
-		
-		$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
-		$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
-		$facture = $modelManager->getNewModel('Facture', array());
-		$contrat->setFacture($facture);
-		$location->setContrat($contrat);
-		$location->setConfirmation(false);
-		
-		$_SESSION['locations'][] = $location;
-		unset($_SESSION['reserver']);
-		
-		header("Location: ./locations");
 	}
 	
 	public function compte()
