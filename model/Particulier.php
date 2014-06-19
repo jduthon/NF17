@@ -19,6 +19,7 @@ class Particulier extends library\Model
 	static private $foreignKey=null;
 	
 	public function __construct(){
+		$this->contrat_en_cours=false;
 	}
 	
 	public function getid_part(){

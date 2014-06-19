@@ -1,3 +1,4 @@
+<?php include("successlist.php"); ?>
 <h1 class="page-header">Ajouter une nouvelle entreprise</h1>
 
 <?php include("errList.php"); ?>

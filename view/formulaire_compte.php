@@ -1,3 +1,4 @@
+<?php include("successlist.php"); ?>
 <form class="form-horizontal" method="post" action="" role="form">
 	<h2 class="page-header">Informations personnelles</h2>
 	
@@ -5,14 +6,14 @@
 		<div class="form-group">
 			<label for="nom" class="col-sm-2 control-label">Nom</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" value="<?php echo $client->getParticulier()->getnom(); ?>" required autofocus>
+				<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" disabled value="<?php echo $client->getParticulier()->getnom(); ?>" required autofocus>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="prenom" class="col-sm-2 control-label">Prénom</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom" value="<?php echo $client->getParticulier()->getprenom(); ?>" required>
+				<input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom" disabled value="<?php echo $client->getParticulier()->getprenom(); ?>" required>
 			</div>
 		</div>
 	<?php } ?>
@@ -21,7 +22,7 @@
 		<div class="form-group">
 			<label for="nom_entreprise" class="col-sm-2 control-label">Nom de l'entreprise</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nom_entreprise" id="nom_entreprise" placeholder="Nom de l'entreprise" value="<?php echo $client->getProfessionnel()->getnom_entreprise(); ?>" required autofocus>
+				<input type="text" class="form-control" name="nom_entreprise" id="nom_entreprise" placeholder="Nom de l'entreprise" disabled value="<?php echo $client->getProfessionnel()->getnom_entreprise(); ?>" required autofocus>
 			</div>
 		</div>
 	<?php } ?>
@@ -45,25 +46,14 @@
 		</div>
 	</div> 
 		<div class="form-group">
-			<span class="col-sm-2 control-label">Date de naissance</span>
 			<div class="col-sm-10">
 				<div class="row">
-					<label for="jour_naissance" class="col-sm-1 control-label">Jour</label>
-					<div class="col-sm-3 col-md-2">
-						<input type="number" class="form-control" name="jour_naissance" id="jour_naissance" min="01" max="31" step="1" value="<?php echo $client->getParticulier()->getdate_naissance(); ?>" required>
-					</div>
-					
-					<label for="mois_naissance" class="col-sm-1 col-md-offset-1 control-label">Mois</label>
-					<div class="col-sm-3 col-md-2">
-						<input type="number" class="form-control" name="mois_naissance" id="mois_naissance" min="01" max="12" step="1" value="<?php echo $client->getParticulier()->getdate_naissance(); ?>" required>
-					</div>
-					
-					<label for="annee_naissance" class="col-sm-1 col-md-offset-1 control-label">Année</label>
-					<div class="col-sm-3">
-						<input type="number" class="form-control" name="annee_naissance" id="annee_naissance" min="1920" max="2010" step="1" value="<?php echo $client->getParticulier()->getdate_naissance(); ?>" required>
-					</div>
+					<label for="jour_naissance" class="col-sm-2 control-label">Date de naissance</label>
+					<div class="col-sm-10 ">
+						<?php echo $client->getParticulier()->getdate_naissance(); ?>
 				</div>
 			</div>
+		</div>
 		</div>
 		
 		<div class="form-group">

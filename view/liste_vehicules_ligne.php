@@ -31,6 +31,7 @@
 		<small><?php echo $vehicule->getseuil_km(); ?> km inclus gratuits</small>
 	</td>
 	<td>
+
 		<?php if(empty($statut)) { ?>
 			<form role="form" method="post" action="reserver">
 				<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
@@ -63,5 +64,8 @@
 			<button type="submit" name="supprimer" value="<?php echo 'supprimer'; ?>" class="btn btn-primary">Supprimer</button>
 			</form>
 		<?php } ?>
+
+			
+		
 	</td>
 </tr>

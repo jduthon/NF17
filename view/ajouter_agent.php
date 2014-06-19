@@ -1,3 +1,4 @@
+<?php include("successlist.php"); ?>
 <h1 class="page-header">Ajouter un nouvel agent</h1>
 
 <?php if(isset($err)){ ?>
@@ -17,17 +18,18 @@
 			</div>
 		</div>
 		
-		<div class="form-group">
-			<label for="mot de passe" class="col-sm-2 control-label">Mot de passe</label>
-			<div class="col-sm-10">
-				<input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe" required>
-			</div>
-		</div>
 		
 		<div class="form-group">
 			<label for="function" class="col-sm-2 control-label">Fonction</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" name="function" id="function" placeholder="Fonction" required>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="password" class="col-sm-2 control-label">Mot de passe</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="password" id="password" placeholder="Mot de passe" required>
 			</div>
 		</div>
 	

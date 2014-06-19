@@ -189,9 +189,14 @@ class ModelManager {
 				foreach($fk->getRefId() as $refId)
 					$refIdString .= $refId . " , ";
 				$refIdString = substr($refIdString,0,strlen($refIdString)-3);
+				
 				$stringQuery = "SELECT " . $refIdString . " FROM " . $fk->getRefTable() . " WHERE " . $fk->getExtId() . " = '" . call_user_func(array($newModel,"get".$newModel->getPrimaryKey())) . "'";
 				//print("<br/> $stringQuery <br/>");
-				$result=$this->application->query($stringQuery);
+				try{
+					$result=$this->application->query($stringQuery);
+				} catch (TommeException $e){
+					$result=null;
+				}
 				$fkValue=null;
 				//print_r($result);
 				if(is_array($result) && !empty($result)){
@@ -274,8 +279,8 @@ class ModelManager {
 		$stringQuery="DELETE FROM ". $modelName;
 		$parameters[$id]=call_user_func(array($model,"get" . $id));
 		$stringQuery.=" WHERE $id = :$id";
-		//print($stringQuery);
-		//print_r($parameters);
+		print($stringQuery);
+		print_r($parameters);
 		$this->application->query($stringQuery, $parameters);
 	}
 	

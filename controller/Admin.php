@@ -15,6 +15,7 @@ class Admin extends library\Controller
 	
 	public function liste_agents()
 	{
+		$success='';
 		$modelManager = $this->getApplication()->getModelManager();
 		$agents = $modelManager->getAll("Employe");
 		
@@ -25,8 +26,9 @@ class Admin extends library\Controller
 			if($agentAModif==null)
 				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
 			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->updateModel($agentTest);
+				$agent=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->updateModel($agent);
+				$success='Agent modifié';
 			}
 		}
 		
@@ -35,12 +37,13 @@ class Admin extends library\Controller
 			if($agentAModif==null)
 				$this->addVars(array('err' => 'Invalid employe id :' . $_POST['id_employe']));
 			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->deleteModel($agentTest);
+				$agent=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->deleteModel($agent);
+				$success = 'Agent supprimé';
 			}
 		}
 		
-		$this->addVars(array('agents' => $agents));
+		$this->addVars(array('agents' => $agents,'success' => $success));
 		return 'liste_agents.php';
 	}
 	
@@ -48,34 +51,56 @@ class Admin extends library\Controller
 	{
 		$modelManager = $this->getApplication()->getModelManager();
 		$entreprises=$modelManager->getAll("Entreprise");
+		$success="";
 		if(!is_array($entreprises))
 			$entreprises=array($entreprises);
-	
-		/*
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');
-		$entreprises[] = array('nom' => 'pute', 'fonction' => 'tapin');*/
+			
+		if(isset($_POST['modifier'])){
+			$entrepriseAModif=$modelManager->getOneByNom_entreprise("Entreprise",$_POST['nom_entreprise']);
+			if($entrepriseAModif==null)
+				$this->addVars(array('err' => 'Invalid entreprise name :' . $_POST['nom_entreprise']));
+			else{
+				$entreprise=$modelManager->getNewModel("Entreprise",$_POST);
+				$modelManager->updateModel($entreprise);
+				$success="Modifications effectuées";
+				}
+		}
 		
-		$this->addVars(array('entreprises' => $entreprises));
+		if(isset($_POST['supprimer'])){
+			$entrepriseAModif=$modelManager->getOneByNom_entreprise("Entreprise",$_POST['nom_entreprise']);
+			if($entrepriseAModif==null)
+				$this->addVars(array('err' => 'Invalid entreprise name :' . $_POST['nom_entreprise']));
+			else{
+				$entreprise=$modelManager->getNewModel("Entreprise",$_POST);
+				$modelManager->deleteModel($entreprise);
+				$success="Entreprise supprimée";
+			}
+		}
+		
+		$this->addVars(array('entreprises' => $entreprises,'success' => $success));
 		return 'liste_entreprises.php';
 	}
 	
 	public function ajout_agent()
 	{
+		$success='';
 		$modelManager = $this->getApplication()->getModelManager();
 		if(isset($_POST['id_employe'])){
 			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
 			if($agentAModif!=null)
 				$this->addVars(array('err' => 'Already exists employe id :' . $_POST['id_employe']));
 			else{
-				$agentTest=$modelManager->getNewModel("Employe",$_POST);
-				$modelManager->addModel($agentTest);
+				$agent=$modelManager->getNewModel("Employe",$_POST);
+				$modelManager->addModel($agent);
+				$success = 'Agent ajouté';
 			}
 		}
+		$this->addVars(array('success' => $success));
 		return 'ajouter_agent.php';
 	}
 	public function ajout_entreprise()
 	{
+		$success="";
 		$modelManager = $this->getApplication()->getModelManager();
 		if(isset($_POST['nom_entreprise'])){
 			$entrepriseAModif=$modelManager->getOneBynom_entreprise("Entreprise",$_POST['nom_entreprise']);
@@ -84,8 +109,10 @@ class Admin extends library\Controller
 			else{
 				$entrepriseAjout=$modelManager->getNewModel("Entreprise",$_POST);
 				$modelManager->addModel($entrepriseAjout);
+				$success="Entreprise ajoutée";
 			}
 		}
+		$this->addVars(array('success' => $success));
 		return 'ajout_entreprise.php';
 	}
 	

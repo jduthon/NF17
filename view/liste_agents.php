@@ -1,3 +1,4 @@
+<?php include("successlist.php"); ?>
 <h1>Liste des agents</h1>
 
 <div>
@@ -17,6 +18,7 @@
 			<tr>
 				<th>Identifiant</th>
 				<th>Fonction</th>
+				<th>Mot de passe </th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -30,6 +32,9 @@
 						</td>
 						<td>
 							<input type="text" class="form-control" name="function" id="function" value="<?php echo $agent->getfunction(); ?>" >
+						</td>
+						<td>
+							<input type="text" class="form-control" name="password" id="password" value="<?php echo $agent->getpassword(); ?>" >
 						</td>
 						<td class="col-xs-4 text-right">
 							<div class="btn-group">
