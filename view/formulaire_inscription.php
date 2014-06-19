@@ -1,5 +1,3 @@
-<?php include("errList.php"); ?>
-
 <form class="form-horizontal" method="post" action="" role="form">
 	<h2 class="page-header">Informations personnelles</h2>
 	

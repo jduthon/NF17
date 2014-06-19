@@ -153,9 +153,7 @@ class Client extends library\Controller
 		
 		if($_SESSION['user']->isProfessionnel())
 			$conducteurs = $modelManager->getOneById_proById_location("Liste_conducteurs",array('id_pro' => $_SESSION['user']->getid_client(), 'id_location' => $location->getid_location()));
-			
-		print_r($conducteurs);
-		
+					
 		$this->addVars(array('location' => $location, 'professionnel' => $_SESSION['user']->isProfessionnel(), 'vehicules' => $vehicules, 'moyens_paiements' => array("Cheque","Carte bancaire","Especes")));
 		return 'location.php';
 	}

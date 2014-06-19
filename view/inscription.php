@@ -1,3 +1,6 @@
+<?php include 'errList.php'; ?>
+<?php include 'successlist.php'; ?>
+
 <h1>Inscription</h1>
 
 <section class="row">
