@@ -1,19 +1,25 @@
 <h1>Liste des conducteurs</h1>
 
+<div>
+	<a href="recherche" class="btn btn-primary" role="button">Ajouter un conducteur</a>
+</div>
+
+
 <?php if(!isset($conducteurs)){ ?>
-	Vous n'avez pas encore entrer de conducteurs.
+	Vous n'avez pas encore entré de conducteurs.
 <?php } else { ?>
-<section class="table-responsive">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Nom</th>
-				<th>Prénom</th>
-				<th>Numéro de permis</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
+
+	<section class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Numéro de permis</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 				<?php foreach($conducteurs as $conducteur) { ?>
 					<tr>
 						<form class="form" method="post" action="" role="form">
@@ -35,9 +41,9 @@
 							</td>
 						</form>
 					</tr>
-				<?php }}?>
-		</tbody>
-	</table>
-</section>
+				<?php }?>
+			</tbody>
+		</table>
+	</section>
 
-
+<?php } ?>

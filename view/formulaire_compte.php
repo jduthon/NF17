@@ -6,14 +6,16 @@
 		<div class="form-group">
 			<label for="nom" class="col-sm-2 control-label">Nom</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" disabled value="<?php echo $client->getParticulier()->getnom(); ?>" required autofocus>
+				<p class="form-control-static"><?php echo $client->getParticulier()->getnom(); ?></p>
+				<input type="hidden" name="nom" value="<?php echo $client->getParticulier()->getnom(); ?>">
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="prenom" class="col-sm-2 control-label">Prénom</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom" disabled value="<?php echo $client->getParticulier()->getprenom(); ?>" required>
+				<p class="form-control-static"><?php echo $client->getParticulier()->getprenom(); ?></p>
+				<input type="hidden" name="prenom"disabled value="<?php echo $client->getParticulier()->getprenom(); ?>">
 			</div>
 		</div>
 	<?php } ?>
@@ -22,7 +24,8 @@
 		<div class="form-group">
 			<label for="nom_entreprise" class="col-sm-2 control-label">Nom de l'entreprise</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nom_entreprise" id="nom_entreprise" placeholder="Nom de l'entreprise" disabled value="<?php echo $client->getProfessionnel()->getnom_entreprise(); ?>" required autofocus>
+				<p class="form-control-static"><?php echo $client->getProfessionnel()->getnom_entreprise(); ?></p>
+				<input type="hidden" name="nom_entreprise" value="<?php echo $client->getProfessionnel()->getnom_entreprise(); ?>">
 			</div>
 		</div>
 	<?php } ?>
@@ -31,29 +34,26 @@
 	
 	<?php if ($client->isParticulier()) { ?>
 		<div class="form-group">
-		<label for="adresse" class="col-sm-2 control-label">Adresse</label>
-		<div class="col-sm-10">
-			<div class="row">
-				<div class="col-sm-6">
-					<input type="text" class="form-control" name="adresse" id="adresse" placeholder="Adresse" value="<?php echo $client->getParticulier()->getadresse(); ?>" required>
-				</div>
-
-				<label for="ville" class="col-sm-1 control-label">Ville</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" name="ville" id="ville" placeholder="Ville" value="<?php echo $client->getParticulier()->getville(); ?>" required>
-				</div>
-			</div>
-		</div>
-	</div> 
-		<div class="form-group">
+			<label for="adresse" class="col-sm-2 control-label">Adresse</label>
 			<div class="col-sm-10">
 				<div class="row">
-					<label for="jour_naissance" class="col-sm-2 control-label">Date de naissance</label>
-					<div class="col-sm-10 ">
-						<?php echo $client->getParticulier()->getdate_naissance(); ?>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" name="adresse" id="adresse" placeholder="Adresse" value="<?php echo $client->getParticulier()->getadresse(); ?>" required>
+					</div>
+
+					<label for="ville" class="col-sm-1 control-label">Ville</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="ville" id="ville" placeholder="Ville" value="<?php echo $client->getParticulier()->getville(); ?>" required>
+					</div>
 				</div>
 			</div>
-		</div>
+		</div> 
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Date de naissance</label>
+			<div class="col-sm-10">
+				<p class="form-control-static"><?php echo $client->getParticulier()->getdate_naissance(); ?></p>
+			</div>
 		</div>
 		
 		<div class="form-group">

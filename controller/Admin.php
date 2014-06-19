@@ -96,7 +96,7 @@ class Admin extends library\Controller
 			}
 		}
 		$this->addVars(array('success' => $success));
-		return 'ajouter_agent.php';
+		return 'ajout_agent.php';
 	}
 	public function ajout_entreprise()
 	{
