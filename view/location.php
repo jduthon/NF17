@@ -77,6 +77,7 @@
 			
 			<?php if ($location->getEtat() == 'A confirmer') { ?>
 				<div class="form-group text-right">
+					<input type="hidden" name="numero_immatriculation" value="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" />
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</div>
 			<?php } ?>
@@ -147,6 +148,7 @@
 			
 			<?php if ($location->getEtat() == 'A confirmer') { ?>
 				<div class="form-group text-right">
+					<input type="hidden" name="numero_immatriculation" value="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" />
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</div>
 			<?php } ?>
@@ -171,6 +173,7 @@
 					
 					<?php if ($location['etat'] == 'A confirmer') { ?>
 						<div class="col-xs-1">
+							<input type="hidden" name="numero_immatriculation" value="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" />
 							<button class="btn btn-default btn-xs" type="submit"><span class="glyphicon glyphicon-remove"></span></button>
 						</div>
 					<?php } ?>
@@ -194,6 +197,7 @@
 				</div>
 				
 				<div class="form-group text-right">
+					<input type="hidden" name="numero_immatriculation" value="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" />
 					<button type="submit" class="btn btn-primary">Ajouter</button>
 				</div>
 			</form>
