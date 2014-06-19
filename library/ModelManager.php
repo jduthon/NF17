@@ -279,12 +279,12 @@ class ModelManager {
 		$stringQuery="DELETE FROM ". $modelName;
 		$parameters[$id]=call_user_func(array($model,"get" . $id));
 		$stringQuery.=" WHERE $id = :$id";
-		print($stringQuery);
-		print_r($parameters);
+		//print($stringQuery);
+		//print_r($parameters);
 		$this->application->query($stringQuery, $parameters);
 	}
 	
-		public function getLocationsNonValidees(){
+	public function getLocationsNonValidees(){
 		$return=array();
 		$query="SELECT * FROM location l WHERE l.id_location NOT IN(SELECT g2.id_location FROM gerer g2)";
 		$result=$this->application->query($query);

@@ -142,6 +142,10 @@ class Application
 		}
 		catch (TommeException $e)
 		{
+			//print_r($e);
+			//require($this->path('view',"error.php"));
+			//header("Location: ./error");
+			//exit("Oups, une erreur s'est produite.");
 			$this->controller = new Erreur($this);
 			$this->controller->execute('erreur', array($e));
 		}

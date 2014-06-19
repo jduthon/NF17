@@ -1,4 +1,4 @@
-<h1 class="page-header">Modification ou ajout de voiture </h1>
+<h1 class="page-header">Ajout de voiture </h1>
 
 <form class="form-horizontal" method="post" action="" role="form">	
 	

@@ -7,6 +7,7 @@
 	if(!is_array($errs))
 		$errs=array($errs);
 ?>
+<?php if(!empty($errs)){ ?>
 	<div class="alert alert-danger alert-dismissable">
 	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 	  <?php foreach($errs as $err){
@@ -15,4 +16,4 @@
 			echo $err;
 		}?>
 	</div>
-<?php }?>
+<?php } }?>
