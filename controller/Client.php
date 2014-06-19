@@ -93,7 +93,7 @@ class Client extends library\Controller
 		$location = null;
 		
 		if(!empty($_POST['num_contrat'])) {
-			echo $num_contrat = $_POST['num_contrat'];
+			$num_contrat = $_POST['num_contrat'];
 			$location = $modelManager->getOneByNum_contrat("Location",$num_contrat);
 		} else if (!empty($_POST['numero_immatriculation'])) {
 			foreach($_SESSION['locations'] as $loc) {

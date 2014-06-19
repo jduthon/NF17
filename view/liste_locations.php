@@ -46,7 +46,7 @@
 					</td>
 					<td>
 						<div class="btn-group">
-							<form class="form" method="post" action="location" role="form">
+							<form class="form" method="post" action="location" role="form" style="display: inline">
 								<?php if($location->getEtat() == 'A confirmer') { ?>
 									<input type="hidden" name="numero_immatriculation" value="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" />
 									<button name="modifier" value="modifier" class="btn btn-primary" type="submit">Modifier</button>
@@ -56,7 +56,7 @@
 								<?php } ?>
 							</form>
 							
-							<form class="form" method="post" action="locations" role="form">							
+							<form class="form" method="post" action="locations" role="form" style="display: inline">							
 								<?php if ($location->getEtat() == 'A confirmer') { ?>
 									<input type="hidden" name="numero_immatriculation" value="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" />
 									<button name="annuler" value="annuler" class="btn btn-primary" type="submit">Annuler</button>

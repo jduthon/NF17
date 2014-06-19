@@ -23,7 +23,7 @@
 							<select class="form-control" name="vehicule" id="vehicule">
 								<?php foreach($vehicules as $vehicule) { ?>
 									<option value="<?php echo $vehicule->getnumero_immatriculation(); ?>" <?php echo ($location->getVehicule()->getnumero_immatriculation() == $vehicule->getnumero_immatriculation()) ? 'selected' : ''; ?>>
-										<?php echo $location->getVehicule()->getmarque(); ?>
+										<?php echo $vehicule->getmarque(); ?>
 										<?php echo $vehicule->getModele()->getnom_modele(); ?>
 									</option>
 								<?php } ?>
@@ -66,12 +66,15 @@
 				</div>
 			</div>
 			
-			<div class="form-group">
-				<label class="col-sm-5 control-label">Seuil de kilométrage</label>
-				<div class="col-sm-7">
-					<p class="form-control-static"><?php echo $location->getContrat()->getseuil_km(); ?> km</p>
+			<?php if ($location->getEtat() != 'A confirmer') { ?>
+				<div class="form-group">
+					<label class="col-sm-5 control-label">Seuil de kilométrage</label>
+					<div class="col-sm-7">
+						<p class="form-control-static"><?php echo $location->getContrat()->getseuil_km(); ?> km</p>
+					</div>
 				</div>
-			</div>
+			<?php } ?>
+			
 			<?php if ($location->getEtat() == 'A confirmer') { ?>
 				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary">Valider</button>
@@ -94,23 +97,25 @@
 				</div>
 			</div>
 			
-			<div class="form-group">
-				<label class="col-sm-5 control-label">Kilométrage</label>
-				<div class="col-sm-7">
-					<p class="form-control-static">
-						<?php echo $location->getContrat()->getkm_initial(); ?> km
-					</p>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-sm-5 control-label">Frais supplémentaires</label>
-				<div class="col-sm-7">
-					<div class="form-control-static">
-						<?php echo $location->getFraisSupplementaires(); ?> €
+			<?php if($location->getEtat() != 'A confirmer') { ?>
+				<div class="form-group">
+					<label class="col-sm-5 control-label">Kilométrage</label>
+					<div class="col-sm-7">
+						<p class="form-control-static">
+							<?php echo $location->getContrat()->getkm_initial(); ?> km
+						</p>
 					</div>
 				</div>
-			</div>
+				
+				<div class="form-group">
+					<label class="col-sm-5 control-label">Frais supplémentaires</label>
+					<div class="col-sm-7">
+						<div class="form-control-static">
+							<?php echo $location->getFraisSupplementaires(); ?> €
+						</div>
+					</div>
+				</div>
+			<?php } ?>
 			
 			<div class="form-group">
 				<label class="col-sm-5 control-label" class="moyen_paiement">Moyen de paiement</label>
@@ -119,7 +124,7 @@
 						<?php if ($location->getEtat() == 'A confirmer') { ?>
 							<select class="form-control" name="moyen_paiement" id="moyen_paiement">
 								<?php foreach($moyens_paiements as $moyen_paiement) { ?>
-									<option <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
+									<option value="<?php echo $location->getContrat()->getFacture()->getmoyen_de_paiement(); ?>" <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
 										<?php echo $moyen_paiement; ?>
 									</option>
 								<?php } ?>
@@ -131,12 +136,14 @@
 				</div>
 			</div>
 			
-			<div class="form-group">
-				<label class="col-sm-5 control-label">Date de règlement</label>
-				<div class="col-sm-7">
-					<p class="form-control-static"><?php echo $location->getContrat()->getFacture()->getdate_reglement(); ?></p>
+			<?php if($location->getEtat() != 'A confirmer') { ?>
+				<div class="form-group">
+					<label class="col-sm-5 control-label">Date de règlement</label>
+					<div class="col-sm-7">
+						<p class="form-control-static"><?php echo $location->getContrat()->getFacture()->getdate_reglement(); ?></p>
+					</div>
 				</div>
-			</div>
+			<?php } ?>
 			
 			<?php if ($location->getEtat() == 'A confirmer') { ?>
 				<div class="form-group text-right">
