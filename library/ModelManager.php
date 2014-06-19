@@ -194,7 +194,7 @@ class ModelManager {
 				//print("<br/> $stringQuery <br/>");
 				try{
 					$result=$this->application->query($stringQuery);
-				} catch (Exception $e){
+				} catch (TommeException $e){
 					$result=null;
 				}
 				$fkValue=null;

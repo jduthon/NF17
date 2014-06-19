@@ -40,15 +40,13 @@ class Technique extends library\Controller
 		return 'liste_vehicules.php';
 	}
 	
-
-	
 	public function modificationVehicule($numero_immatriculation)
 	{
 		$modelManager = $this->getApplication()->getModelManager();
 		$vehicule = $modelManager->getOneByNumero_immatriculation("Vehicule",$numero_immatriculation);
 		$options = array('AC','GPS');
 		$typemodif = 'modification';
-		
+		if($_POST["submit"])
 		$this->addVars(array('vehicule' => $vehicule, 'options' => $options, 'typemodif' => $typemodif));
 		return 'ajout_modification_vehicule.php';
 	}

@@ -8,8 +8,8 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th class="col-xs-2">N° de contrat</th>
-				<th class="col-xs-2">Voiture</th>
+				<th class="col-xs-1">N° de contrat</th>
+				<th class="col-xs-3">Véhicule</th>
 				<th class="col-xs-1">Départ</th>
 				<th class="col-xs-1">Retour</th>
 				<th class="col-xs-1">Montant</th>
@@ -27,6 +27,8 @@
 							<?php echo $location->getnum_contrat(); ?>
 						</td>
 						<td>
+							<img class="col-xs-6" src="<?php echo $_images; ?>/vehicules/<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>.jpg" alt="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" /> 
+							<?php echo $location->getVehicule()->getmarque(); ?>						
 							<?php echo $location->getVehicule()->getModele()->getnom_modele(); ?>						
 						</td>
 						<td>
@@ -45,14 +47,15 @@
 						</td>
 						<td>
 							<div class="btn-group">
-								<?php if ($location->getEtat() == 'Passé' || $location->getEtat() == "Validé") { ?>
+								<?php if ($location->getEtat() == 'Passé' || $location->getEtat() == "Validé" || $location->getEtat() == "A valider") { ?>
 									<a href="location-<?php echo $location->getnum_contrat(); ?>" class="btn btn-primary" role="button">Voir</a>
 								<?php } else { ?>
 									<a href="location-<?php echo $location->getnum_contrat(); ?>" class="btn btn-primary" role="button">Modifier</a>
 								<?php } ?>
 								
 								<?php if ($location->getEtat() == 'A confirmer') { ?>
-									<button name="annuler" class="btn btn-primary" type="submit">Annuler</button>
+									<input type="hidden" name="numero_immatriculation" value="<?php echo $location->getVehicule()->getnumero_immatriculation(); ?>" />
+									<button name="annuler" value="annuler" class="btn btn-primary" type="submit">Annuler</button>
 									<button name="valider" class="btn btn-primary" type="submit">Valider</button>
 								<?php } ?>
 							</div>

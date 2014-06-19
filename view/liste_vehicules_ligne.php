@@ -31,21 +31,25 @@
 		<small><?php echo $vehicule->getseuil_km(); ?> km inclus gratuits</small>
 	</td>
 	<td>
-
-	<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
 		<form role="form" method="post" action="reserver">
-			<?php if(empty($statut)) { ?>
-			<button type="submit" name="reserver" value="<?php echo 'Reserver'; ?>" class="btn btn-primary">Réserver</button>
-			<?php } ?>	
-			<?php if(!empty($statut)) { ?>
-				<button type="submit" name="entretien" value="<?php echo 'entretien'; ?>" class="btn btn-primary">Entretien</button>
-			<?php } ?>
-			<?php if(!empty($statut)) { ?>
-				<button type="submit" name="réparation" value="<?php echo 'reparation'; ?>" class="btn btn-primary">Réparation</button>
-			<?php } ?>
-			<?php if(!empty($statut)) { ?>
-				<button type="submit" name="supprimer" value="<?php echo 'supprimer'; ?>" class="btn btn-primary">Supprimer</button>
-			<?php } ?>
+			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>" name="numero_immatriculation" />
+			
+			<div class="btn-group">
+				<?php if(empty($statut)) { ?>
+					<input type="hidden" value="<?php echo $post['date_debut_loc'] ?>" name="date_debut_loc" />
+					<input type="hidden" value="<?php echo $post['date_fin_loc'] ?>" name="date_fin_loc" />
+					<button type="submit" name="reserver" value="reserver" class="btn btn-primary">Réserver</button>
+				<?php } ?>	
+				<?php if(!empty($statut)) { ?>
+					<button type="submit" name="entretien" value="entretien" class="btn btn-primary">Entretien</button>
+				<?php } ?>
+				<?php if(!empty($statut)) { ?>
+					<button type="submit" name="réparation" value="reparation" class="btn btn-primary">Réparation</button>
+				<?php } ?>
+				<?php if(!empty($statut)) { ?>
+					<button type="submit" name="supprimer" value="supprimer" class="btn btn-primary">Supprimer</button>
+				<?php } ?>
+			</div>
 		</form>
 	</td>
 </tr>

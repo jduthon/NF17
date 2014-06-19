@@ -1,6 +1,11 @@
 <?php include("errList.php"); ?>
 
-<h1 class="text-center">Connexion</h1>
+<h1 class="text-center">
+	Connexion
+	<?php if (!empty($_SESSION['reserver'])) { ?>
+		<br><small>Connectez-vous ou inscrivez-vous pour continuer votre réservation</small>
+	<?php } ?>
+</h1>
 
 <section class="row">
 	<div class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">

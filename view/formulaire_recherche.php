@@ -4,9 +4,9 @@
 			<h3>Date du départ</h3>
 			
 			<div>
-				<label for="date_depart" class="control-label hidden-lg">Date</label>
+				<label for="date_debut_loc" class="control-label hidden-lg">Date</label>
 				<div class="input-group date">
-					<input type="text" class="form-control" name="date_depart" id="date_depart" value="<?php echo $date_depart; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input type="text" class="form-control" name="date_debut_loc" id="date_debut_loc" value="<?php echo $post['date_debut_loc']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				</div>
 			</div>
 		</div>
@@ -15,9 +15,9 @@
 			<h3>Date du retour</h3>
 			
 			<div>
-				<label for="date_retour" class="control-label hidden-lg">Date</label>
+				<label for="date_fin_loc" class="control-label hidden-lg">Date</label>
 				<div class="input-group date">
-					<input type="text" class="form-control" name="date_retour" id="date_retour" value="<?php echo $date_retour; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					<input type="text" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $post['date_fin_loc']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				</div>
 			</div>
 		</div>
@@ -28,7 +28,7 @@
 			<label for="categorie" class="control-label sr-only">Catégorie</label>
 			<select class="form-control" name="categorie" id="categorie">
 				<?php foreach($categories as $cat) { ?>
-					<option <?php echo ($cat->getnom_categorie() == $categorie) ? 'selected' : ''; ?>>
+					<option <?php echo ($cat->getnom_categorie() == $post['categorie']) ? 'selected' : ''; ?>>
 						<?php echo $cat->getnom_categorie(); ?>
 					</option>
 				<?php } ?>

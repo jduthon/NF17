@@ -14,25 +14,28 @@
 					<p class="form-control-static"><?php echo $location->getnum_contrat(); ?></p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Véhicule</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location->getEtat() == 'Passé') { ?>
-							<?php echo $location->getVehicule()->getModele()->getnom_modele(); ?>
-						<?php } ?>
-						<?php if ($location->getEtat() != 'Passé') { ?>
-							<select class="form-control" name="vehicule" id="vehicule" <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>>
+						<?php if ($location->getEtat() == 'A confirmer') { ?>
+							<select class="form-control" name="vehicule" id="vehicule">
 								<?php foreach($vehicules as $vehicule) { ?>
-									<option <?php echo ($location->getVehicule()->getnumero_immatriculation() == $vehicule->getnumero_immatriculation()) ? 'selected' : ''; ?>>
+									<option value="<?php echo $vehicule->getnumero_immatriculation(); ?>" <?php echo ($location->getVehicule()->getnumero_immatriculation() == $vehicule->getnumero_immatriculation()) ? 'selected' : ''; ?>>
+										<?php echo $location->getVehicule()->getmarque(); ?>
 										<?php echo $vehicule->getModele()->getnom_modele(); ?>
 									</option>
 								<?php } ?>
 							</select>
+						<?php } else { ?>
+							<?php echo $location->getVehicule()->getmarque(); ?>
+							<?php echo $location->getVehicule()->getModele()->getnom_modele(); ?>
 						<?php } ?>
 					</p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label" for="date_debut_loc">Date de départ</label>
 				<div class="col-sm-7">
@@ -48,6 +51,7 @@
 					</p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label" for="date_fin_loc">Date de retour</label>
 				<div class="col-sm-7">
@@ -63,6 +67,7 @@
 					</p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Seuil de kilométrage</label>
 				<div class="col-sm-7">
@@ -77,6 +82,7 @@
 		</form>
 	</div>
 
+	
 	<div class="col-md-<?php echo $professionnel == true ? 4 : 6; ?>">
 		<h2>Facture</h2>
 		
@@ -89,6 +95,7 @@
 					</p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Kilométrage</label>
 				<div class="col-sm-7">
@@ -97,6 +104,7 @@
 					</p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Frais supplémentaires</label>
 				<div class="col-sm-7">
@@ -105,6 +113,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label" class="moyen_paiement">Moyen de paiement</label>
 				<div class="col-sm-7">
@@ -112,31 +121,36 @@
 						<?php if ($location->getEtat() == 'Passé') { ?>
 							<?php echo $location->getContrat()->getFacture()->getmoyen_paiement(); ?>
 						<?php } ?>
-						<?php if ($location->getEtat() != 'Passé') { ?>
-						<select class="form-control" name="moyen_paiement" id="moyen_paiement" <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>>
-							<?php foreach($moyens_paiements as $moyen_paiement) { ?>
-								<option <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
-									<?php echo $moyen_paiement; ?>
-								</option>
-							<?php } ?>
-						</select>	
+						<?php if ($location->getEtat() == 'A confirmer') { ?>
+							<select class="form-control" name="moyen_paiement" id="moyen_paiement" <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>>
+								<?php foreach($moyens_paiements as $moyen_paiement) { ?>
+									<option <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
+										<?php echo $moyen_paiement; ?>
+									</option>
+								<?php } ?>
+							</select>
+						<?php } else { ?>
+						
 						<?php } ?>
 					</p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-5 control-label">Date de règlement</label>
 				<div class="col-sm-7">
 					<p class="form-control-static"><?php echo $location->getContrat()->getFacture()->getdate_reglement(); ?></p>
 				</div>
 			</div>
-			<?php if ($location->getEtat() != 'Passé') { ?>
+			
+			<?php if ($location->getEtat() == 'A confirmer') { ?>
 				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</div>
 			<?php } ?>
 		</form>
 	</div>
+	
 	
 	<?php if ($professionnel == true) { ?>
 	<div class="col-md-4">
@@ -152,7 +166,8 @@
 							<dt>Numéro du permis</dt><dd><?php echo $conducteur['copie_permis']; ?></dd>
 						</dl>
 					</div>
-					<?php if ($location['etat'] != 'Passé') { ?>
+					
+					<?php if ($location['etat'] == 'A confirmer') { ?>
 						<div class="col-xs-1">
 							<button class="btn btn-default btn-xs" type="submit"><span class="glyphicon glyphicon-remove"></span></button>
 						</div>
@@ -161,7 +176,7 @@
 			<?php } ?>
 		</div>
 		
-		<?php if ($location['etat'] != 'Passé') { ?>
+		<?php if ($location['etat'] == 'A confirmer') { ?>
 			<form class="form-horizontal" method="post" action="" role="form">
 				<div class="form-group">
 					<label class="col-sm-5 control-label" for="conducteur">Ajouter un conducteur</label>
@@ -175,6 +190,7 @@
 						</p>
 					</div>
 				</div>
+				
 				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary">Ajouter</button>
 				</div>
