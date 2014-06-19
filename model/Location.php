@@ -82,9 +82,10 @@ class Location extends library\Model
 	}
 	
 	public function getMontantPrevi(){
-		//TODO CALCULER UN FUCKING MONTANT EN FONCTION DE NBJOURS ET DE VEHICULE
-		//Multiplier la somme pourrie par le nb de jours
-		return 50;
+		$date_debut_loc = new \DateTime($this->getContrat()->getdate_debut_loc());
+		$date_fin_loc = new \DateTime($this->getContrat()->getdate_fin_loc());
+		
+		return 50 * max(1, $date_fin_loc->diff($date_debut_loc)->days);
 	}
 	
 	public function getPrimaryKey(){

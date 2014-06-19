@@ -18,18 +18,19 @@
 		</ul>
 	</td>
 	<td>
-		<ul class="list-unstyled">
+		<ul class="no-padding">
 			<?php foreach($vehicule->getoptions() as $option) { ?>
 				<li>
-					<input type="checkbox" id="<?php echo $vehicule->getnumero_immatriculation(); ?>_options" value="<?php echo $option; ?>"> <?php echo $option; ?>
+					<!--<input type="checkbox" id="<?php //echo $vehicule->getnumero_immatriculation(); ?>_options" value="<?php //echo $option; ?>"> <?php //echo $option; ?>-->
+					<?php echo $option; ?>
 				</li>
 			<?php } ?>
 		</ul>
 	</td>
-	<td>
-		<strong><?php echo $vehicule->getprix(); ?> €</strong> <br>
-		<small><?php echo $vehicule->getseuil_km(); ?> km inclus gratuits</small>
-	</td>
+	<!--<td>
+		<strong><?php //echo $vehicule->getprix(); ?> €</strong> <br>
+		<small><?php //echo $vehicule->getseuil_km(); ?> km inclus gratuits</small>
+	</td>-->
 	<td>
 
 		<?php if(empty($statut)) { ?>
