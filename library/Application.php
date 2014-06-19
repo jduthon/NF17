@@ -142,8 +142,8 @@ class Application
 		}
 		catch (TommeException $e)
 		{
-			print_r($e);
-			exit('404 error');
+			$this->controller = new Erreur($this);
+			$this->controller->execute('erreur', array($e));
 		}
 	}
 	
