@@ -98,7 +98,21 @@ class Client extends library\Controller
 		} else if (!empty($_POST['numero_immatriculation'])) {
 			foreach($_SESSION['locations'] as &$loc) {
 				if($loc->getVehicule()->getnumero_immatriculation() == $_POST['numero_immatriculation'])
-				{										
+				{	
+					if(!empty($_POST['moyen_paiement'])) {
+						$loc->getContrat()->getFacture()->setmoyen_de_paiement($_POST['moyen_paiement']);
+					}
+					if(!empty($_POST['date_debut_loc'])) {
+						$loc->getContrat()->setdate_debut_loc($_POST['date_debut_loc']);
+					}					
+					if(!empty($_POST['date_fin_loc'])) {
+						$loc->getContrat()->setdate_fin_loc($_POST['date_fin_loc']);
+					}
+					if(!empty($_POST['vehicule'])) {
+						$loc->setnumero_immatriculation($_POST['vehicule']);
+						$loc->setVehicule($modelManager->getOneByNumero_immatriculation("Vehicule", $_POST['vehicule']));
+					}
+					
 					$location = $loc;					
 				}
 			}
