@@ -61,7 +61,7 @@ class Client extends library\Model
 	}
 	
 	public function getParticulier(){
-		if($this->_isParticulier==null)
+		if(isset($this->_isParticulier))
 			$this->isParticulier();
 		if($this->_isParticulier)
 			return $this->_particulier;
@@ -70,7 +70,7 @@ class Client extends library\Model
 	}
 	
 	public function getProfessionnel(){
-		if($this->_isParticulier==null)
+		if(isset($this->_isParticulier))
 			$this->isParticulier();
 		if($this->_isParticulier)
 			return null;
