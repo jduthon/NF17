@@ -36,7 +36,7 @@ class Technique extends library\Controller
 		$modelManager = $this->getApplication()->getModelManager();
 		$vehicule = $modelManager->getAll("Vehicule");
 		$statut = 'technique';
-		$this->addVars(array('vehicule'=>$vehicule,'statut'=>$statut));
+		$this->addVars(array('vehicules'=>$vehicule,'statut'=>$statut));
 		return 'liste_vehicules.php';
 	}
 	
@@ -58,4 +58,18 @@ class Technique extends library\Controller
 		$this->addVars(array('typemodif' => $typemodif));
 		return 'ajout_modification_vehicule.php';
 	}	
+	
+	public function formulaireReparation()
+	{
+		$immat = $_POST['numero_immatriculation'];
+		$modelManager = $this->getApplication()->getModelManager();
+		$entreprises = $modelManager->getAllBy("Entreprise",'rep');
+		
+		$vehicule = $modelManager->getOneByNumero_immatriculation("Vehicule",$immat);
+		if(empty($vehicule))
+			header("Location: ./");
+		
+		$this->addVars(array('entreprises'=>$entreprises, 'vehicule'=>$vehicule));
+		return 'formulaire_reparation.php';
+	}
 }
