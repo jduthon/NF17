@@ -11,7 +11,7 @@
 				<th class="sr_only col-sm-1">Actions</th>
 			</tr>
 		</thead>
-		
+			
 		<tbody>
 			<?php foreach($vehicules as $vehicule) { ?>
 				
