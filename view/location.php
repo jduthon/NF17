@@ -22,7 +22,7 @@
 						<?php if ($location->getEtat() == 'A confirmer') { ?>
 							<select class="form-control" name="vehicule" id="vehicule">
 								<?php foreach($vehicules as $vehicule) { ?>
-									<option value="<?php echo $vehicule->getnumero_immatriculation(); ?>" <?php echo ($location->getVehicule()->getnumero_immatriculation() == $vehicule->getnumero_immatriculation()) ? 'selected' : ''; ?>>
+									<option value="<?php echo $vehicule->getnumero_immatriculation(); ?>" <?php echo ($location->getnumero_immatriculation() == $vehicule->getnumero_immatriculation()) ? 'selected' : ''; ?>>
 										<?php echo $vehicule->getmarque(); ?>
 										<?php echo $vehicule->getModele()->getnom_modele(); ?>
 									</option>
@@ -99,16 +99,7 @@
 				</div>
 			</div>
 			
-			<?php if($location->getEtat() != 'A confirmer') { ?>
-				<div class="form-group">
-					<label class="col-sm-5 control-label">Kilométrage</label>
-					<div class="col-sm-7">
-						<p class="form-control-static">
-							<?php echo $location->getContrat()->getkm_initial(); ?> km
-						</p>
-					</div>
-				</div>
-				
+			<?php if($location->getEtat() != 'A confirmer') { ?>				
 				<div class="form-group">
 					<label class="col-sm-5 control-label">Frais supplémentaires</label>
 					<div class="col-sm-7">
@@ -120,13 +111,13 @@
 			<?php } ?>
 			
 			<div class="form-group">
-				<label class="col-sm-5 control-label" class="moyen_paiement">Moyen de paiement</label>
+				<label class="col-sm-5 control-label" for="moyen_paiement">Moyen de paiement</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
 						<?php if ($location->getEtat() == 'A confirmer') { ?>
 							<select class="form-control" name="moyen_paiement" id="moyen_paiement">
 								<?php foreach($moyens_paiements as $moyen_paiement) { ?>
-									<option value="<?php echo $location->getContrat()->getFacture()->getmoyen_de_paiement(); ?>" <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
+									<option value="<?php echo $moyen_paiement; ?>" <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
 										<?php echo $moyen_paiement; ?>
 									</option>
 								<?php } ?>
