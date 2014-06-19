@@ -33,7 +33,6 @@
 						<li><a href="controle-locations">Véhicules à contrôler</a></li>
 						<li><a href="vehicules-techniques">Gestion du parc</a></li>
 						<li><a href="ajout_vehicule">Ajouter un véhicule au parc </a> </li>
-						<li><a href="modification_vehicule">Modifier un véhicule </a> </li>
 					<?php } ?>
 				<?php } ?>
 			</ul>

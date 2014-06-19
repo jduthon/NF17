@@ -40,22 +40,19 @@ class Technique extends library\Controller
 		return 'liste_vehicules.php';
 	}
 	
-	public function modificationVehicule($numero_immatriculation)
-	{
-		$modelManager = $this->getApplication()->getModelManager();
-		$vehicule = $modelManager->getOneByNumero_immatriculation("Vehicule",$numero_immatriculation);
-		$options = array('AC','GPS');
-		$typemodif = 'modification';
-		if($_POST["submit"])
-		$this->addVars(array('vehicule' => $vehicule, 'options' => $options, 'typemodif' => $typemodif));
-		return 'ajout_modification_vehicule.php';
-	}
-	
 	public function ajoutVehicule()
 	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$categories=$modelManager->getAll("Categorie");
+		$modeles=$modelManager->getAll("Modele");
 		$typemodif = 'ajout';
-		
-		$this->addVars(array('typemodif' => $typemodif));
+		print_r($_POST);
+		if(isset($_POST["numero_immatriculation"])){
+			$modelManager = $this->getApplication()->getModelManager();
+			$vehicule=$modelManager->getNewModel("Vehicule",array_merge($_POST,array("nom_agence" => "LoukoumKar")));
+			$modelManager->addModel($vehicule);
+		}
+		$this->addVars(array('typemodif' => $typemodif,"categories" => $categories,"modeles" => $modeles));
 		return 'ajout_modification_vehicule.php';
 	}	
 	
