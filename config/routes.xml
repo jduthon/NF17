@@ -32,6 +32,7 @@
 	<route url="/ajout_vehicule" controller="technique" action="ajoutVehicule" />
 	<route url="/modification_vehicule" controller="technique" action="modificationVehicule" />
 	<route url="/controle-locations" controller="technique" action="controleLocations" />
+	<route url="/reparation" controller="technique" action="formulaireReparation" />
 	
 
 	

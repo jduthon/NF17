@@ -11,9 +11,9 @@
 				<th class="sr_only col-sm-1">Actions</th>
 			</tr>
 		</thead>
-		
+			
 		<tbody>
-			<?php foreach($vehicule as $vehicule) { ?>
+			<?php foreach($vehicules as $vehicule) { ?>
 				
 				<?php include 'liste_vehicules_ligne.php'; ?>
 

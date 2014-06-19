@@ -57,7 +57,8 @@
 						<?php } ?>
 						<?php if ($location->getEtat() != 'Passé') { ?>
 							<div class="input-group date">
-								<input type="datetime" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $location->getContrat()->getdate_fin_loc(); ?>" required <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input type="datetime" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $location->getContrat()->getdate_fin_loc(); ?>" required <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						<?php } ?>
 					</p>

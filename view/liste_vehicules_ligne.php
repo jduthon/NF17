@@ -31,21 +31,37 @@
 		<small><?php echo $vehicule->getseuil_km(); ?> km inclus gratuits</small>
 	</td>
 	<td>
-
-	<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
-		<form role="form" method="post" action="reserver">
-			<?php if(empty($statut)) { ?>
-			<button type="submit" name="reserver" value="<?php echo 'Reserver'; ?>" class="btn btn-primary">Réserver</button>
-			<?php } ?>	
-			<?php if(!empty($statut)) { ?>
-				<button type="submit" name="entretien" value="<?php echo 'entretien'; ?>" class="btn btn-primary">Entretien</button>
-			<?php } ?>
-			<?php if(!empty($statut)) { ?>
-				<button type="submit" name="réparation" value="<?php echo 'reparation'; ?>" class="btn btn-primary">Réparation</button>
-			<?php } ?>
-			<?php if(!empty($statut)) { ?>
-				<button type="submit" name="supprimer" value="<?php echo 'supprimer'; ?>" class="btn btn-primary">Supprimer</button>
-			<?php } ?>
-		</form>
+		<?php if(empty($statut)) { ?>
+			<form role="form" method="post" action="reserver">
+				<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
+				<button type="submit" name="reserver" value="<?php echo 'Reserver'; ?>" class="btn btn-primary">Réserver</button>
+			</form>
+		<?php } ?>	
+		<?php if(!empty($statut)) { ?>
+			<form role="form" method="post" action="entretien">
+			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
+			<button type="submit" name="entretien" value="<?php echo 'entretien'; ?>" class="btn btn-primary">Entretien</button>
+			</form>
+		<?php } ?>
+		<?php if(!empty($statut)) { ?>
+			<form role="form" method="post" action="reparation">
+			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
+			<button type="submit" name="reparation" value="<?php echo 'reparation'; ?>" class="btn btn-primary">Réparation</button>
+			</form>
+		<?php } ?>
+		
+		<?php if(!empty($statut)) { ?>
+			<form role="form" method="post" action="edition">
+			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
+			<button type="submit" name="edition" value="<?php echo 'edition'; ?>" class="btn btn-primary">Edition</button>
+			</form>
+		<?php } ?>
+		
+		<?php if(!empty($statut)) { ?>
+			<form role="form" method="post" action="suppression">
+			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
+			<button type="submit" name="supprimer" value="<?php echo 'supprimer'; ?>" class="btn btn-primary">Supprimer</button>
+			</form>
+		<?php } ?>
 	</td>
 </tr>
