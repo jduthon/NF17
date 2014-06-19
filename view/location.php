@@ -1,5 +1,5 @@
 <h1>
-	Location <?php echo $location->getnum_contrat(); ?>
+	Location <?php echo ($location->getEtat() == 'A confirmer') ? $location->getnum_contrat() : ''; ?>
 	<br><small>Etat : <?php echo $location->getEtat(); ?></small>
 </h1>
 
@@ -40,13 +40,12 @@
 				<label class="col-sm-5 control-label" for="date_debut_loc">Date de départ</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location->getEtat() == 'Passé') { ?>
-							<?php echo $location->getContrat()->getdate_debut_loc(); ?>
-						<?php } ?>
-						<?php if ($location->getEtat() != 'Passé') { ?>
+						<?php if ($location->getEtat() == 'A confirmer') { ?>
 							<div class="input-group date">
 								<input type="datetime" class="form-control" name="date_debut_loc" id="date_debut_loc" value="<?php echo $location->getContrat()->getdate_debut_loc(); ?>" required <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
+						<?php } else { ?>
+							<?php echo $location->getContrat()->getdate_debut_loc(); ?>
 						<?php } ?>
 					</p>
 				</div>
@@ -56,13 +55,12 @@
 				<label class="col-sm-5 control-label" for="date_fin_loc">Date de retour</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location->getEtat() == 'Passé') { ?>
-							<?php echo $location->getdate_fin_loc(); ?>
-						<?php } ?>
-						<?php if ($location->getEtat() != 'Passé') { ?>
+						<?php if ($location->getEtat() == 'A confirmer') { ?>
 							<div class="input-group date">
 								<input type="datetime" class="form-control" name="date_fin_loc" id="date_fin_loc" value="<?php echo $location->getContrat()->getdate_fin_loc(); ?>" required <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
+						<?php } else { ?>
+							<?php echo $location->getContrat()->getdate_fin_loc(); ?>
 						<?php } ?>
 					</p>
 				</div>
@@ -74,7 +72,7 @@
 					<p class="form-control-static"><?php echo $location->getContrat()->getseuil_km(); ?> km</p>
 				</div>
 			</div>
-			<?php if ($location->getEtat() != 'Passé') { ?>
+			<?php if ($location->getEtat() == 'A confirmer') { ?>
 				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</div>
@@ -118,11 +116,8 @@
 				<label class="col-sm-5 control-label" class="moyen_paiement">Moyen de paiement</label>
 				<div class="col-sm-7">
 					<p class="form-control-static">
-						<?php if ($location->getEtat() == 'Passé') { ?>
-							<?php echo $location->getContrat()->getFacture()->getmoyen_paiement(); ?>
-						<?php } ?>
 						<?php if ($location->getEtat() == 'A confirmer') { ?>
-							<select class="form-control" name="moyen_paiement" id="moyen_paiement" <?php if($location->getEtat()=='Passé' || $location->getEtat() == 'Validé') echo "disabled"; ?>>
+							<select class="form-control" name="moyen_paiement" id="moyen_paiement">
 								<?php foreach($moyens_paiements as $moyen_paiement) { ?>
 									<option <?php echo ($location->getContrat()->getFacture()->getmoyen_de_paiement() == $moyen_paiement) ? 'selected' : ''; ?>>
 										<?php echo $moyen_paiement; ?>
@@ -130,7 +125,7 @@
 								<?php } ?>
 							</select>
 						<?php } else { ?>
-						
+							<?php echo $location->getContrat()->getFacture()->getmoyen_de_paiement(); ?>
 						<?php } ?>
 					</p>
 				</div>

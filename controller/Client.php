@@ -53,16 +53,22 @@ class Client extends library\Controller
 			
 		if(!empty($_SESSION['reserver']) && !empty($_SESSION['reserver']['date_debut_loc']) && !empty($_SESSION['reserver']['date_fin_loc']) && !empty($_SESSION['reserver']['numero_immatriculation']))
 		{
-			$modelManager = $this->getApplication()->getModelManager();
+			$doublon = false;
+			foreach($_SESSION['locations'] as $location) {
+				if($location->getVehicule()->getnumero_immatriculation() == $_SESSION['reserver']['numero_immatriculation'])
+					$doublon = true;
+			}
 			
-			$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
-			$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
-			$facture = $modelManager->getNewModel('Facture', array());
-			$contrat->setFacture($facture);
-			$location->setContrat($contrat);
-			$location->setConfirmation(false);
-			
-			$_SESSION['locations'][] = $location;
+			if ($doublon == false) {
+				$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
+				$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
+				$facture = $modelManager->getNewModel('Facture', array());
+				$contrat->setFacture($facture);
+				$location->setContrat($contrat);
+				$location->setConfirmation(false);
+				
+				$_SESSION['locations'][] = $location;
+			}
 			unset($_SESSION['reserver']);
 		}
 		
@@ -80,11 +86,21 @@ class Client extends library\Controller
 		return 'liste_locations.php';
 	}
 	
-	public function location($num_contrat)
+	public function location()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$location = $modelManager->getOneByNum_contrat("Location",$num_contrat);
 		$vehicules = $modelManager->getAll("Vehicule");
+		$location = null;
+		
+		if(!empty($_POST['num_contrat'])) {
+			echo $num_contrat = $_POST['num_contrat'];
+			$location = $modelManager->getOneByNum_contrat("Location",$num_contrat);
+		} else if (!empty($_POST['numero_immatriculation'])) {
+			foreach($_SESSION['locations'] as $loc) {
+				if($loc->getVehicule()->getnumero_immatriculation() == $_POST['numero_immatriculation'])
+					$location = $loc;
+			}
+		}
 		
 		if($location == null)
 			header("Location: ./");
