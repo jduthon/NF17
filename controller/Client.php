@@ -18,12 +18,7 @@ class Client extends library\Controller
 			throw new \library\TommeException("You are not granted the rights to access this page\n");
 			
 		$modelManager = $this->getApplication()->getModelManager();
-		$listeCond = $modelManager->getAllById_pro("Liste_conducteurs",$_SESSION['user']->getid_client());
-		if(!is_array($listeCond) && !empty($listeCond)){
-			$listeCond=array($listeCond);
-			foreach($listeCond as $key=>$value)
-				$conducteurs[$key] = $value;
-		}
+		
 		if(isset($_POST["modifier"]) || isset($_POST["supprimer"])){
 			$conducteurAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
 			if($conducteurAModif==null)
@@ -35,6 +30,14 @@ class Client extends library\Controller
 					$modelManager->deleteModel($conducteurAModif);
 			}
 		}
+		
+		$listeCond = $modelManager->getAllById_pro("Liste_conducteurs",$_SESSION['user']->getid_client());
+		if(!is_array($listeCond) && !empty($listeCond)){
+			$listeCond=array($listeCond);
+			foreach($listeCond as $key=>$value)
+				$conducteurs[$key] = $value;
+		}
+		
 		/*
 		$conducteurs[] = array('nom' => 'pute', 'prenom' => 'jean', 'numero_permis' => 7658, 'id_conducteur' => '');
 		$conducteurs[] = array('nom' => 'biatch', 'prenom' => 'Erwan', 'numero_permis' => 7658, 'id_conducteur' => '');
@@ -77,11 +80,12 @@ class Client extends library\Controller
 		if(!empty($_SESSION['reserver']) && !empty($_SESSION['reserver']['date_debut_loc']) && !empty($_SESSION['reserver']['date_fin_loc']) && !empty($_SESSION['reserver']['numero_immatriculation']))
 		{
 			$doublon = false;
-			if(is_array($_SESSION['locations']))
-				foreach($_SESSION['locations'] as $location) {
-					if($location->getVehicule()->getnumero_immatriculation() == $_SESSION['reserver']['numero_immatriculation'])
-						$doublon = true;
-				}
+			if(isset($_SESSION['locations']))
+				if(is_array($_SESSION['locations']))
+					foreach($_SESSION['locations'] as $location) {
+						if($location->getVehicule()->getnumero_immatriculation() == $_SESSION['reserver']['numero_immatriculation'])
+							$doublon = true;
+					}
 			
 			if ($doublon == false) {
 				$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
@@ -167,7 +171,6 @@ class Client extends library\Controller
 				if(method_exists($_SESSION['user'],"set" . $key))
 					call_user_func(array($_SESSION['user'],"set" . $key),$value);
 				else if(method_exists($_SESSION['user']->getProfessionnel(),"set" . $key)){
-					print($key);
 					call_user_func(array($_SESSION['user']->getProfessionnel(),"set" . $key),$value);
 				}
 			}

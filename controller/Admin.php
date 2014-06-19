@@ -17,10 +17,7 @@ class Admin extends library\Controller
 	{
 		$success='';
 		$modelManager = $this->getApplication()->getModelManager();
-		$agents = $modelManager->getAll("Employe");
 		
-		if(!is_array($agents))
-			$agents=array($agents);
 		if(isset($_POST['modifier'])){
 			$agentAModif=$modelManager->getOneByid_employe("Employe",$_POST['id_employe']);
 			if($agentAModif==null)
@@ -43,6 +40,11 @@ class Admin extends library\Controller
 			}
 		}
 		
+		$agents = $modelManager->getAll("Employe");
+		if(!is_array($agents))
+			$agents=array($agents);
+		
+		
 		$this->addVars(array('agents' => $agents,'success' => $success));
 		return 'liste_agents.php';
 	}
@@ -50,11 +52,7 @@ class Admin extends library\Controller
 	public function liste_entreprises()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$entreprises=$modelManager->getAll("Entreprise");
-		$success="";
-		if(!is_array($entreprises))
-			$entreprises=array($entreprises);
-			
+		
 		if(isset($_POST['modifier'])){
 			$entrepriseAModif=$modelManager->getOneByNom_entreprise("Entreprise",$_POST['nom_entreprise']);
 			if($entrepriseAModif==null)
@@ -76,6 +74,13 @@ class Admin extends library\Controller
 				$success="Entreprise supprimée";
 			}
 		}
+		
+		$entreprises=$modelManager->getAll("Entreprise");
+		$success="";
+		if(!is_array($entreprises))
+			$entreprises=array($entreprises);
+			
+		
 		
 		$this->addVars(array('entreprises' => $entreprises,'success' => $success));
 		return 'liste_entreprises.php';

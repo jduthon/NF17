@@ -1,3 +1,4 @@
+<?php include("errList.php"); ?>
 <section class="table-responsive">
 	<table class="table table-striped">
 		<thead>

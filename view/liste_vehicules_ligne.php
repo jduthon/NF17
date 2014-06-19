@@ -38,12 +38,7 @@
 				<button type="submit" name="reserver" value="<?php echo 'Reserver'; ?>" class="btn btn-primary">Réserver</button>
 			</form>
 		<?php } ?>	
-		<?php if(!empty($statut)) { ?>
-			<form role="form" method="post" action="entretien">
-			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
-			<button type="submit" name="entretien" value="<?php echo 'entretien'; ?>" class="btn btn-primary">Entretien</button>
-			</form>
-		<?php } ?>
+
 		<?php if(!empty($statut)) { ?>
 			<form role="form" method="post" action="reparation">
 			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
@@ -52,14 +47,7 @@
 		<?php } ?>
 		
 		<?php if(!empty($statut)) { ?>
-			<form role="form" method="post" action="edition">
-			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
-			<button type="submit" name="edition" value="<?php echo 'edition'; ?>" class="btn btn-primary">Edition</button>
-			</form>
-		<?php } ?>
-		
-		<?php if(!empty($statut)) { ?>
-			<form role="form" method="post" action="suppression">
+			<form role="form" method="post" action="">
 			<input type="hidden" value="<?php echo $vehicule->getnumero_immatriculation(); ?>"  name="numero_immatriculation" />
 			<button type="submit" name="supprimer" value="<?php echo 'supprimer'; ?>" class="btn btn-primary">Supprimer</button>
 			</form>

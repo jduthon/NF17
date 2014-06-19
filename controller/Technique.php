@@ -34,9 +34,16 @@ class Technique extends library\Controller
 	public function listeVehiculesTech()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
+		$errs="";
+		if(isset($_POST['supprimer'])){
+			try{
+			$vehicule=$modelManager->getOneByNumero_immatriculation("Vehicule",$_POST["numero_immatriculation"]);
+			$modelManager->deleteModel($vehicule);
+			} catch(\library\TommeException $e){$errs="Ce vehicule est référencé dans une autre table";}
+		}
 		$vehicule = $modelManager->getAll("Vehicule");
 		$statut = 'technique';
-		$this->addVars(array('vehicules'=>$vehicule,'statut'=>$statut));
+		$this->addVars(array('vehicules'=>$vehicule,'statut'=>$statut,"errs" => $errs));
 		return 'liste_vehicules.php';
 	}
 	
@@ -46,7 +53,6 @@ class Technique extends library\Controller
 		$categories=$modelManager->getAll("Categorie");
 		$modeles=$modelManager->getAll("Modele");
 		$typemodif = 'ajout';
-		print_r($_POST);
 		if(isset($_POST["numero_immatriculation"])){
 			$modelManager = $this->getApplication()->getModelManager();
 			$vehicule=$modelManager->getNewModel("Vehicule",array_merge($_POST,array("nom_agence" => "LoukoumKar")));

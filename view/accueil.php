@@ -39,14 +39,6 @@
   </a>
 </div>
 
-<div class="item active">
-  <img src="..." alt="...">
-  <div class="carousel-caption">
-    <h3>...</h3>
-    <p>...</p>
-  </div>
-</div>
-
 <h1>Réservez un véhicule
 	<?php if(!isset($_SESSION['user']) && !isset($_SESSION['admin']) && !isset($_SESSION['agent'])) { ?> 
 		<br><small>Ou <a href="connexion">connectez-vous</a> pour modifier/annuler/valider une réservation</a></small>

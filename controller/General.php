@@ -39,13 +39,15 @@ class General extends library\Controller
 			$_SESSION['type_connexion']="client";
 		}
 		
-		if (!empty($_SESSION['reserver']))
-			header("Location: ./ajouter-location");
-		
 		$this->addVars(array('connexion_client' => true));
 
-		if(isset($_SESSION['user']))
-			header("Location: ./");
+		if(isset($_SESSION['user'])){
+			if(isset($_SESSION['fromReserver'])){
+				unset($_SESSION['fromReserver']);
+				header("Location: ./locations");
+			} else
+				header("Location: ./");
+		}
 		if(isset($errs))
 			$this->addVars(array("errs" => $errs));
 
@@ -147,7 +149,9 @@ class General extends library\Controller
 				$modelManager->addModel($newClient);
 				try{
 					if($type_client != "professionnel"){
-						$dateNaiss=$_POST["annee_naissance"].$_POST["mois_naissance"].$_POST["jour_naissance"];
+						$m=strlen($_POST["mois_naissance"])==1?"0".$_POST["mois_naissance"]:$_POST["mois_naissance"];
+						$j=strlen($_POST["jour_naissance"])==1?"0".$_POST["jour_naissance"]:$_POST["jour_naissance"];
+						$dateNaiss=$_POST["annee_naissance"].$m.$j;
 						$dateNaissTime = new \DateTime($dateNaiss);
 						$dateNow = new \DateTime();
 						$dateInterval = $dateNow->diff($dateNaissTime);
@@ -168,7 +172,6 @@ class General extends library\Controller
 						$success="Vous êtes maintenant inscrit";
 					}
 				} catch(\library\TommeException $e){
-						print("SALUT LERREUR");
 						$modelManager->deleteModel($newClient);
 						throw $e;
 				}
@@ -188,13 +191,20 @@ class General extends library\Controller
 		if(empty($vehicule))
 			header("Location: ./");
 		
-		$_SESSION['reserver']['date_debut_loc'] = $post['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
-		$_SESSION['reserver']['date_fin_loc'] = $post['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
+		//Sauvegarde des données du formulaire précédemment entrées
+		$post['date_debut_loc'] = !empty($_SESSION['post']['date_debut_loc']) ? $_SESSION['post']['date_debut_loc'] : '';
+		$post['date_fin_loc'] = !empty($_SESSION['post']['date_fin_loc']) ? $_SESSION['post']['date_fin_loc'] : '';
+		//$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : 
+		
+		$_SESSION['reserver']['date_debut_loc'] = $post['date_debut_loc'] ;
+		$_SESSION['reserver']['date_fin_loc'] = $post['date_fin_loc'];
 		$_SESSION['reserver']['numero_immatriculation'] = $vehicule->getnumero_immatriculation();
 		
 		if(!empty($post['date_debut_loc']) && !empty($post['date_fin_loc'])) {
-			if(!isset($_SESSION['user']))
+			if(!isset($_SESSION['user'])){
+				$_SESSION["fromReserver"]=true;
 				header("Location: ./connexion");
+			}
 			else
 				header("Location: ./locations");
 		}
@@ -212,6 +222,9 @@ class General extends library\Controller
 		$post['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
 		$post['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
 		$post['categorie'] = !empty($_POST['categorie']) ? $_POST['categorie'] : '';
+		
+		$_SESSION['post']['date_debut_loc'] = !empty($_POST['date_debut_loc']) ? $_POST['date_debut_loc'] : '';
+		$_SESSION['post']['date_fin_loc'] = !empty($_POST['date_fin_loc']) ? $_POST['date_fin_loc'] : '';
 		
 		//Ajout des véhicules
 		$vehicules = $modelManager->getAllBynom_categorie("Vehicule",$post['categorie']);

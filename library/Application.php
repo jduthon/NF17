@@ -142,8 +142,10 @@ class Application
 		}
 		catch (TommeException $e)
 		{
-			print_r($e);
-			exit('404 error');
+			//print_r($e);
+			//require($this->path('view',"error.php"));
+			header("Location: ./error");
+			//exit("Oups, une erreur s'est produite.");
 		}
 	}
 	
