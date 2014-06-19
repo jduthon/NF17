@@ -224,4 +224,9 @@ class General extends library\Controller
 		return 'recherche.php';
 	}
 
+	public function erreur()
+	{
+		return 'error.php';
+	
+	}
 }

@@ -13,6 +13,7 @@
 	<route url="/deconnexionAgent" controller="general" action="deconnexionAgent" />
 	<route url="/connexionAdmin" controller="general" action="connexionAdmin" />
 	<route url="/deconnexionAdmin" controller="general" action="deconnexionAdmin" />
+	<route url="/error" controller="general" action="erreur" />
 
 	
 	<route url="/locations" controller="client" action="listeLocations" />
