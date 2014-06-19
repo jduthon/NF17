@@ -83,14 +83,13 @@ class Client extends library\Controller
 	public function location($num_contrat)
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$location=$modelManager->getOneByNum_contrat("Location",$num_contrat);
-		$vehicules=$modelManager->getAll("Vehicule");
+		$location = $modelManager->getOneByNum_contrat("Location",$num_contrat);
+		$vehicules = $modelManager->getAll("Vehicule");
 		
-		if($location==null){
-			//TODO
-		}
+		if($location == null)
+			header("Location: ./");
 		
-		$this->addVars(array('location' => $location,'professionnel' => false,'vehicules' => $vehicules,'moyens_paiements' => array("Cheque","Carte bancaire","Especes")));
+		$this->addVars(array('location' => $location, 'professionnel' => $_SESSION['user']->isProfessionnel(), 'vehicules' => $vehicules, 'moyens_paiements' => array("Cheque","Carte bancaire","Especes")));
 		return 'location.php';
 	}
 	
