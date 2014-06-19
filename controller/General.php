@@ -121,6 +121,7 @@ class General extends library\Controller
 	
 	public function inscription($type_client)
 	{
+		$success="";
 		$type_client = ($type_client == 'Pro') ? 'professionnel' : 'particulier';
 	
 		$post['prenom'] = !empty($_POST['prenom']) ? $_POST['prenom'] : '';
@@ -158,11 +159,13 @@ class General extends library\Controller
 						else{
 							$newParticulier=$modelManager->getNewModel("Particulier",array_merge($_POST,array("id_part" => $_POST["id_client"],"date_naissance" => $dateNaiss)));
 							$modelManager->addModel($newParticulier);
+							$success="Vous êtes maintenant inscrit";
 						}
 					}
 					else{
 						$newProfessionnel=$modelManager->getNewModel("Professionnel",array_merge($_POST,array("id_pro" => $_POST["id_client"])));
 						$modelManager->addModel($newProfessionnel);
+						$success="Vous êtes maintenant inscrit";
 					}
 				} catch(\library\TommeException $e){
 						print("SALUT LERREUR");
@@ -171,7 +174,7 @@ class General extends library\Controller
 				}
 			}
 		}
-		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true,'errs' => $errs));
+		$this->addVars(array('post' => $post, 'type_client' => $type_client, 'inscription' => true,'errs' => $errs,'success' => $success));
 		return 'inscription.php';
 	}
 	
