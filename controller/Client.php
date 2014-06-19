@@ -88,6 +88,9 @@ class Client extends library\Controller
 					}
 			
 			if ($doublon == false) {
+				$_SESSION['reserver']['date_debut_loc'] = str_replace('/','-',$_SESSION['reserver']['date_debut_loc']);
+				$_SESSION['reserver']['date_fin_loc'] = str_replace('/','-',$_SESSION['reserver']['date_fin_loc']);
+
 				$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
 				$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
 				$facture = $modelManager->getNewModel('Facture', array());
@@ -131,9 +134,11 @@ class Client extends library\Controller
 						$loc->getContrat()->getFacture()->setmoyen_de_paiement($_POST['moyen_paiement']);
 					}
 					if(!empty($_POST['date_debut_loc'])) {
+						$_POST['date_debut_loc'] = str_replace('/','-',$_POST['date_debut_loc']);
 						$loc->getContrat()->setdate_debut_loc($_POST['date_debut_loc']);
 					}					
 					if(!empty($_POST['date_fin_loc'])) {
+						$_POST['date_fin_loc'] = str_replace('/','-',$_POST['date_fin_loc']);
 						$loc->getContrat()->setdate_fin_loc($_POST['date_fin_loc']);
 					}
 					if(!empty($_POST['vehicule'])) {
