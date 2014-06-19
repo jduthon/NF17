@@ -8,8 +8,10 @@ class Technique extends library\Controller
 {	
 
 	public function __construct($application){
-		/*if(!isset($_SESSION['technique']))
-			throw new \library\TommeException("You are not granted the rights to access this page\n");*/
+		if(!isset($_SESSION['agent']))
+			throw new \library\TommeException("You are not granted the rights to access this page\n");
+		if(!$_SESSION['agent']->isTechnique())
+			throw new \library\TommeException("You are not granted the rights to access this page\n");
 		parent::__construct($application);
 	}
 		
@@ -36,28 +38,22 @@ class Technique extends library\Controller
 		$statut = 'technique';
 		$this->addVars(array('vehicules'=>$vehicule,'statut'=>$statut));
 		return 'liste_vehicules.php';
-
-	}
-	
-
-	
-	public function modificationVehicule($numero_imatriculation)
-	{
-		$modelManager = $this->getApplication()->getModelManager();
-		$vehicules = $modelManager->getAll("Vehicule");
-		$options = array('AC','GPS');
-		$typemodif = 'modification';
-		
-		$this->addVars(array('vehicule' => $vehicules[0], 'options' => $options, 'typemodif' => $typemodif));
-		return 'ajout_modification_vehicule.php';
 	}
 	
 	public function ajoutVehicule()
 	{
+		$modelManager = $this->getApplication()->getModelManager();
+		$categories=$modelManager->getAll("Categorie");
+		$modeles=$modelManager->getAll("Modele");
 		$typemodif = 'ajout';
-		
-		$this->addVars(array('typemodif' => $typemodif));
-		return 'ajout_modificatio_vehicule.php';
+		print_r($_POST);
+		if(isset($_POST["numero_immatriculation"])){
+			$modelManager = $this->getApplication()->getModelManager();
+			$vehicule=$modelManager->getNewModel("Vehicule",array_merge($_POST,array("nom_agence" => "LoukoumKar")));
+			$modelManager->addModel($vehicule);
+		}
+		$this->addVars(array('typemodif' => $typemodif,"categories" => $categories,"modeles" => $modeles));
+		return 'ajout_modification_vehicule.php';
 	}	
 	
 	public function formulaireReparation()

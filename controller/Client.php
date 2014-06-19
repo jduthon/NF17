@@ -47,22 +47,52 @@ class Client extends library\Controller
 	public function listeLocations()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
+		
+		if(!empty($_POST['valider'])) {
+			foreach($_SESSION['locations'] as $i => $location) {
+				if($location->getVehicule()->getnumero_immatriculation() == $_POST['numero_immatriculation']){
+					$lastId=$modelManager->find("Facture",null,array("id_facture" => "desc"),1);
+					$location->getContrat()->getFacture()->setid_facture($lastId->getid_facture()+1);
+					$lastId=$modelManager->find("Contrat_de_location",null,array("num_contrat" => "desc"),1);
+					$location->getContrat()->setnum_contrat($lastId->getnum_contrat()+1);
+					$location->getContrat()->setid_facture($location->getContrat()->getFacture()->getid_facture());
+					$lastId=$modelManager->find("Location",null,array("id_location" => "desc"),1);
+					$location->setid_location($lastId->getid_location()+1);
+					$location->setid_client($_SESSION['user']->getid_client());
+					$location->setnum_contrat($location->getContrat()->getnum_contrat());
+					$modelManager->addModel($location->getContrat()->getFacture());
+					$modelManager->addModel($location->getContrat());
+					$modelManager->addModel($location);
+					unset($_SESSION['locations'][$i]);
+					}
+			}
+		}
+			
+		
+		
 		$locations = $modelManager->getAllById_client("Location",$_SESSION['user']->getid_client());
 		if(!is_array($locations))
 			$locations = array($locations);
 			
 		if(!empty($_SESSION['reserver']) && !empty($_SESSION['reserver']['date_debut_loc']) && !empty($_SESSION['reserver']['date_fin_loc']) && !empty($_SESSION['reserver']['numero_immatriculation']))
 		{
-			$modelManager = $this->getApplication()->getModelManager();
+			$doublon = false;
+			if(is_array($_SESSION['locations']))
+				foreach($_SESSION['locations'] as $location) {
+					if($location->getVehicule()->getnumero_immatriculation() == $_SESSION['reserver']['numero_immatriculation'])
+						$doublon = true;
+				}
 			
-			$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
-			$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
-			$facture = $modelManager->getNewModel('Facture', array());
-			$contrat->setFacture($facture);
-			$location->setContrat($contrat);
-			$location->setConfirmation(false);
-			
-			$_SESSION['locations'][] = $location;
+			if ($doublon == false) {
+				$location = $modelManager->getNewModel('Location', $_SESSION['reserver']);
+				$contrat = $modelManager->getNewModel('Contrat_de_location', $_SESSION['reserver']);
+				$facture = $modelManager->getNewModel('Facture', array());
+				$contrat->setFacture($facture);
+				$location->setContrat($contrat);
+				$location->setConfirmation(false);
+				
+				$_SESSION['locations'][] = $location;
+			}
 			unset($_SESSION['reserver']);
 		}
 		
@@ -72,7 +102,8 @@ class Client extends library\Controller
 					unset($_SESSION['locations'][$i]);
 			}
 		}
-			
+		
+		
 		if(!empty($_SESSION['locations']))
 			$locations = array_merge($locations,$_SESSION['locations']);
 			
@@ -80,11 +111,23 @@ class Client extends library\Controller
 		return 'liste_locations.php';
 	}
 	
-	public function location($num_contrat)
+	public function location()
 	{
 		$modelManager = $this->getApplication()->getModelManager();
-		$location = $modelManager->getOneByNum_contrat("Location",$num_contrat);
 		$vehicules = $modelManager->getAll("Vehicule");
+		$location = null;
+		
+		if(!empty($_POST['num_contrat'])) {
+			$num_contrat = $_POST['num_contrat'];
+			$location = $modelManager->getOneByNum_contrat("Location",$num_contrat);
+		} else if (!empty($_POST['numero_immatriculation'])) {
+			foreach($_SESSION['locations'] as &$loc) {
+				if($loc->getVehicule()->getnumero_immatriculation() == $_POST['numero_immatriculation'])
+				{										
+					$location = $loc;					
+				}
+			}
+		}
 		
 		if($location == null)
 			header("Location: ./");
@@ -105,8 +148,26 @@ class Client extends library\Controller
 			}
 			$modelManager->updateModel($_SESSION['user']);
 			$modelManager->updateModel($_SESSION['user']->getParticulier());
+		} else if (isset($_POST['nom_entreprise'])){
+			foreach($_POST as $key=>$value){
+				if(method_exists($_SESSION['user'],"set" . $key))
+					call_user_func(array($_SESSION['user'],"set" . $key),$value);
+				else if(method_exists($_SESSION['user']->getProfessionnel(),"set" . $key)){
+					print($key);
+					call_user_func(array($_SESSION['user']->getProfessionnel(),"set" . $key),$value);
+				}
+			}
+			$modelManager->updateModel($_SESSION['user']);
+			$modelManager->updateModel($_SESSION['user']->getProfessionnel());
 		}
 		
+		/*
+		print_r($_POST);
+		print_r($_SESSION['user']->getProfessionnel());
+		if(method_exists($_SESSION['user']->getProfessionnel(),"set" . "nom_entreprise"))
+			//call_user_func(array($_SESSION['user']->getProfessionnel(),"set" . "nom_entreprise"),"EntrepriseLOLILOLO");
+		print("DEDEDEDE3");
+		print_r($_SESSION['user']);*/
 		$this->addVars(array('client' => $_SESSION['user']));
 		return 'compte_client.php';
 	}
