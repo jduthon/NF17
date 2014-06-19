@@ -17,7 +17,7 @@
 				<tr>
 					<form class="form" method="post" action="" role="form">
 						<td>
-							<input type="text" class="form-control" name="id_loc" id="id_loc" value="<?php echo $loc['id']; ?>" >
+							<input type="text" class="form-control" name="id_loc" id="id_loc" value="<?php echo $loc->getid_location(); ?>" >
 						</td>
 
 						<td class="col-xs-4 text-right">
